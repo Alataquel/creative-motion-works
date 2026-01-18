@@ -1,9 +1,10 @@
 import AnimatedBlobs from "@/components/AnimatedBlobs";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import MarqueeSection from "@/components/MarqueeSection";
+import SegmentsSection from "@/components/SegmentsSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import StatsSection from "@/components/StatsSection";
+import SolutionsSection from "@/components/SolutionsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
@@ -14,9 +15,10 @@ const Index = () => {
       <AnimatedBlobs />
       <Navbar />
       <HeroSection />
-      <MarqueeSection />
+      <SegmentsSection />
       <FeaturesSection />
       <StatsSection />
+      <SolutionsSection />
       <TestimonialsSection />
       <CTASection />
       <Footer />
