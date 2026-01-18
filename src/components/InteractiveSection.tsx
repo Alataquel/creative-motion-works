@@ -14,14 +14,17 @@ import {
   Target,
   Briefcase,
   MessageSquare,
-  Star
+  Star,
+  BookOpen,
+  Globe
 } from "lucide-react";
 
 const studentFeatures = [
   { icon: Search, title: "Smart Job Discovery", desc: "AI-matched opportunities tailored to your skills" },
   { icon: FileText, title: "Resume Building", desc: "Get real-time feedback to stand out" },
   { icon: Send, title: "Application Tracking", desc: "Know where every application stands" },
-  { icon: MessageSquare, title: "Interview Prep", desc: "Practice with AI mock interviews" },
+  { icon: BookOpen, title: "Case Study Prep", desc: "Master consulting & finance case interviews" },
+  { icon: Globe, title: "Global Events", desc: "Discover career fairs & networking worldwide" },
   { icon: TrendingUp, title: "Progress Insights", desc: "See your growth over time" },
 ];
 
@@ -204,15 +207,15 @@ const InteractiveSection = () => {
                     </motion.p>
                   </div>
 
-                  {/* Student dashboard mockup */}
+                  {/* Student dashboard mockup - matching dark blue design */}
                   <motion.div
-                    className="relative bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-3xl border border-blue-200 p-6 md:p-8 overflow-hidden"
+                    className="relative bg-gradient-to-br from-[#0c1929] to-[#1e40af] rounded-3xl border border-blue-500/20 p-6 md:p-8 overflow-hidden"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.2 }}
                   >
-                    {/* Decorative gradient */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-200/50 to-blue-300/30 rounded-full blur-3xl" />
+                    {/* Background glow */}
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/20 to-blue-600/20 rounded-full blur-3xl" />
 
                     <div className="relative z-10">
                       {/* Progress bar */}
@@ -223,12 +226,12 @@ const InteractiveSection = () => {
                         transition={{ delay: 0.3 }}
                       >
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium text-blue-700">Career Readiness</span>
-                          <span className="text-sm font-bold text-blue-600">78%</span>
+                          <span className="text-sm font-medium text-white/80">Career Readiness</span>
+                          <span className="text-sm font-bold text-blue-400">78%</span>
                         </div>
-                        <div className="h-3 bg-white rounded-full overflow-hidden shadow-inner">
+                        <div className="h-3 bg-white/10 rounded-full overflow-hidden">
                           <motion.div
-                            className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"
+                            className="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full"
                             initial={{ width: 0 }}
                             animate={{ width: "78%" }}
                             transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
@@ -241,7 +244,7 @@ const InteractiveSection = () => {
                         {studentFeatures.map((feature, i) => (
                           <motion.div
                             key={feature.title}
-                            className="relative p-5 bg-white rounded-2xl shadow-sm border border-blue-100 cursor-pointer group"
+                            className="relative p-5 bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/10 cursor-pointer group"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 + i * 0.08 }}
@@ -249,17 +252,17 @@ const InteractiveSection = () => {
                             onMouseLeave={() => setHoveredFeature(null)}
                             whileHover={{ 
                               y: -5, 
-                              scale: 1.02,
-                              boxShadow: "0 15px 30px -10px rgba(37,99,235,0.2)"
+                              borderColor: "rgba(37,99,235,0.4)",
+                              backgroundColor: "rgba(255,255,255,0.05)"
                             }}
                           >
                             <motion.div
-                              className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center mb-3 group-hover:from-blue-500 group-hover:to-blue-600 transition-all duration-300"
+                              className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-500/20 flex items-center justify-center mb-3 group-hover:from-blue-500 group-hover:to-blue-600 transition-all duration-300"
                             >
-                              <feature.icon className="w-5 h-5 text-blue-600 group-hover:text-white transition-colors" />
+                              <feature.icon className="w-5 h-5 text-blue-400 group-hover:text-white transition-colors" />
                             </motion.div>
-                            <h4 className="font-semibold text-foreground mb-1">{feature.title}</h4>
-                            <p className="text-sm text-muted-foreground">{feature.desc}</p>
+                            <h4 className="font-semibold text-white mb-1">{feature.title}</h4>
+                            <p className="text-sm text-white/50">{feature.desc}</p>
 
                             {/* Hover indicator */}
                             <motion.div
@@ -274,13 +277,13 @@ const InteractiveSection = () => {
 
                       {/* Student testimonial */}
                       <motion.div
-                        className="mt-6 p-5 bg-white/80 backdrop-blur-sm rounded-2xl border border-blue-100"
+                        className="mt-6 p-5 bg-white/[0.03] rounded-2xl border border-white/10"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.8 }}
                       >
                         <div className="flex items-start gap-4">
-                          <div className="w-10 h-10 rounded-full bg-[#2563EB] flex items-center justify-center text-white font-bold text-sm">
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
                             JD
                           </div>
                           <div>
@@ -289,10 +292,10 @@ const InteractiveSection = () => {
                                 <Star key={i} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
                               ))}
                             </div>
-                            <p className="text-sm text-foreground/80 italic">
+                            <p className="text-sm text-white/80 italic">
                               "Finally, I can see my whole career journey in one place. Game changer."
                             </p>
-                            <p className="text-xs text-muted-foreground mt-1">— Computer Science, Class of 2025</p>
+                            <p className="text-xs text-white/50 mt-1">— Computer Science, Class of 2025</p>
                           </div>
                         </div>
                       </motion.div>
