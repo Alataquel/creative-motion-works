@@ -2,12 +2,10 @@ import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import LoginDialog from "./LoginDialog";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -65,12 +63,12 @@ const Navbar = () => {
             </div>
 
             <div className="hidden md:flex items-center gap-4">
-              <button
-                onClick={() => setIsLoginOpen(true)}
+              <Link
+                to="/login"
                 className="text-sm font-medium text-white/70 hover:text-white transition-colors"
               >
                 Login
-              </button>
+              </Link>
               <motion.button
                 className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#2563EB] rounded-full font-semibold text-sm group"
                 whileHover={{ scale: 1.03 }}
@@ -87,8 +85,6 @@ const Navbar = () => {
           </div>
         </nav>
       </motion.header>
-
-      <LoginDialog open={isLoginOpen} onOpenChange={setIsLoginOpen} />
     </>
   );
 };
