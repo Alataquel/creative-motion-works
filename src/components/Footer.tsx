@@ -2,26 +2,31 @@ import { motion } from "framer-motion";
 
 const Footer = () => {
   const footerLinks = {
-    Product: ["Features", "Pricing", "Integrations", "Changelog"],
-    Company: ["About", "Blog", "Careers", "Press"],
-    Resources: ["Documentation", "Help Center", "Community", "Contact"],
-    Legal: ["Privacy", "Terms", "Security", "Cookies"],
+    Platform: ["Resume Grader", "Resume Builder", "Cover Letters", "Job Matching"],
+    Company: ["About", "Careers", "Press", "Contact"],
+    Resources: ["Blog", "Help Center", "Universities", "Students"],
+    Legal: ["Privacy", "Terms", "Security"],
   };
 
   return (
-    <footer className="py-20 px-6 border-t border-border">
+    <footer className="py-16 px-6 border-t border-border bg-muted/30">
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-5 gap-12 mb-16">
+        <div className="grid md:grid-cols-5 gap-12 mb-12">
           {/* Brand */}
           <div className="md:col-span-1">
             <motion.div
-              className="text-2xl font-display font-bold text-gradient mb-4"
-              whileHover={{ scale: 1.05 }}
+              className="flex items-center gap-2 mb-4"
+              whileHover={{ scale: 1.02 }}
             >
-              Kinetic
+              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-sm">A</span>
+              </div>
+              <span className="text-xl font-display font-bold text-foreground">
+                ApplyLab
+              </span>
             </motion.div>
             <p className="text-muted-foreground text-sm">
-              Building the future, one project at a time.
+              Empowering career success through AI-powered intelligence.
             </p>
           </div>
 
@@ -34,7 +39,7 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
             >
-              <h4 className="font-semibold mb-4">{category}</h4>
+              <h4 className="font-semibold mb-4 text-foreground">{category}</h4>
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link}>
@@ -54,10 +59,10 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-border">
           <p className="text-muted-foreground text-sm">
-            © 2024 Kinetic. All rights reserved.
+            © 2024 ApplyLab. All rights reserved.
           </p>
           <div className="flex items-center gap-6 mt-4 md:mt-0">
-            {["Twitter", "GitHub", "Discord", "LinkedIn"].map((social) => (
+            {["LinkedIn", "Twitter", "Instagram"].map((social) => (
               <motion.a
                 key={social}
                 href="#"

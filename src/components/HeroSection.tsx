@@ -1,81 +1,103 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Sparkles, GraduationCap, Building2 } from "lucide-react";
 
 const HeroSection = () => {
-  const titleWords = ["Build", "Something", "Extraordinary"];
-
   return (
-    <section className="min-h-screen flex items-center justify-center pt-20 px-6 relative overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center pt-24 pb-16 px-6 relative overflow-hidden">
       <div className="max-w-6xl mx-auto text-center">
+        {/* Badge */}
+        <motion.div
+          className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <Sparkles className="w-4 h-4" />
+          Partnering with Leading Universities
+        </motion.div>
+
         {/* Kinetic Typography */}
+        <div className="overflow-hidden mb-6">
+          <motion.h1
+            className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-tight text-foreground"
+            initial={{ y: 120, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Career Acceleration
+          </motion.h1>
+        </div>
         <div className="overflow-hidden mb-8">
-          {titleWords.map((word, i) => (
-            <motion.h1
-              key={word}
-              className="text-7xl md:text-9xl font-display font-bold leading-none"
-              initial={{ y: 200, rotateX: -90 }}
-              animate={{ y: 0, rotateX: 0 }}
-              transition={{
-                duration: 1,
-                delay: i * 0.15,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              <span className={i === 1 ? "text-gradient" : "text-foreground"}>
-                {word}
-              </span>
-            </motion.h1>
-          ))}
+          <motion.h1
+            className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-tight"
+            initial={{ y: 120, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span className="text-gradient">Powered by AI</span>
+          </motion.h1>
         </div>
 
-        {/* Subtitle with stagger */}
+        {/* Subtitle */}
         <motion.p
-          className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12"
-          initial={{ opacity: 0, y: 40 }}
+          className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
         >
-          The next generation platform for creators, builders, and visionaries
-          who refuse to settle for ordinary.
+          Empowering universities to deliver exceptional career outcomes for their 
+          students through advanced AI technology and comprehensive analytics.
         </motion.p>
 
         {/* CTA Buttons */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          initial={{ opacity: 0, y: 40 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
         >
           <motion.button
             className="flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold text-lg glow-box group"
-            whileHover={{ scale: 1.05, boxShadow: "0 0 80px hsl(145 80% 50% / 0.5)" }}
+            whileHover={{ scale: 1.05, boxShadow: "0 15px 50px hsl(230 65% 28% / 0.35)" }}
             whileTap={{ scale: 0.95 }}
           >
-            Start Building Free
+            Partner With Us
             <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
           </motion.button>
 
           <motion.button
-            className="flex items-center gap-2 px-8 py-4 border border-border rounded-full font-semibold text-lg text-foreground hover:bg-muted transition-colors group"
+            className="flex items-center gap-2 px-8 py-4 bg-card border border-border rounded-full font-semibold text-lg text-foreground hover:bg-muted transition-colors group shadow-soft"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
-            Watch Demo
+            <GraduationCap className="w-5 h-5" />
+            I'm a Student
           </motion.button>
         </motion.div>
 
-        {/* Floating badge */}
+        {/* Trust badges */}
         <motion.div
-          className="mt-16 inline-flex items-center gap-2 px-4 py-2 bg-muted/50 backdrop-blur-sm rounded-full border border-border"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
+          className="flex flex-wrap items-center justify-center gap-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          <span className="text-sm text-muted-foreground">
-            Trusted by 10,000+ teams worldwide
-          </span>
+          {[
+            { icon: Sparkles, text: "100% Free for Students" },
+            { icon: Building2, text: "Universities Are Our Clients" },
+            { icon: Sparkles, text: "AI-Powered Intelligence" },
+          ].map((item, i) => (
+            <motion.div
+              key={item.text}
+              className="flex items-center gap-2 px-4 py-2 bg-card rounded-full border border-border shadow-soft"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.9 + i * 0.1 }}
+            >
+              <item.icon className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium text-muted-foreground">{item.text}</span>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

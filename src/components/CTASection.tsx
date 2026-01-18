@@ -1,98 +1,114 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, GraduationCap, Building2 } from "lucide-react";
 
 const CTASection = () => {
   return (
-    <section className="py-32 px-6 relative overflow-hidden">
-      {/* Animated background */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10"
-        animate={{
-          backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-      />
-
-      <div className="max-w-5xl mx-auto relative">
+    <section className="py-24 px-6 relative overflow-hidden">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <motion.div
-          className="text-center p-12 md:p-20 rounded-[3rem] bg-card border border-border relative overflow-hidden"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
         >
-          {/* Floating particles */}
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 rounded-full bg-primary/40"
-              style={{
-                top: `${20 + i * 15}%`,
-                left: `${10 + i * 15}%`,
-              }}
-              animate={{
-                y: [0, -30, 0],
-                opacity: [0.4, 1, 0.4],
-              }}
-              transition={{
-                duration: 3 + i * 0.5,
-                repeat: Infinity,
-                delay: i * 0.3,
-              }}
-            />
-          ))}
+          <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
+            For University Partners
+          </span>
+          <h2 className="text-4xl md:text-6xl font-display font-bold mb-6 text-foreground">
+            Your Partner in <span className="text-gradient">Career Success</span>
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            We work exclusively with universities to provide comprehensive career services. 
+            Your institution is our client, your success is our mission.
+          </p>
+        </motion.div>
 
+        {/* Two cards */}
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* University Dashboard */}
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-8"
-            whileHover={{ scale: 1.05 }}
+            className="relative p-8 rounded-3xl bg-primary text-primary-foreground overflow-hidden group"
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            whileHover={{ scale: 1.02, boxShadow: "0 20px 60px hsl(230 65% 28% / 0.4)" }}
           >
-            <Sparkles className="w-4 h-4" />
-            Start for free
+            {/* Background pattern */}
+            <div className="absolute inset-0 opacity-10">
+              {[...Array(20)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-1 h-1 rounded-full bg-white"
+                  style={{
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                  }}
+                  animate={{ opacity: [0.3, 1, 0.3] }}
+                  transition={{ duration: 2 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 2 }}
+                />
+              ))}
+            </div>
+
+            <Building2 className="w-10 h-10 mb-6" />
+            <h3 className="text-2xl font-display font-bold mb-4">University Dashboard</h3>
+            <p className="text-primary-foreground/80 mb-6">
+              Comprehensive analytics, outcome tracking, and market insights to demonstrate the value of your career services.
+            </p>
+            <ul className="space-y-2 mb-8">
+              {["Real-time Placement Tracking", "Student Engagement Analytics", "ROI Reporting"].map((item) => (
+                <li key={item} className="flex items-center gap-2 text-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary-foreground" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <motion.button
+              className="flex items-center gap-2 px-6 py-3 bg-white text-primary rounded-full font-semibold group/btn"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Explore Partner Portal
+              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+            </motion.button>
           </motion.div>
 
-          <motion.h2
-            className="text-4xl md:text-6xl font-display font-bold mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+          {/* Student Platform */}
+          <motion.div
+            className="relative p-8 rounded-3xl bg-card border border-border overflow-hidden group shadow-soft"
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
+            transition={{ duration: 0.8 }}
+            whileHover={{ scale: 1.02, boxShadow: "0 20px 60px hsl(230 65% 28% / 0.15)" }}
           >
-            Ready to build
-            <br />
-            <span className="text-gradient">something amazing?</span>
-          </motion.h2>
+            <GraduationCap className="w-10 h-10 text-primary mb-6" />
+            <h3 className="text-2xl font-display font-bold mb-4 text-foreground">Student Platform</h3>
+            <p className="text-muted-foreground mb-6">
+              Free, powerful tools for students to discover opportunities, optimize applications, and track their career journey.
+            </p>
+            <ul className="space-y-2 mb-8">
+              {["AI-Powered Job Matching", "Resume Builder & Grader", "Application Tracking"].map((item) => (
+                <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <motion.button
+              className="flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full font-semibold group/btn"
+              whileHover={{ scale: 1.05, boxShadow: "0 8px 30px hsl(230 65% 28% / 0.3)" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Start Your Career Journey
+              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+            </motion.button>
 
-          <motion.p
-            className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            Join thousands of teams already building the future. No credit card
-            required.
-          </motion.p>
-
-          <motion.button
-            className="inline-flex items-center gap-2 px-10 py-5 bg-primary text-primary-foreground rounded-full font-semibold text-lg glow-box-intense group"
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 0 120px hsl(145 80% 50% / 0.6)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-          >
-            Get Started Now
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-          </motion.button>
-
-          {/* Corner glows */}
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl" />
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/20 rounded-full blur-3xl" />
-        </motion.div>
+            {/* Corner glow */}
+            <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-primary/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          </motion.div>
+        </div>
       </div>
     </section>
   );
