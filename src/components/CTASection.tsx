@@ -22,19 +22,13 @@ const CTASection = () => {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 relative overflow-hidden bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#0c1929]">
+    <section ref={sectionRef} className="py-24 md:py-32 relative overflow-hidden bg-[#0a1628]">
       {/* Animated background */}
       <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full"
         style={{ background: "radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 60%)" }}
         animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
         transition={{ duration: 10, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute top-1/4 right-1/4 w-[400px] h-[400px] rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 60%)" }}
-        animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
-        transition={{ duration: 15, repeat: Infinity }}
       />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
@@ -66,11 +60,7 @@ const CTASection = () => {
           {testimonials.map((testimonial, i) => (
             <motion.div
               key={i}
-              className={`p-8 rounded-3xl backdrop-blur-sm border ${
-                testimonial.type === "student"
-                  ? "bg-gradient-to-br from-blue-500/10 to-blue-600/10 border-blue-500/20"
-                  : "bg-gradient-to-br from-blue-600/10 to-blue-700/10 border-blue-600/20"
-              }`}
+              className="p-8 rounded-3xl backdrop-blur-sm border bg-white/5 border-white/10"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.4 + i * 0.15 }}
@@ -83,11 +73,7 @@ const CTASection = () => {
               </div>
               <p className="text-white text-lg mb-6 italic">"{testimonial.quote}"</p>
               <div className="flex items-center gap-3">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                  testimonial.type === "student"
-                    ? "bg-[#2563EB]"
-                    : "bg-[#1e40af]"
-                }`}>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center bg-[#2563EB]">
                   {testimonial.type === "student" 
                     ? <GraduationCap className="w-5 h-5 text-white" />
                     : <Building2 className="w-5 h-5 text-white" />
@@ -111,7 +97,7 @@ const CTASection = () => {
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
             Make your career activity{" "}
-            <span className="bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">
               visible
             </span>
           </h2>
@@ -131,8 +117,8 @@ const CTASection = () => {
             </motion.button>
 
             <motion.button
-              className="flex items-center gap-2 px-8 py-4 bg-white text-[#0f2847] rounded-full font-semibold text-lg group shadow-lg"
-              whileHover={{ scale: 1.03, boxShadow: "0 20px 40px rgba(255,255,255,0.15)" }}
+              className="flex items-center gap-2 px-8 py-4 bg-white text-gray-900 rounded-full font-semibold text-lg group shadow-lg"
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             >
               <Building2 className="w-5 h-5" />
