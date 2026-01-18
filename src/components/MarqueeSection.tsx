@@ -2,22 +2,22 @@ import { motion } from "framer-motion";
 
 const MarqueeSection = () => {
   const items = [
-    "DESIGN SYSTEMS",
+    "RESUME GRADER",
     "✦",
-    "MOTION GRAPHICS",
+    "AI MATCHING",
     "✦",
-    "WEB EXPERIENCES",
+    "CAREER INSIGHTS",
     "✦",
-    "CREATIVE TECH",
+    "COVER LETTERS",
     "✦",
-    "BRAND IDENTITY",
+    "INTERVIEW PREP",
     "✦",
-    "DIGITAL PRODUCTS",
+    "APPLICATION TRACKING",
     "✦",
   ];
 
   return (
-    <section className="py-20 overflow-hidden border-y border-border relative">
+    <section className="py-12 overflow-hidden border-y border-border bg-muted/30 relative">
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10"
         initial={{ opacity: 0 }}
@@ -28,10 +28,10 @@ const MarqueeSection = () => {
       {/* First row */}
       <div className="flex gap-8 mb-4">
         <motion.div
-          className="flex gap-8 text-6xl md:text-8xl font-display font-bold whitespace-nowrap"
+          className="flex gap-8 text-4xl md:text-6xl font-display font-bold whitespace-nowrap"
           animate={{ x: [0, -2000] }}
           transition={{
-            duration: 30,
+            duration: 35,
             repeat: Infinity,
             ease: "linear",
           }}
@@ -39,7 +39,7 @@ const MarqueeSection = () => {
           {[...items, ...items].map((item, i) => (
             <span
               key={i}
-              className={item === "✦" ? "text-primary" : "text-foreground/10"}
+              className={item === "✦" ? "text-primary" : "text-muted-foreground/20"}
             >
               {item}
             </span>
@@ -50,10 +50,10 @@ const MarqueeSection = () => {
       {/* Second row - reverse */}
       <div className="flex gap-8">
         <motion.div
-          className="flex gap-8 text-6xl md:text-8xl font-display font-bold whitespace-nowrap"
+          className="flex gap-8 text-4xl md:text-6xl font-display font-bold whitespace-nowrap"
           animate={{ x: [-2000, 0] }}
           transition={{
-            duration: 30,
+            duration: 35,
             repeat: Infinity,
             ease: "linear",
           }}
@@ -61,7 +61,7 @@ const MarqueeSection = () => {
           {[...items, ...items].map((item, i) => (
             <span
               key={i}
-              className={item === "✦" ? "text-secondary" : "text-foreground/10"}
+              className={item === "✦" ? "text-secondary" : "text-muted-foreground/20"}
             >
               {item}
             </span>
