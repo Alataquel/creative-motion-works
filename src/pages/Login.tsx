@@ -1,149 +1,159 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { GraduationCap, Building2, ArrowRight, ArrowLeft } from "lucide-react";
+import { motion } from "framer-motion";
+import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-  const [selectedRole, setSelectedRole] = useState<"student" | "staff" | null>(null);
+  const [staffEmail, setStaffEmail] = useState("");
+  const [staffPassword, setStaffPassword] = useState("");
+  const [staffShowPassword, setStaffShowPassword] = useState(false);
 
-  const roles = [
-    {
-      id: "student" as const,
-      title: "Student",
-      description: "Track applications, prep for interviews, and land your dream job",
-      icon: GraduationCap,
-      gradient: "from-blue-500 to-blue-600",
-    },
-    {
-      id: "staff" as const,
-      title: "University Staff",
-      description: "Access analytics, manage students, and drive career outcomes",
-      icon: Building2,
-      gradient: "from-blue-600 to-blue-700",
-    },
-  ];
+  const [studentEmail, setStudentEmail] = useState("");
+  const [studentPassword, setStudentPassword] = useState("");
+  const [studentShowPassword, setStudentShowPassword] = useState(false);
 
-  const handleContinue = () => {
-    if (selectedRole) {
-      console.log(`Continuing as ${selectedRole}`);
-    }
+  const handleStaffLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Staff login:", staffEmail);
+  };
+
+  const handleStudentLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Student login:", studentEmail);
   };
 
   return (
-    <div className="min-h-screen bg-[#0a1628] flex items-center justify-center relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="relative z-10 w-full max-w-md mx-4"
+    <div className="min-h-screen flex">
+      {/* Back button - fixed */}
+      <Link
+        to="/"
+        className="fixed top-6 left-6 z-50 inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors bg-[#1e3a8a]/50 backdrop-blur-sm px-4 py-2 rounded-full"
       >
-        {/* Back link */}
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-white/60 hover:text-white mb-8 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to home
-        </Link>
+        <ArrowLeft className="w-4 h-4" />
+        Back
+      </Link>
 
-        {/* Card */}
-        <div className="bg-[#0c1929] border border-white/10 rounded-2xl p-8 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-blue-600/5" />
+      {/* Left side - University Staff (Dark Blue) */}
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-1/2 bg-[#1e3a8a] flex items-center justify-center p-8"
+      >
+        <div className="w-full max-w-sm">
+          <h1 className="text-3xl font-display font-bold text-white text-center mb-10">
+            University Staff
+          </h1>
 
-          <div className="relative">
-            {/* Logo */}
-            <div className="flex items-center justify-center gap-2 mb-8">
-              <div className="w-10 h-10 rounded-xl bg-[#2563EB] flex items-center justify-center">
-                <span className="text-white font-bold">A</span>
-              </div>
-              <span className="text-2xl font-display font-bold text-white">ApplyLab</span>
+          <form onSubmit={handleStaffLogin} className="space-y-4">
+            <div>
+              <input
+                type="email"
+                placeholder="Staff email"
+                value={staffEmail}
+                onChange={(e) => setStaffEmail(e.target.value)}
+                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-white/40 text-white placeholder-white/60 focus:border-white focus:outline-none transition-colors"
+              />
             </div>
 
-            {/* Header */}
-            <div className="text-center mb-8">
-              <h1 className="text-2xl font-display font-bold text-white mb-2">
-                Welcome back
-              </h1>
-              <p className="text-white/60">
-                Choose how you'd like to sign in
-              </p>
+            <div className="relative">
+              <input
+                type={staffShowPassword ? "text" : "password"}
+                placeholder="Password"
+                value={staffPassword}
+                onChange={(e) => setStaffPassword(e.target.value)}
+                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-white/40 text-white placeholder-white/60 focus:border-white focus:outline-none transition-colors pr-12"
+              />
+              <button
+                type="button"
+                onClick={() => setStaffShowPassword(!staffShowPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors"
+              >
+                {staffShowPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+              </button>
             </div>
 
-            {/* Role selection */}
-            <div className="space-y-3 mb-6">
-              {roles.map((role) => (
-                <motion.button
-                  key={role.id}
-                  onClick={() => setSelectedRole(role.id)}
-                  className={`w-full p-4 rounded-xl border transition-all text-left group ${
-                    selectedRole === role.id
-                      ? "bg-white/10 border-blue-500/50"
-                      : "bg-white/[0.03] border-white/10 hover:bg-white/[0.06] hover:border-white/20"
-                  }`}
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.99 }}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${role.gradient} flex items-center justify-center shrink-0`}>
-                      <role.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-white mb-1">{role.title}</h3>
-                      <p className="text-sm text-white/50">{role.description}</p>
-                    </div>
-                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 mt-1 ${
-                      selectedRole === role.id
-                        ? "border-blue-500 bg-blue-500"
-                        : "border-white/30"
-                    }`}>
-                      {selectedRole === role.id && (
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          className="w-2 h-2 rounded-full bg-white"
-                        />
-                      )}
-                    </div>
-                  </div>
-                </motion.button>
-              ))}
-            </div>
+            <motion.button
+              type="submit"
+              className="w-full py-3.5 rounded-full bg-white text-[#1e3a8a] font-semibold hover:bg-white/90 transition-colors"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Log In
+            </motion.button>
+          </form>
 
-            {/* Continue button */}
-            <AnimatePresence>
-              {selectedRole && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                >
-                  <motion.button
-                    onClick={handleContinue}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-semibold group"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Continue as {selectedRole === "student" ? "Student" : "Staff"}
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                  </motion.button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Footer */}
-            <p className="text-center text-white/40 text-sm mt-8">
-              Don't have an account?{" "}
-              <a href="#" className="text-blue-400 hover:text-blue-300 transition-colors">
-                Request access
-              </a>
+          <div className="mt-8 text-center">
+            <p className="text-white/70 text-sm mb-4">
+              Accounts for university staff are created by our team. Please contact us to get started.
             </p>
+            <motion.button
+              className="w-full py-3.5 rounded-full border-2 border-white text-white font-semibold hover:bg-white/10 transition-colors"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Contact Us
+            </motion.button>
           </div>
+        </div>
+      </motion.div>
+
+      {/* Right side - Students (White) */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-1/2 bg-white flex items-center justify-center p-8"
+      >
+        <div className="w-full max-w-sm">
+          <h1 className="text-3xl font-display font-bold text-[#1e3a8a] text-center mb-10">
+            Students
+          </h1>
+
+          <form onSubmit={handleStudentLogin} className="space-y-4">
+            <div>
+              <input
+                type="email"
+                placeholder="Email"
+                value={studentEmail}
+                onChange={(e) => setStudentEmail(e.target.value)}
+                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#1e3a8a] focus:outline-none transition-colors"
+              />
+            </div>
+
+            <div className="relative">
+              <input
+                type={studentShowPassword ? "text" : "password"}
+                placeholder="Password"
+                value={studentPassword}
+                onChange={(e) => setStudentPassword(e.target.value)}
+                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#1e3a8a] focus:outline-none transition-colors pr-12"
+              />
+              <button
+                type="button"
+                onClick={() => setStudentShowPassword(!studentShowPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                {studentShowPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+              </button>
+            </div>
+
+            <motion.button
+              type="submit"
+              className="w-full py-3.5 rounded-full bg-[#1e3a8a] text-white font-semibold hover:bg-[#1e3a8a]/90 transition-colors"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Log In
+            </motion.button>
+          </form>
+
+          <p className="text-center text-gray-500 mt-6">
+            Don't have an account yet?{" "}
+            <a href="#" className="text-[#1e3a8a] font-semibold hover:underline">
+              Sign Up
+            </a>
+          </p>
         </div>
       </motion.div>
     </div>
