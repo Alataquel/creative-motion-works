@@ -14,7 +14,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-5 gap-12 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-400 to-indigo-500 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-[#2563EB] flex items-center justify-center">
                 <span className="text-white font-bold text-sm">A</span>
               </div>
               <span className="text-xl font-display font-bold text-white">ApplyLab</span>

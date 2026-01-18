@@ -22,17 +22,17 @@ const CTASection = () => {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 relative overflow-hidden bg-gradient-to-b from-[#0a1628] via-[#0f2847] to-[#0a1628]">
+    <section ref={sectionRef} className="py-24 md:py-32 relative overflow-hidden bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#0c1929]">
       {/* Animated background */}
       <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 60%)" }}
+        style={{ background: "radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 60%)" }}
         animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
         transition={{ duration: 10, repeat: Infinity }}
       />
       <motion.div
         className="absolute top-1/4 right-1/4 w-[400px] h-[400px] rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 60%)" }}
+        style={{ background: "radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 60%)" }}
         animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
         transition={{ duration: 15, repeat: Infinity }}
       />
@@ -68,8 +68,8 @@ const CTASection = () => {
               key={i}
               className={`p-8 rounded-3xl backdrop-blur-sm border ${
                 testimonial.type === "student"
-                  ? "bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border-indigo-500/20"
-                  : "bg-gradient-to-br from-sky-500/10 to-blue-500/10 border-sky-500/20"
+                  ? "bg-gradient-to-br from-blue-500/10 to-blue-600/10 border-blue-500/20"
+                  : "bg-gradient-to-br from-blue-600/10 to-blue-700/10 border-blue-600/20"
               }`}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -85,8 +85,8 @@ const CTASection = () => {
               <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
                   testimonial.type === "student"
-                    ? "bg-gradient-to-br from-indigo-400 to-purple-500"
-                    : "bg-gradient-to-br from-sky-400 to-blue-500"
+                    ? "bg-[#2563EB]"
+                    : "bg-[#1e40af]"
                 }`}>
                   {testimonial.type === "student" 
                     ? <GraduationCap className="w-5 h-5 text-white" />
@@ -111,7 +111,7 @@ const CTASection = () => {
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
             Make your career activity{" "}
-            <span className="bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 bg-clip-text text-transparent">
               visible
             </span>
           </h2>
@@ -122,8 +122,8 @@ const CTASection = () => {
           {/* Dual CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <motion.button
-              className="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-full font-semibold text-lg group shadow-lg shadow-indigo-500/25"
-              whileHover={{ scale: 1.03, boxShadow: "0 20px 40px rgba(99,102,241,0.3)" }}
+              className="flex items-center gap-2 px-8 py-4 bg-[#2563EB] text-white rounded-full font-semibold text-lg group shadow-lg shadow-blue-500/25"
+              whileHover={{ scale: 1.03, boxShadow: "0 20px 40px rgba(37,99,235,0.3)" }}
               whileTap={{ scale: 0.98 }}
             >
               <GraduationCap className="w-5 h-5" />

@@ -41,8 +41,8 @@ const InteractiveSection = () => {
     <section className="py-24 md:py-32 bg-gradient-to-b from-background via-muted/20 to-background relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-1/2 h-full">
-        <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-primary/5 to-indigo-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-40 w-72 h-72 bg-gradient-to-br from-sky-500/5 to-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-blue-500/5 to-blue-600/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-40 w-72 h-72 bg-gradient-to-br from-blue-400/5 to-blue-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6">
@@ -78,8 +78,8 @@ const InteractiveSection = () => {
               <motion.button
                 className={`w-full relative group text-left p-6 rounded-2xl border transition-all duration-300 ${
                   activeTab === "students"
-                    ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white border-transparent shadow-xl shadow-indigo-500/25"
-                    : "bg-card border-border hover:border-indigo-300 hover:bg-indigo-50/50"
+                    ? "bg-[#2563EB] text-white border-transparent shadow-xl shadow-blue-500/25"
+                    : "bg-card border-border hover:border-blue-300 hover:bg-blue-50/50"
                 }`}
                 onClick={() => setActiveTab("students")}
                 whileHover={{ scale: 1.02 }}
@@ -89,10 +89,10 @@ const InteractiveSection = () => {
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                     activeTab === "students" 
                       ? "bg-white/20" 
-                      : "bg-indigo-100 group-hover:bg-indigo-200"
+                      : "bg-blue-100 group-hover:bg-blue-200"
                   }`}>
                     <GraduationCap className={`w-6 h-6 ${
-                      activeTab === "students" ? "text-white" : "text-indigo-600"
+                      activeTab === "students" ? "text-white" : "text-blue-600"
                     }`} />
                   </div>
                   <div>
@@ -107,7 +107,7 @@ const InteractiveSection = () => {
                 
                 {/* Active indicator */}
                 <motion.div
-                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 rounded-r-full bg-indigo-600"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 rounded-r-full bg-blue-600"
                   initial={{ height: 0 }}
                   animate={{ height: activeTab === "students" ? 40 : 0 }}
                   transition={{ duration: 0.3 }}
@@ -118,8 +118,8 @@ const InteractiveSection = () => {
               <motion.button
                 className={`w-full relative group text-left p-6 rounded-2xl border transition-all duration-300 ${
                   activeTab === "staff"
-                    ? "bg-gradient-to-r from-sky-500 to-blue-600 text-white border-transparent shadow-xl shadow-sky-500/25"
-                    : "bg-card border-border hover:border-sky-300 hover:bg-sky-50/50"
+                    ? "bg-[#1e40af] text-white border-transparent shadow-xl shadow-blue-600/25"
+                    : "bg-card border-border hover:border-blue-300 hover:bg-blue-50/50"
                 }`}
                 onClick={() => setActiveTab("staff")}
                 whileHover={{ scale: 1.02 }}
@@ -129,10 +129,10 @@ const InteractiveSection = () => {
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                     activeTab === "staff" 
                       ? "bg-white/20" 
-                      : "bg-sky-100 group-hover:bg-sky-200"
+                      : "bg-blue-100 group-hover:bg-blue-200"
                   }`}>
                     <Building2 className={`w-6 h-6 ${
-                      activeTab === "staff" ? "text-white" : "text-sky-600"
+                      activeTab === "staff" ? "text-white" : "text-blue-600"
                     }`} />
                   </div>
                   <div>
@@ -146,7 +146,7 @@ const InteractiveSection = () => {
                 </div>
                 
                 <motion.div
-                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 rounded-r-full bg-sky-600"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 rounded-r-full bg-blue-700"
                   initial={{ height: 0 }}
                   animate={{ height: activeTab === "staff" ? 40 : 0 }}
                   transition={{ duration: 0.3 }}
@@ -190,7 +190,7 @@ const InteractiveSection = () => {
                       transition={{ delay: 0.1 }}
                     >
                       Your journey in{" "}
-                      <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                      <span className="bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
                         one view
                       </span>
                     </motion.h3>
@@ -206,13 +206,13 @@ const InteractiveSection = () => {
 
                   {/* Student dashboard mockup */}
                   <motion.div
-                    className="relative bg-gradient-to-br from-indigo-50 to-purple-50 rounded-3xl border border-indigo-100 p-6 md:p-8 overflow-hidden"
+                    className="relative bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-3xl border border-blue-200 p-6 md:p-8 overflow-hidden"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.2 }}
                   >
                     {/* Decorative gradient */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-indigo-200/50 to-purple-200/50 rounded-full blur-3xl" />
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-200/50 to-blue-300/30 rounded-full blur-3xl" />
 
                     <div className="relative z-10">
                       {/* Progress bar */}
@@ -223,12 +223,12 @@ const InteractiveSection = () => {
                         transition={{ delay: 0.3 }}
                       >
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium text-indigo-700">Career Readiness</span>
-                          <span className="text-sm font-bold text-indigo-600">78%</span>
+                          <span className="text-sm font-medium text-blue-700">Career Readiness</span>
+                          <span className="text-sm font-bold text-blue-600">78%</span>
                         </div>
                         <div className="h-3 bg-white rounded-full overflow-hidden shadow-inner">
                           <motion.div
-                            className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full"
+                            className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"
                             initial={{ width: 0 }}
                             animate={{ width: "78%" }}
                             transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
@@ -241,7 +241,7 @@ const InteractiveSection = () => {
                         {studentFeatures.map((feature, i) => (
                           <motion.div
                             key={feature.title}
-                            className="relative p-5 bg-white rounded-2xl shadow-sm border border-indigo-100 cursor-pointer group"
+                            className="relative p-5 bg-white rounded-2xl shadow-sm border border-blue-100 cursor-pointer group"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 + i * 0.08 }}
@@ -250,20 +250,20 @@ const InteractiveSection = () => {
                             whileHover={{ 
                               y: -5, 
                               scale: 1.02,
-                              boxShadow: "0 15px 30px -10px rgba(99,102,241,0.2)"
+                              boxShadow: "0 15px 30px -10px rgba(37,99,235,0.2)"
                             }}
                           >
                             <motion.div
-                              className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center mb-3 group-hover:from-indigo-500 group-hover:to-purple-500 transition-all duration-300"
+                              className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center mb-3 group-hover:from-blue-500 group-hover:to-blue-600 transition-all duration-300"
                             >
-                              <feature.icon className="w-5 h-5 text-indigo-600 group-hover:text-white transition-colors" />
+                              <feature.icon className="w-5 h-5 text-blue-600 group-hover:text-white transition-colors" />
                             </motion.div>
                             <h4 className="font-semibold text-foreground mb-1">{feature.title}</h4>
                             <p className="text-sm text-muted-foreground">{feature.desc}</p>
 
                             {/* Hover indicator */}
                             <motion.div
-                              className="absolute bottom-0 left-4 right-4 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full"
+                              className="absolute bottom-0 left-4 right-4 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"
                               initial={{ scaleX: 0 }}
                               animate={{ scaleX: hoveredFeature === i ? 1 : 0 }}
                               transition={{ duration: 0.2 }}
@@ -274,13 +274,13 @@ const InteractiveSection = () => {
 
                       {/* Student testimonial */}
                       <motion.div
-                        className="mt-6 p-5 bg-white/80 backdrop-blur-sm rounded-2xl border border-indigo-100"
+                        className="mt-6 p-5 bg-white/80 backdrop-blur-sm rounded-2xl border border-blue-100"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.8 }}
                       >
                         <div className="flex items-start gap-4">
-                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold text-sm">
+                          <div className="w-10 h-10 rounded-full bg-[#2563EB] flex items-center justify-center text-white font-bold text-sm">
                             JD
                           </div>
                           <div>
@@ -317,7 +317,7 @@ const InteractiveSection = () => {
                       transition={{ delay: 0.1 }}
                     >
                       See what your students are{" "}
-                      <span className="bg-gradient-to-r from-sky-500 to-blue-600 bg-clip-text text-transparent">
+                      <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
                         actually doing
                       </span>
                     </motion.h3>
@@ -333,13 +333,13 @@ const InteractiveSection = () => {
 
                   {/* Staff dashboard mockup */}
                   <motion.div
-                    className="relative bg-gradient-to-br from-[#0a1628] to-[#1a365d] rounded-3xl border border-sky-500/20 p-6 md:p-8 overflow-hidden"
+                    className="relative bg-gradient-to-br from-[#0c1929] to-[#1e40af] rounded-3xl border border-blue-500/20 p-6 md:p-8 overflow-hidden"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.2 }}
                   >
                     {/* Background glow */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-sky-500/20 to-blue-500/20 rounded-full blur-3xl" />
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/20 to-blue-600/20 rounded-full blur-3xl" />
 
                     <div className="relative z-10">
                       {/* Stats row */}
@@ -387,20 +387,20 @@ const InteractiveSection = () => {
                             onMouseLeave={() => setHoveredFeature(null)}
                             whileHover={{ 
                               y: -5, 
-                              borderColor: "rgba(56,189,248,0.4)",
+                              borderColor: "rgba(37,99,235,0.4)",
                               backgroundColor: "rgba(255,255,255,0.05)"
                             }}
                           >
                             <motion.div
-                              className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500/20 to-blue-500/20 border border-sky-500/20 flex items-center justify-center mb-3 group-hover:from-sky-500 group-hover:to-blue-500 transition-all duration-300"
+                              className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-500/20 flex items-center justify-center mb-3 group-hover:from-blue-500 group-hover:to-blue-600 transition-all duration-300"
                             >
-                              <feature.icon className="w-5 h-5 text-sky-400 group-hover:text-white transition-colors" />
+                              <feature.icon className="w-5 h-5 text-blue-400 group-hover:text-white transition-colors" />
                             </motion.div>
                             <h4 className="font-semibold text-white mb-1">{feature.title}</h4>
                             <p className="text-sm text-white/50">{feature.desc}</p>
 
                             <motion.div
-                              className="absolute bottom-0 left-4 right-4 h-1 bg-gradient-to-r from-sky-500 to-blue-500 rounded-full"
+                              className="absolute bottom-0 left-4 right-4 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"
                               initial={{ scaleX: 0 }}
                               animate={{ scaleX: hoveredFeature === i + 10 ? 1 : 0 }}
                               transition={{ duration: 0.2 }}
@@ -424,7 +424,7 @@ const InteractiveSection = () => {
                           {[40, 65, 45, 80, 60, 75, 90].map((height, i) => (
                             <motion.div
                               key={i}
-                              className="flex-1 bg-gradient-to-t from-sky-500 to-blue-500 rounded-t"
+                              className="flex-1 bg-gradient-to-t from-blue-500 to-blue-400 rounded-t"
                               initial={{ height: 0 }}
                               animate={{ height: `${height}%` }}
                               transition={{ delay: 1.1 + i * 0.05, duration: 0.5, ease: "easeOut" }}
