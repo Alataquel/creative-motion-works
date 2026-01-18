@@ -12,18 +12,18 @@ const HeroSection = () => {
   const dashboardY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   return (
-    <section ref={sectionRef} className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#0a1628] via-[#0f2847] to-[#1a365d]">
+    <section ref={sectionRef} className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB]">
       {/* Animated mesh background */}
       <div className="absolute inset-0">
         <motion.div
           className="absolute top-0 left-1/4 w-[800px] h-[800px] rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%)" }}
           animate={{ x: [0, 80, 0], y: [0, 40, 0] }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute bottom-0 right-1/4 w-[600px] h-[600px] rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%)" }}
           animate={{ x: [0, -60, 0], y: [0, -40, 0] }}
           transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 5 }}
         />
@@ -47,14 +47,14 @@ const HeroSection = () => {
             className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-white/10"
             whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.08)" }}
           >
-            <Building2 className="w-4 h-4 text-sky-400" />
+            <Building2 className="w-4 h-4 text-blue-400" />
             <span className="text-sm font-medium text-white/80">For Universities</span>
           </motion.div>
           <motion.div
             className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-white/10"
             whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.08)" }}
           >
-            <GraduationCap className="w-4 h-4 text-indigo-400" />
+            <GraduationCap className="w-4 h-4 text-blue-300" />
             <span className="text-sm font-medium text-white/80">For Students</span>
           </motion.div>
         </motion.div>
@@ -78,7 +78,7 @@ const HeroSection = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 bg-clip-text text-transparent">
                 Give them clarity on their journey.
               </span>
             </motion.h1>
@@ -104,7 +104,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <motion.button
-            className="flex items-center gap-2 px-8 py-4 bg-white text-[#0f2847] rounded-full font-semibold text-lg group shadow-lg shadow-white/10"
+            className="flex items-center gap-2 px-8 py-4 bg-white text-[#2563EB] rounded-full font-semibold text-lg group shadow-lg shadow-white/10"
             whileHover={{ scale: 1.03, boxShadow: "0 20px 40px rgba(255,255,255,0.15)" }}
             whileTap={{ scale: 0.98 }}
           >
@@ -114,8 +114,8 @@ const HeroSection = () => {
           </motion.button>
 
           <motion.button
-            className="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 backdrop-blur-sm border border-indigo-400/30 text-white rounded-full font-semibold text-lg group"
-            whileHover={{ scale: 1.03, borderColor: "rgba(129,140,248,0.5)" }}
+            className="flex items-center gap-2 px-8 py-4 bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 text-white rounded-full font-semibold text-lg group"
+            whileHover={{ scale: 1.03, borderColor: "rgba(59,130,246,0.5)" }}
             whileTap={{ scale: 0.98 }}
           >
             <GraduationCap className="w-5 h-5" />
@@ -132,10 +132,10 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           {/* Dashboard glow */}
-          <div className="absolute -inset-4 bg-gradient-to-r from-sky-500/20 via-indigo-500/20 to-purple-500/20 rounded-3xl blur-2xl opacity-50" />
+          <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-blue-400/20 to-blue-600/20 rounded-3xl blur-2xl opacity-50" />
           
           {/* Main container */}
-          <div className="relative bg-[#0d1f38]/90 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden">
+          <div className="relative bg-[#0c1929]/90 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden">
             {/* Browser header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-white/5 bg-white/[0.02]">
               <div className="flex items-center gap-2">
@@ -161,16 +161,16 @@ const HeroSection = () => {
                 transition={{ delay: 1.2, duration: 0.6 }}
               >
                 <div className="flex items-center gap-2 mb-4">
-                  <GraduationCap className="w-5 h-5 text-indigo-400" />
+                  <GraduationCap className="w-5 h-5 text-blue-400" />
                   <span className="text-white/60 text-sm font-medium">Student View</span>
                 </div>
 
                 {/* Activity stream */}
                 <div className="space-y-3">
                   {[
-                    { icon: FileText, text: "Resume uploaded", time: "2m ago", color: "from-blue-400 to-blue-600" },
-                    { icon: Send, text: "Applied to Google", time: "1h ago", color: "from-indigo-400 to-indigo-600" },
-                    { icon: Activity, text: "Interview prep complete", time: "3h ago", color: "from-purple-400 to-purple-600" },
+                    { icon: FileText, text: "Resume uploaded", time: "2m ago", color: "from-blue-400 to-blue-500" },
+                    { icon: Send, text: "Applied to Google", time: "1h ago", color: "from-blue-500 to-blue-600" },
+                    { icon: Activity, text: "Interview prep complete", time: "3h ago", color: "from-blue-600 to-blue-700" },
                   ].map((item, i) => (
                     <motion.div
                       key={item.text}
@@ -211,8 +211,8 @@ const HeroSection = () => {
                         />
                         <defs>
                           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#38bdf8" />
-                            <stop offset="100%" stopColor="#818cf8" />
+                            <stop offset="0%" stopColor="#3b82f6" />
+                            <stop offset="100%" stopColor="#2563eb" />
                           </linearGradient>
                         </defs>
                       </svg>
@@ -234,7 +234,7 @@ const HeroSection = () => {
                 transition={{ delay: 1.3, duration: 0.6 }}
               >
                 <div className="flex items-center gap-2 mb-4">
-                  <Building2 className="w-5 h-5 text-sky-400" />
+                  <Building2 className="w-5 h-5 text-blue-400" />
                   <span className="text-white/60 text-sm font-medium">Career Team View</span>
                 </div>
 
@@ -271,13 +271,13 @@ const HeroSection = () => {
 
                 {/* Insight bar */}
                 <motion.div
-                  className="p-4 rounded-xl bg-gradient-to-r from-sky-500/10 to-indigo-500/10 border border-sky-500/20"
+                  className="p-4 rounded-xl bg-gradient-to-r from-blue-500/10 to-blue-600/10 border border-blue-500/20"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.9 }}
                 >
                   <div className="flex items-center gap-3">
-                    <TrendingUp className="w-5 h-5 text-sky-400" />
+                    <TrendingUp className="w-5 h-5 text-blue-400" />
                     <div>
                       <p className="text-white text-sm font-medium">Engagement up 24% this week</p>
                       <p className="text-white/40 text-xs">Compared to last week</p>
@@ -290,7 +290,7 @@ const HeroSection = () => {
 
           {/* Floating connection line */}
           <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-20 bg-gradient-to-b from-transparent via-sky-400/50 to-transparent"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-20 bg-gradient-to-b from-transparent via-blue-400/50 to-transparent"
             initial={{ scaleY: 0, opacity: 0 }}
             animate={{ scaleY: 1, opacity: 1 }}
             transition={{ delay: 2.2, duration: 0.5 }}
