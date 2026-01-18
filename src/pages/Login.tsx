@@ -27,7 +27,7 @@ const Login = () => {
       {/* Back button - fixed */}
       <Link
         to="/"
-        className="fixed top-6 left-6 z-50 inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors bg-[#1e3a8a]/50 backdrop-blur-sm px-4 py-2 rounded-full"
+        className="fixed top-6 left-6 z-50 inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors bg-[#0a1628]/50 backdrop-blur-sm px-4 py-2 rounded-full"
       >
         <ArrowLeft className="w-4 h-4" />
         Back
@@ -38,7 +38,7 @@ const Login = () => {
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-1/2 bg-[#1e3a8a] flex items-center justify-center p-8"
+        className="w-1/2 bg-[#0a1628] flex items-center justify-center p-8"
       >
         <div className="w-full max-w-sm">
           <h1 className="text-3xl font-display font-bold text-white text-center mb-10">
@@ -75,7 +75,7 @@ const Login = () => {
 
             <motion.button
               type="submit"
-              className="w-full py-3.5 rounded-full bg-white text-[#1e3a8a] font-semibold hover:bg-white/90 transition-colors"
+              className="w-full py-3.5 rounded-full bg-white text-[#2563EB] font-semibold hover:bg-white/90 transition-colors"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -106,7 +106,7 @@ const Login = () => {
         className="w-1/2 bg-white flex items-center justify-center p-8"
       >
         <div className="w-full max-w-sm">
-          <h1 className="text-3xl font-display font-bold text-[#1e3a8a] text-center mb-10">
+          <h1 className="text-3xl font-display font-bold text-[#2563EB] text-center mb-10">
             Students
           </h1>
 
@@ -117,7 +117,7 @@ const Login = () => {
                 placeholder="Email"
                 value={studentEmail}
                 onChange={(e) => setStudentEmail(e.target.value)}
-                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#1e3a8a] focus:outline-none transition-colors"
+                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#2563EB] focus:outline-none transition-colors"
               />
             </div>
 
@@ -127,7 +127,7 @@ const Login = () => {
                 placeholder="Password"
                 value={studentPassword}
                 onChange={(e) => setStudentPassword(e.target.value)}
-                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#1e3a8a] focus:outline-none transition-colors pr-12"
+                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#2563EB] focus:outline-none transition-colors pr-12"
               />
               <button
                 type="button"
@@ -140,7 +140,7 @@ const Login = () => {
 
             <motion.button
               type="submit"
-              className="w-full py-3.5 rounded-full bg-[#1e3a8a] text-white font-semibold hover:bg-[#1e3a8a]/90 transition-colors"
+              className="w-full py-3.5 rounded-full bg-[#2563EB] text-white font-semibold hover:bg-[#2563EB]/90 transition-colors"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -150,7 +150,7 @@ const Login = () => {
 
           <p className="text-center text-gray-500 mt-6">
             Don't have an account yet?{" "}
-            <a href="#" className="text-[#1e3a8a] font-semibold hover:underline">
+            <a href="#" className="text-[#2563EB] font-semibold hover:underline">
               Sign Up
             </a>
           </p>
