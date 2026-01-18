@@ -73,66 +73,55 @@ const SlidingHero = () => {
         backgroundSize: '60px 60px'
       }} />
 
-      {/* ApplyLab Logo - Fixed top center */}
+      {/* ApplyLab Logo - Fixed top left */}
       <motion.div 
-        className="absolute top-8 left-1/2 -translate-x-1/2 z-30"
+        className="absolute top-6 left-6 z-30"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="flex items-center gap-3">
-          <motion.div 
-            className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-lg"
-            animate={{ rotate: [0, 360] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          >
-            <span className="text-[#2563EB] font-bold text-lg">A</span>
-          </motion.div>
-          <span className="text-white font-display font-bold text-xl">ApplyLab</span>
+        <div className="flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-lg bg-white flex items-center justify-center shadow-lg">
+            <span className="text-[#2563EB] font-bold text-base">A</span>
+          </div>
+          <span className="text-white font-display font-semibold text-lg">ApplyLab</span>
         </div>
-        
-        {/* Subtle animated dotted circle */}
-        <motion.div 
-          className="absolute -inset-4 border border-dashed border-white/20 rounded-full"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        />
       </motion.div>
 
-      {/* Slide indicator */}
+      {/* Slide indicator - Left side navigation */}
       <motion.div 
-        className="absolute top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3"
-        style={{ left: "2rem" }}
+        className="absolute top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col gap-2"
+        style={{ left: "1.5rem" }}
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.5 }}
       >
         <motion.button
           onClick={() => setActivePanel("students")}
-          className={`flex items-center gap-2 px-4 py-3 rounded-full transition-all ${
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm transition-all ${
             activePanel === "students" 
-              ? "bg-white text-[#2563EB]" 
-              : "bg-white/10 text-white/70 hover:bg-white/20"
+              ? "bg-white text-[#2563EB] shadow-lg" 
+              : "bg-white/10 text-white/80 hover:bg-white/20 border border-white/10"
           }`}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
-          <GraduationCap className="w-5 h-5" />
-          <span className="font-medium hidden md:block">Students</span>
+          <GraduationCap className="w-4 h-4" />
+          <span className="font-medium">Students</span>
         </motion.button>
         
         <motion.button
           onClick={() => setActivePanel("careers")}
-          className={`flex items-center gap-2 px-4 py-3 rounded-full transition-all ${
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm transition-all ${
             activePanel === "careers" 
-              ? "bg-white text-[#2563EB]" 
-              : "bg-white/10 text-white/70 hover:bg-white/20"
+              ? "bg-white text-[#2563EB] shadow-lg" 
+              : "bg-white/10 text-white/80 hover:bg-white/20 border border-white/10"
           }`}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
-          <Building2 className="w-5 h-5" />
-          <span className="font-medium hidden md:block">Career Teams</span>
+          <Building2 className="w-4 h-4" />
+          <span className="font-medium">Career Teams</span>
         </motion.button>
       </motion.div>
 
@@ -431,35 +420,17 @@ const SlidingHero = () => {
         </div>
       </motion.div>
 
-      {/* Drag hint */}
-      <motion.div 
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5 }}
-      >
-        <motion.div 
-          className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20"
-          animate={{ x: [-5, 5, -5] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronLeft className="w-4 h-4 text-white/60" />
-          <span className="text-sm text-white/60">Drag or click to explore</span>
-          <ChevronRight className="w-4 h-4 text-white/60" />
-        </motion.div>
-      </motion.div>
-
       {/* Panel indicator dots */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
         <motion.button
-          className={`w-3 h-3 rounded-full transition-all ${activePanel === "students" ? "bg-white scale-125" : "bg-white/30"}`}
+          className={`h-2.5 rounded-full transition-all ${activePanel === "students" ? "bg-white w-8" : "bg-white/40 hover:bg-white/60 w-2.5"}`}
           onClick={() => setActivePanel("students")}
-          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
         />
         <motion.button
-          className={`w-3 h-3 rounded-full transition-all ${activePanel === "careers" ? "bg-white scale-125" : "bg-white/30"}`}
+          className={`h-2.5 rounded-full transition-all ${activePanel === "careers" ? "bg-white w-8" : "bg-white/40 hover:bg-white/60 w-2.5"}`}
           onClick={() => setActivePanel("careers")}
-          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
         />
       </div>
     </section>
