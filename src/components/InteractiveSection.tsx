@@ -61,33 +61,27 @@ const studentFeatures = [
 const staffFeatures = [
   { 
     icon: Users, 
-    title: "Cohort Engagement", 
-    desc: "See who's active and who needs support",
-    detail: "Real-time dashboard showing student engagement levels, helping you identify and support students who may be falling behind."
+    title: "Student Insights", 
+    desc: "Behavioral data + engagement patterns",
+    detail: "Track how students engage with career resources, identify at-risk students early, and understand behavioral patterns that predict success."
   },
   { 
-    icon: Activity, 
-    title: "Activity Tracking", 
-    desc: "Real-time visibility into student actions",
-    detail: "Comprehensive activity feeds showing resume updates, applications submitted, and events attended."
-  },
-  { 
-    icon: BarChart3, 
-    title: "Application Funnel", 
-    desc: "Track applications to placements",
-    detail: "Visual funnel analytics from initial applications through interviews to final placements."
+    icon: Send, 
+    title: "Applications Insights", 
+    desc: "Roles applied for + outcome status",
+    detail: "See what roles students are pursuing, track application outcomes, and understand where your cohort is finding success."
   },
   { 
     icon: Target, 
-    title: "Material Quality", 
-    desc: "Monitor resume and prep quality",
-    detail: "Aggregate quality scores across your cohort with drill-down into individual student materials."
+    title: "Qualification Insights", 
+    desc: "Skills + materials quality scoring",
+    detail: "Aggregate quality scores for resumes and cover letters, identify skill gaps, and track improvement across your cohort."
   },
   { 
     icon: TrendingUp, 
-    title: "Outcome Analytics", 
-    desc: "Connect actions to results",
-    detail: "Correlation analysis showing which activities drive the best placement outcomes."
+    title: "Market Insights", 
+    desc: "Real-time opportunity + outcome intelligence",
+    detail: "Understand market trends, which employers are hiring, and connect student activities to placement outcomes."
   },
 ];
 

@@ -299,17 +299,17 @@ const ProgressInsightsMockup = () => (
   </div>
 );
 
-// ======= STAFF MOCKUPS =======
+// ======= STAFF MOCKUPS (4 Insight Categories) =======
 
-// Cohort Engagement Mockup
-const CohortEngagementMockup = () => (
+// Student Insights Mockup - Behavioral data + engagement patterns
+const StudentInsightsMockup = () => (
   <div className="space-y-3">
     {/* Engagement Overview */}
     <div className="grid grid-cols-3 gap-2">
       {[
-        { label: "Active", value: "847", color: "text-emerald-400", bg: "bg-emerald-500/20" },
-        { label: "At Risk", value: "56", color: "text-amber-400", bg: "bg-amber-500/20" },
-        { label: "Inactive", value: "23", color: "text-red-400", bg: "bg-red-500/20" },
+        { label: "Active", value: "847", color: "text-emerald-400" },
+        { label: "At Risk", value: "56", color: "text-amber-400" },
+        { label: "Inactive", value: "23", color: "text-red-400" },
       ].map((stat, i) => (
         <motion.div
           key={stat.label}
@@ -324,207 +324,195 @@ const CohortEngagementMockup = () => (
       ))}
     </div>
 
-    {/* At-Risk Students */}
-    <div className="bg-white/[0.05] rounded-xl p-3 border border-white/5">
-      <div className="text-xs text-white/40 mb-2 flex items-center gap-2">
-        <AlertCircle className="w-3 h-3 text-amber-400" />
-        Needs Attention
-      </div>
-      {[
-        { name: "Alex M.", lastActive: "5 days ago", apps: 0 },
-        { name: "Jordan L.", lastActive: "1 week ago", apps: 1 },
-      ].map((student, i) => (
-        <motion.div
-          key={student.name}
-          className="flex items-center gap-2 py-2 border-b border-white/5 last:border-0"
-          initial={{ opacity: 0, x: -10 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3 + i * 0.1 }}
-        >
-          <div className="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-300 text-xs font-medium">
-            {student.name.charAt(0)}
-          </div>
-          <div className="flex-1">
-            <span className="text-white text-xs">{student.name}</span>
-          </div>
-          <span className="text-amber-400/70 text-[10px]">{student.lastActive}</span>
-        </motion.div>
-      ))}
-    </div>
-  </div>
-);
-
-// Activity Tracking Mockup (Staff)
-const ActivityTrackingMockup = () => (
-  <div className="space-y-3">
-    {/* Live Feed */}
+    {/* Engagement Heatmap */}
     <div className="bg-white/[0.08] rounded-xl p-3 border border-white/5">
-      <div className="flex items-center gap-2 mb-3">
-        <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-        <span className="text-white/70 text-xs font-medium">Live Activity</span>
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-white/70 text-xs font-medium">Weekly Engagement</span>
+        <div className="flex items-center gap-1">
+          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="text-white/40 text-[10px]">Live</span>
+        </div>
       </div>
-      {[
-        { action: "submitted application", student: "Sarah K.", target: "Google", time: "2m" },
-        { action: "updated resume", student: "Mike T.", target: "", time: "5m" },
-        { action: "RSVP'd to event", student: "Emma L.", target: "Career Fair", time: "12m" },
-      ].map((item, i) => (
-        <motion.div
-          key={i}
-          className="flex items-start gap-2 py-2 border-b border-white/5 last:border-0"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 + i * 0.1 }}
-        >
-          <Activity className="w-3 h-3 text-blue-400 mt-0.5" />
-          <div className="flex-1 text-xs">
-            <span className="text-white">{item.student}</span>
-            <span className="text-white/50"> {item.action}</span>
-            {item.target && <span className="text-blue-300"> {item.target}</span>}
-          </div>
-          <span className="text-white/30 text-[10px]">{item.time}</span>
-        </motion.div>
-      ))}
+      <div className="grid grid-cols-7 gap-1">
+        {[75, 45, 80, 90, 60, 30, 85].map((val, i) => (
+          <motion.div
+            key={i}
+            className="h-8 rounded"
+            style={{ backgroundColor: `rgba(34, 197, 94, ${val / 100})` }}
+            initial={{ opacity: 0, scaleY: 0 }}
+            whileInView={{ opacity: 1, scaleY: 1 }}
+            transition={{ delay: 0.2 + i * 0.05 }}
+          />
+        ))}
+      </div>
+      <div className="flex justify-between mt-1">
+        <span className="text-white/30 text-[9px]">Mon</span>
+        <span className="text-white/30 text-[9px]">Sun</span>
+      </div>
+    </div>
+
+    {/* Behavioral Pattern */}
+    <div className="bg-white/[0.05] rounded-xl p-3 border border-white/5">
+      <div className="flex items-center gap-2">
+        <Users className="w-4 h-4 text-blue-400" />
+        <span className="text-white text-xs">Peak activity: <span className="text-blue-300">Tuesdays 2-4pm</span></span>
+      </div>
     </div>
   </div>
 );
 
-// Application Funnel Mockup (Staff)
-const ApplicationFunnelMockup = () => (
+// Applications Insights Mockup - Roles applied for + outcome status
+const ApplicationsInsightsMockup = () => (
   <div className="space-y-3">
     {/* Funnel Visual */}
     <div className="bg-white/[0.08] rounded-xl p-3 border border-white/5">
+      <div className="text-white/70 text-xs font-medium mb-3">Application Pipeline</div>
       {[
-        { stage: "Applications", count: 2847, width: 100, color: "from-blue-500 to-blue-400" },
-        { stage: "Screenings", count: 892, width: 75, color: "from-indigo-500 to-indigo-400" },
-        { stage: "Interviews", count: 456, width: 50, color: "from-amber-500 to-amber-400" },
-        { stage: "Offers", count: 189, width: 30, color: "from-emerald-500 to-emerald-400" },
+        { stage: "Applied", count: 2847, width: 100, color: "from-blue-500 to-blue-400" },
+        { stage: "Screening", count: 892, width: 65, color: "from-indigo-500 to-indigo-400" },
+        { stage: "Interview", count: 456, width: 40, color: "from-amber-500 to-amber-400" },
+        { stage: "Offers", count: 189, width: 22, color: "from-emerald-500 to-emerald-400" },
       ].map((stage, i) => (
         <motion.div
           key={stage.stage}
-          className="flex items-center gap-3 py-1.5"
+          className="flex items-center gap-2 py-1"
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ delay: i * 0.1 }}
         >
-          <div className="w-20 text-right">
-            <span className="text-white text-sm font-medium">{stage.count}</span>
+          <div className="w-12 text-right">
+            <span className="text-white text-xs font-medium">{stage.count}</span>
           </div>
           <div className="flex-1">
             <motion.div
-              className={`h-6 bg-gradient-to-r ${stage.color} rounded-r-full`}
+              className={`h-4 bg-gradient-to-r ${stage.color} rounded-r-full`}
               initial={{ width: 0 }}
               whileInView={{ width: `${stage.width}%` }}
               transition={{ delay: 0.2 + i * 0.1, duration: 0.6 }}
             />
           </div>
-          <span className="text-white/50 text-xs w-20">{stage.stage}</span>
+          <span className="text-white/50 text-[10px] w-16">{stage.stage}</span>
         </motion.div>
       ))}
     </div>
 
-    {/* Conversion Rate */}
-    <div className="flex items-center justify-between p-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
-      <span className="text-emerald-300 text-xs">Overall Conversion</span>
-      <span className="text-emerald-400 font-bold text-sm">6.6%</span>
+    {/* Top Roles */}
+    <div className="bg-white/[0.05] rounded-xl p-3 border border-white/5">
+      <div className="text-white/40 text-[10px] mb-2">Top Roles Applied</div>
+      <div className="flex flex-wrap gap-1">
+        {["SWE Intern", "Product", "Data Analyst", "Consulting"].map((role, i) => (
+          <motion.span
+            key={role}
+            className="px-2 py-1 bg-blue-500/20 text-blue-300 text-[10px] rounded-full"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 + i * 0.05 }}
+          >
+            {role}
+          </motion.span>
+        ))}
+      </div>
     </div>
   </div>
 );
 
-// Material Quality Mockup (Staff)
-const MaterialQualityMockup = () => (
+// Qualification Insights Mockup - Skills + materials quality scoring
+const QualificationInsightsMockup = () => (
   <div className="space-y-3">
     {/* Quality Distribution */}
     <div className="bg-white/[0.08] rounded-xl p-3 border border-white/5">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-white/70 text-xs font-medium">Resume Quality Distribution</span>
-        <span className="text-white/40 text-xs">926 total</span>
+        <span className="text-white/70 text-xs font-medium">Materials Quality</span>
+        <span className="text-white/40 text-xs">926 students</span>
       </div>
-      <div className="flex gap-0.5 h-4 rounded-full overflow-hidden">
+      <div className="flex gap-0.5 h-5 rounded-full overflow-hidden">
         {[
-          { pct: 35, color: "bg-emerald-500" },
-          { pct: 40, color: "bg-blue-500" },
-          { pct: 18, color: "bg-amber-500" },
-          { pct: 7, color: "bg-red-500" },
+          { pct: 35, color: "bg-emerald-500", label: "A" },
+          { pct: 40, color: "bg-blue-500", label: "B" },
+          { pct: 18, color: "bg-amber-500", label: "C" },
+          { pct: 7, color: "bg-red-500", label: "D" },
         ].map((seg, i) => (
           <motion.div
             key={i}
-            className={seg.color}
+            className={`${seg.color} flex items-center justify-center`}
             initial={{ width: 0 }}
             whileInView={{ width: `${seg.pct}%` }}
             transition={{ delay: 0.2 + i * 0.1, duration: 0.5 }}
-          />
+          >
+            <span className="text-white/80 text-[9px] font-medium">{seg.label}</span>
+          </motion.div>
         ))}
-      </div>
-      <div className="flex justify-between mt-2 text-[9px]">
-        <span className="text-emerald-400">Excellent</span>
-        <span className="text-blue-400">Good</span>
-        <span className="text-amber-400">Fair</span>
-        <span className="text-red-400">Poor</span>
       </div>
     </div>
 
-    {/* Top Improvement Areas */}
-    <div className="space-y-2">
+    {/* Skills Gap */}
+    <div className="bg-white/[0.05] rounded-xl p-3 border border-white/5">
+      <div className="text-white/40 text-[10px] mb-2 flex items-center gap-1">
+        <Target className="w-3 h-3" />
+        Top Skill Gaps
+      </div>
       {[
-        { area: "Quantified achievements", count: 234 },
-        { area: "Action verbs usage", count: 156 },
+        { skill: "Quantified achievements", count: 234 },
+        { skill: "Technical depth", count: 156 },
+        { skill: "Action verbs", count: 89 },
       ].map((item, i) => (
         <motion.div
-          key={item.area}
-          className="flex items-center justify-between p-2 bg-white/[0.05] rounded-lg"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 + i * 0.1 }}
+          key={item.skill}
+          className="flex items-center justify-between py-1.5 border-b border-white/5 last:border-0"
+          initial={{ opacity: 0, x: -10 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3 + i * 0.1 }}
         >
-          <span className="text-white/60 text-xs">{item.area}</span>
-          <span className="text-white text-xs font-medium">{item.count} need help</span>
+          <span className="text-white/60 text-xs">{item.skill}</span>
+          <span className="text-amber-400 text-xs font-medium">{item.count}</span>
         </motion.div>
       ))}
     </div>
   </div>
 );
 
-// Outcome Analytics Mockup (Staff)
-const OutcomeAnalyticsMockup = () => (
+// Market Insights Mockup - Real-time opportunity + outcome intelligence
+const MarketInsightsMockup = () => (
   <div className="space-y-3">
     {/* Key Insight */}
     <div className="bg-gradient-to-r from-blue-500/10 to-indigo-500/10 rounded-xl p-3 border border-blue-500/20">
       <div className="flex items-center gap-2 mb-2">
         <TrendingUp className="w-4 h-4 text-blue-400" />
-        <span className="text-white/70 text-xs font-medium">Key Insight</span>
+        <span className="text-white/70 text-xs font-medium">Market Trend</span>
       </div>
-      <p className="text-white text-sm">Students with 80+ resume scores are <span className="text-emerald-400 font-bold">3.2x</span> more likely to get interviews</p>
+      <p className="text-white text-sm">Tech hiring up <span className="text-emerald-400 font-bold">23%</span> in Q1 vs last year</p>
     </div>
 
-    {/* Correlation Matrix */}
+    {/* Top Hiring Companies */}
     <div className="bg-white/[0.08] rounded-xl p-3 border border-white/5">
-      <div className="text-xs text-white/40 mb-2">Placement Predictors</div>
+      <div className="text-white/40 text-[10px] mb-2">Top Hiring This Month</div>
       {[
-        { factor: "Resume Score", correlation: 0.82, impact: "High" },
-        { factor: "Applications Sent", correlation: 0.71, impact: "High" },
-        { factor: "Events Attended", correlation: 0.54, impact: "Medium" },
+        { company: "Google", openings: 47, trend: "+12" },
+        { company: "Amazon", openings: 38, trend: "+8" },
+        { company: "McKinsey", openings: 24, trend: "+15" },
       ].map((item, i) => (
         <motion.div
-          key={item.factor}
-          className="flex items-center gap-2 py-1.5"
-          initial={{ opacity: 0, x: -10 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          key={item.company}
+          className="flex items-center justify-between py-1.5 border-b border-white/5 last:border-0"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 + i * 0.1 }}
         >
-          <span className="text-white/60 text-xs flex-1">{item.factor}</span>
-          <div className="w-16 h-1.5 bg-white/10 rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-gradient-to-r from-blue-500 to-emerald-400 rounded-full"
-              initial={{ width: 0 }}
-              whileInView={{ width: `${item.correlation * 100}%` }}
-              transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-            />
+          <span className="text-white text-xs">{item.company}</span>
+          <div className="flex items-center gap-2">
+            <span className="text-white/50 text-xs">{item.openings} roles</span>
+            <span className="text-emerald-400 text-[10px]">{item.trend}</span>
           </div>
-          <span className={`text-[10px] ${item.impact === "High" ? "text-emerald-400" : "text-amber-400"}`}>
-            {item.impact}
-          </span>
         </motion.div>
       ))}
+    </div>
+
+    {/* Outcome Predictor */}
+    <div className="bg-white/[0.05] rounded-xl p-3 border border-white/5">
+      <div className="flex items-center justify-between">
+        <span className="text-white/60 text-xs">Placement Rate</span>
+        <span className="text-emerald-400 font-bold text-lg">78.5%</span>
+      </div>
     </div>
   </div>
 );
@@ -540,11 +528,10 @@ const studentMockups = [
 ];
 
 const staffMockups = [
-  CohortEngagementMockup,
-  ActivityTrackingMockup,
-  ApplicationFunnelMockup,
-  MaterialQualityMockup,
-  OutcomeAnalyticsMockup,
+  StudentInsightsMockup,
+  ApplicationsInsightsMockup,
+  QualificationInsightsMockup,
+  MarketInsightsMockup,
 ];
 
 export const FeatureMockup = ({ featureIndex, isStaff = false }: MockupProps) => {
