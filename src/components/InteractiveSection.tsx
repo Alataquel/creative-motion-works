@@ -121,7 +121,7 @@ const InteractiveSection = () => {
               <motion.button
                 className={`w-full relative group text-left p-6 rounded-2xl border transition-all duration-300 ${
                   activeTab === "staff"
-                    ? "bg-[#1e40af] text-white border-transparent shadow-xl shadow-blue-600/25"
+                    ? "bg-[#2563EB] text-white border-transparent shadow-xl shadow-blue-500/25"
                     : "bg-white border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 shadow-sm"
                 }`}
                 onClick={() => setActiveTab("staff")}
@@ -149,7 +149,7 @@ const InteractiveSection = () => {
                 </div>
                 
                 <motion.div
-                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 rounded-r-full bg-blue-700"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 rounded-r-full bg-blue-600"
                   initial={{ height: 0 }}
                   animate={{ height: activeTab === "staff" ? 40 : 0 }}
                   transition={{ duration: 0.3 }}
@@ -192,8 +192,8 @@ const InteractiveSection = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 }}
                     >
-                      Your journey in{" "}
-                      <span className="bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
+                    Your journey in{" "}
+                      <span className="bg-gradient-to-r from-[#2563EB] to-[#3B82F6] bg-clip-text text-transparent">
                         one view
                       </span>
                     </motion.h3>
@@ -319,8 +319,8 @@ const InteractiveSection = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 }}
                     >
-                      See what your students are{" "}
-                      <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+                    See what your students are{" "}
+                      <span className="bg-gradient-to-r from-[#2563EB] to-[#3B82F6] bg-clip-text text-transparent">
                         actually doing
                       </span>
                     </motion.h3>
