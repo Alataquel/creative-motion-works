@@ -69,14 +69,16 @@ const Navbar = () => {
               >
                 Login
               </Link>
-              <motion.button
-                className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#2563EB] rounded-full font-semibold text-sm group"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Request Pilot
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-              </motion.button>
+              <Link to="/request-pilot">
+                <motion.button
+                  className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#2563EB] rounded-full font-semibold text-sm group"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Request Pilot
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </motion.button>
+              </Link>
             </div>
 
             <button className="md:hidden p-2 text-white" onClick={() => setIsMobileOpen(!isMobileOpen)}>
