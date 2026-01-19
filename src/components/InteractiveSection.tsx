@@ -209,13 +209,13 @@ const InteractiveSection = () => {
 
                   {/* Student dashboard mockup - matching dark blue design */}
                   <motion.div
-                    className="relative bg-gradient-to-br from-[#0c1929] to-[#1e40af] rounded-3xl border border-blue-500/20 p-6 md:p-8 overflow-hidden"
+                    className="relative bg-gradient-to-br from-[#0c1929] to-[#2563EB] rounded-3xl border border-[#2563EB]/20 p-6 md:p-8 overflow-hidden"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.2 }}
                   >
                     {/* Background glow */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/20 to-blue-600/20 rounded-full blur-3xl" />
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#2563EB]/20 to-[#2563EB]/10 rounded-full blur-3xl" />
 
                     <div className="relative z-10">
                       {/* Progress bar */}
@@ -227,11 +227,11 @@ const InteractiveSection = () => {
                       >
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-sm font-medium text-white/80">Career Readiness</span>
-                          <span className="text-sm font-bold text-blue-400">78%</span>
+                          <span className="text-sm font-bold text-[#3B82F6]">78%</span>
                         </div>
                         <div className="h-3 bg-white/10 rounded-full overflow-hidden">
                           <motion.div
-                            className="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full"
+                            className="h-full bg-gradient-to-r from-[#2563EB] to-[#3B82F6] rounded-full"
                             initial={{ width: 0 }}
                             animate={{ width: "78%" }}
                             transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
@@ -257,16 +257,16 @@ const InteractiveSection = () => {
                             }}
                           >
                             <motion.div
-                              className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-500/20 flex items-center justify-center mb-3 group-hover:from-blue-500 group-hover:to-blue-600 transition-all duration-300"
+                              className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2563EB]/20 to-[#2563EB]/10 border border-[#2563EB]/20 flex items-center justify-center mb-3 group-hover:from-[#2563EB] group-hover:to-[#3B82F6] transition-all duration-300"
                             >
-                              <feature.icon className="w-5 h-5 text-blue-400 group-hover:text-white transition-colors" />
+                              <feature.icon className="w-5 h-5 text-[#3B82F6] group-hover:text-white transition-colors" />
                             </motion.div>
                             <h4 className="font-semibold text-white mb-1">{feature.title}</h4>
                             <p className="text-sm text-white/50">{feature.desc}</p>
 
                             {/* Hover indicator */}
                             <motion.div
-                              className="absolute bottom-0 left-4 right-4 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"
+                              className="absolute bottom-0 left-4 right-4 h-1 bg-gradient-to-r from-[#2563EB] to-[#3B82F6] rounded-full"
                               initial={{ scaleX: 0 }}
                               animate={{ scaleX: hoveredFeature === i ? 1 : 0 }}
                               transition={{ duration: 0.2 }}
@@ -336,13 +336,13 @@ const InteractiveSection = () => {
 
                   {/* Staff dashboard mockup */}
                   <motion.div
-                    className="relative bg-gradient-to-br from-[#0c1929] to-[#1e40af] rounded-3xl border border-blue-500/20 p-6 md:p-8 overflow-hidden"
+                    className="relative bg-gradient-to-br from-[#0c1929] to-[#2563EB] rounded-3xl border border-[#2563EB]/20 p-6 md:p-8 overflow-hidden"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.2 }}
                   >
                     {/* Background glow */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/20 to-blue-600/20 rounded-full blur-3xl" />
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#2563EB]/20 to-[#2563EB]/10 rounded-full blur-3xl" />
 
                     <div className="relative z-10">
                       {/* Stats row */}
