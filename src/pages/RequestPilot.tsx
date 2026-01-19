@@ -54,13 +54,13 @@ const RequestPilot = () => {
         </Link>
       </nav>
 
-      {/* Content */}
-      <div className="relative z-10 flex-1 flex items-center justify-center px-6 pb-16">
+      {/* Full Screen Content */}
+      <div className="relative z-10 flex-1 flex items-center justify-center px-6 py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full max-w-md"
+          className="w-full max-w-2xl"
         >
           {!isSubmitted ? (
             <div className="bg-white rounded-2xl shadow-2xl p-8 border border-slate-200">
