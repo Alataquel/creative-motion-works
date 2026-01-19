@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, Building2, Mail, User } from "lucide-react";
+import { ArrowLeft, ArrowRight, Building2, Mail, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -38,12 +38,19 @@ const RequestPilot = () => {
       />
 
       {/* Simple Navbar */}
-      <nav className="relative z-10 max-w-7xl mx-auto px-6 py-6 w-full">
+      <nav className="relative z-10 max-w-7xl mx-auto px-6 py-6 w-full flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 w-fit">
           <div className="w-8 h-8 rounded-lg bg-[#2563EB] flex items-center justify-center">
             <span className="text-white font-bold text-sm">A</span>
           </div>
           <span className="text-xl font-display font-bold text-white">ApplyLab</span>
+        </Link>
+        <Link 
+          to="/" 
+          className="flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm font-medium"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back
         </Link>
       </nav>
 
