@@ -183,15 +183,15 @@ const InteractiveSection = () => {
       </div>
 
       {/* Full-Width Scroll-Triggered Feature Journey */}
-      <div className="bg-gradient-to-br from-[#0c1929] via-[#1e3a5f] to-[#2563EB] relative">
+      <div className="bg-gradient-to-br from-[#f0f6ff] via-white to-[#e8f1fc] relative">
         {/* Parallax background decorations */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div 
-            className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-full blur-3xl"
+            className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-blue-200/30 to-blue-300/10 rounded-full blur-3xl"
             style={{ y: useTransform(scrollYProgress, [0, 1], [0, -100]) }}
           />
           <motion.div 
-            className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-gradient-to-br from-blue-400/10 to-blue-500/5 rounded-full blur-3xl"
+            className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-gradient-to-br from-blue-100/30 to-blue-200/10 rounded-full blur-3xl"
             style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]) }}
           />
         </div>
@@ -204,13 +204,13 @@ const InteractiveSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-[#1e3a5f] mb-4">
               {activeTab === "students" ? "Your journey in " : "See what your students are "}
-              <span className="bg-gradient-to-r from-[#93c5fd] via-[#60a5fa] to-[#3b82f6] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#2563EB] via-[#3b82f6] to-[#60a5fa] bg-clip-text text-transparent">
                 {activeTab === "students" ? "one view" : "actually doing"}
               </span>
             </h3>
-            <p className="text-xl text-white/60 max-w-2xl mx-auto">
+            <p className="text-xl text-slate-500 max-w-2xl mx-auto">
               {activeTab === "students" 
                 ? "Discover jobs, build better materials, and track your progress — all in one place."
                 : "Track engagement, activity, and outcomes across your entire cohort."}
@@ -231,19 +231,19 @@ const InteractiveSection = () => {
                 {/* Content - alternating sides */}
                 <div className={`${i % 2 === 1 ? "lg:order-2" : ""}`}>
                   <motion.div
-                    className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center mb-8 shadow-2xl shadow-blue-500/30"
+                    className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center mb-8 shadow-2xl shadow-blue-500/20"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                   >
                     <feature.icon className="w-10 h-10 text-white" />
                   </motion.div>
                   
-                  <h4 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+                  <h4 className="text-3xl md:text-4xl font-display font-bold text-[#1e3a5f] mb-4">
                     {feature.title}
                   </h4>
-                  <p className="text-xl text-white/70 mb-6">
+                  <p className="text-xl text-slate-600 mb-6">
                     {feature.desc}
                   </p>
-                  <p className="text-lg text-white/50 leading-relaxed">
+                  <p className="text-lg text-slate-400 leading-relaxed">
                     {feature.detail}
                   </p>
                 </div>
@@ -254,28 +254,28 @@ const InteractiveSection = () => {
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="relative p-6 bg-white/[0.05] backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden">
+                  <div className="relative p-6 bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-xl shadow-slate-200/50">
                     {/* Glow effect */}
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-2xl" />
+                    <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-100/50 to-transparent rounded-full blur-2xl" />
                     
                     {/* Authentic Feature UI */}
                     <div className="relative z-10">
                       <div className="flex items-center gap-2 mb-4">
-                        <div className="w-3 h-3 rounded-full bg-red-400/60" />
-                        <div className="w-3 h-3 rounded-full bg-yellow-400/60" />
-                        <div className="w-3 h-3 rounded-full bg-green-400/60" />
+                        <div className="w-3 h-3 rounded-full bg-red-400" />
+                        <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                        <div className="w-3 h-3 rounded-full bg-green-400" />
                       </div>
                       
                       {/* Feature-specific mockup */}
                       <FeatureMockup featureIndex={i} isStaff={activeTab === "staff"} />
                       
-                      <div className="mt-4 flex items-center justify-between pt-3 border-t border-white/5">
-                        <span className="text-sm text-white/40">Feature {i + 1} of {features.length}</span>
+                      <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-100">
+                        <span className="text-sm text-slate-400">Feature {i + 1} of {features.length}</span>
                         <div className="flex items-center gap-1">
                           {[...Array(features.length)].map((_, j) => (
                             <div 
                               key={j} 
-                              className={`w-2 h-2 rounded-full transition-colors ${j === i ? "bg-blue-400" : "bg-white/20"}`}
+                              className={`w-2 h-2 rounded-full transition-colors ${j === i ? "bg-blue-500" : "bg-slate-200"}`}
                             />
                           ))}
                         </div>

@@ -23,7 +23,7 @@ const Navbar = () => {
     <>
       <motion.header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "bg-[#0c1929]/90 backdrop-blur-xl border-b border-white/5" : "bg-transparent"
+          isScrolled ? "bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm" : "bg-transparent"
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -47,7 +47,7 @@ const Navbar = () => {
                   <Link
                     key={item.label}
                     to={item.href}
-                    className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+                    className="text-sm font-medium text-slate-600 hover:text-[#1e3a5f] transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -55,7 +55,7 @@ const Navbar = () => {
                   <a
                     key={item.label}
                     href={item.href}
-                    className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+                    className="text-sm font-medium text-slate-600 hover:text-[#1e3a5f] transition-colors"
                   >
                     {item.label}
                   </a>
@@ -66,13 +66,13 @@ const Navbar = () => {
             <div className="hidden md:flex items-center gap-4">
               <Link
                 to="/login"
-                className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+                className="text-sm font-medium text-slate-600 hover:text-[#1e3a5f] transition-colors"
               >
                 Login
               </Link>
               <Link to="/request-pilot">
                 <motion.button
-                  className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#2563EB] rounded-full font-semibold text-sm group"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#2563EB] text-white rounded-full font-semibold text-sm group shadow-lg shadow-blue-500/25"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -82,7 +82,7 @@ const Navbar = () => {
               </Link>
             </div>
 
-            <button className="md:hidden p-2 text-white" onClick={() => setIsMobileOpen(!isMobileOpen)}>
+            <button className="md:hidden p-2 text-[#1e3a5f]" onClick={() => setIsMobileOpen(!isMobileOpen)}>
               {isMobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
