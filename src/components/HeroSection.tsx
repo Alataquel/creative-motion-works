@@ -1,26 +1,52 @@
-import { ArrowRight, GraduationCap, Building2, Activity, FileText, Send, TrendingUp } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { ArrowRight, GraduationCap, Building2, Activity, FileText, Send, TrendingUp, ChevronDown } from "lucide-react";
+import { useRef } from "react";
 
 const HeroSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Scroll progress for DNA helix animation
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const springConfig = { stiffness: 100, damping: 22, mass: 0.5 };
+  const progress = useSpring(scrollYProgress, springConfig);
+
+  // DNA HELIX ANIMATION - panels descend and converge
+  const panelY = useTransform(progress, [0, 0.5, 1], [0, 150, 300]);
+
+  // LEFT PANEL - Moves RIGHT to center
+  const leftX = useTransform(progress, [0, 0.4, 0.7, 1], [0, 80, 160, 220]);
+  const leftRotateY = useTransform(progress, [0, 0.35, 0.7, 1], [0, 20, 10, 0]);
+  const leftRotateZ = useTransform(progress, [0, 0.5, 1], [0, -12, 0]);
+  const leftScale = useTransform(progress, [0, 0.5, 1], [1, 0.9, 0.8]);
+
+  // RIGHT PANEL - Moves LEFT to center
+  const rightX = useTransform(progress, [0, 0.4, 0.7, 1], [0, -80, -160, -220]);
+  const rightRotateY = useTransform(progress, [0, 0.35, 0.7, 1], [0, -20, -10, 0]);
+  const rightRotateZ = useTransform(progress, [0, 0.5, 1], [0, 12, 0]);
+  const rightScale = useTransform(progress, [0, 0.5, 1], [1, 0.9, 0.8]);
+
+  // Panel opacity
+  const panelOpacity = useTransform(progress, [0, 0.7, 1], [1, 0.8, 0.3]);
+
+  // Scroll indicator
+  const scrollIndicatorOpacity = useTransform(progress, [0, 0.1], [1, 0]);
+
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB] overflow-hidden">
-      {/* Background effects */}
-      <div
-        className="absolute top-0 left-1/4 w-[800px] h-[800px] rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%)" }}
-      />
-      <div
-        className="absolute bottom-0 right-1/4 w-[600px] h-[600px] rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%)" }}
-      />
-      <div className="absolute inset-0 opacity-[0.02]" style={{
+    <section ref={containerRef} className="relative min-h-screen bg-[#0a1628] overflow-hidden">
+      {/* Clean grid background only */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
         backgroundSize: '50px 50px'
       }} />
 
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col justify-center items-center max-w-7xl mx-auto px-6 pt-24 pb-16">
-        {/* HEADLINE */}
-        <div className="text-center mb-6">
+      <div className="relative z-10 min-h-screen flex flex-col justify-start items-center max-w-7xl mx-auto px-6 pt-32 pb-16">
+        {/* HEADLINE - Centered */}
+        <div className="text-center mb-8 w-full">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight text-white">
             See what students are doing.
           </h1>
@@ -31,20 +57,35 @@ const HeroSection = () => {
           </h1>
         </div>
 
-        {/* SUBTITLE */}
-        <p className="text-center text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed text-white/60">
+        {/* SUBTITLE - Centered */}
+        <p className="text-center text-lg md:text-xl max-w-3xl mx-auto mb-16 leading-relaxed text-white/60">
           ApplyLab brings student career activity into one clear system — helping students stay on track and career teams gain{" "}
           <span className="text-white/90 font-medium">real visibility</span>.
         </p>
 
-        {/* PANELS CONTAINER */}
-        <div className="relative w-full max-w-6xl mx-auto">
-          {/* PANELS */}
-          <div className="relative grid md:grid-cols-2 gap-4 md:gap-6 items-stretch">
+        {/* DNA PANELS CONTAINER - More breathing room */}
+        <div
+          className="relative w-full max-w-6xl mx-auto mt-4"
+          style={{ perspective: 1400 }}
+        >
+          {/* DNA PANELS */}
+          <div className="relative grid md:grid-cols-2 gap-4 md:gap-6 items-stretch" style={{ transformStyle: 'preserve-3d' }}>
             
-            {/* LEFT PANEL - Students */}
-            <div className="relative h-full">
-              <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200">
+            {/* LEFT PANEL - Students (Taller) */}
+            <motion.div
+              className="relative"
+              style={{
+                y: panelY,
+                x: leftX,
+                rotateY: leftRotateY,
+                rotateZ: leftRotateZ,
+                scale: leftScale,
+                opacity: panelOpacity,
+                transformStyle: 'preserve-3d',
+                transformOrigin: 'right center',
+              }}
+            >
+              <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col border border-slate-200 min-h-[480px]">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-red-400" />
@@ -59,7 +100,7 @@ const HeroSection = () => {
                 </div>
 
                 <div className="p-6 flex-1 flex flex-col">
-                  <div className="space-y-3 mb-4">
+                  <div className="space-y-3 mb-6">
                     {[
                       { icon: FileText, text: "Resume uploaded", time: "2m ago", color: "from-blue-500 to-blue-600" },
                       { icon: Send, text: "Applied to Google", time: "1h ago", color: "from-blue-600 to-blue-700" },
@@ -107,18 +148,30 @@ const HeroSection = () => {
 
                   <div className="flex-1" />
 
-                  <button className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm group bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20">
+                  <button className="mt-6 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm group bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20">
                     <GraduationCap className="w-4 h-4" />
                     Explore the Platform
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            {/* RIGHT PANEL - Universities */}
-            <div className="relative h-full">
-              <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200">
+            {/* RIGHT PANEL - Universities (Taller) */}
+            <motion.div
+              className="relative"
+              style={{
+                y: panelY,
+                x: rightX,
+                rotateY: rightRotateY,
+                rotateZ: rightRotateZ,
+                scale: rightScale,
+                opacity: panelOpacity,
+                transformStyle: 'preserve-3d',
+                transformOrigin: 'left center',
+              }}
+            >
+              <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col border border-slate-200 min-h-[480px]">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-red-400" />
@@ -133,7 +186,7 @@ const HeroSection = () => {
                 </div>
 
                 <div className="p-6 flex-1 flex flex-col">
-                  <div className="grid grid-cols-2 gap-3 mb-4">
+                  <div className="grid grid-cols-2 gap-3 mb-6">
                     {[
                       { label: "Active", value: "2,847", trend: "+12%" },
                       { label: "Applications", value: "8,234", trend: "+24%" },
@@ -167,16 +220,30 @@ const HeroSection = () => {
 
                   <div className="flex-1" />
 
-                  <button className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm group bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 transition-colors shadow-lg shadow-blue-500/20">
+                  <button className="mt-6 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm group bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 transition-colors shadow-lg shadow-blue-500/20">
                     <Building2 className="w-4 h-4" />
                     Request Demo
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          style={{ opacity: scrollIndicatorOpacity }}
+        >
+          <span className="text-xs text-white/40 uppercase tracking-widest">Scroll</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ChevronDown className="w-5 h-5 text-white/40" />
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
