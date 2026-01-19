@@ -46,8 +46,7 @@ const HeroSection = () => {
             {/* LEFT PANEL - Students */}
             <motion.div 
               className="relative h-full min-h-[480px]"
-              initial={{ rotate: -2 }}
-              whileHover={{ rotate: 0, scale: 1.02, y: -8 }}
+              whileHover={{ scale: 1.02, y: -8 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200 cursor-pointer">
@@ -125,8 +124,7 @@ const HeroSection = () => {
             {/* RIGHT PANEL - Universities */}
             <motion.div 
               className="relative h-full min-h-[480px]"
-              initial={{ rotate: 2 }}
-              whileHover={{ rotate: 0, scale: 1.02, y: -8 }}
+              whileHover={{ scale: 1.02, y: -8 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200 cursor-pointer">
