@@ -41,11 +41,11 @@ const InteractiveSection = () => {
   const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
 
   return (
-    <section className="py-24 md:py-32 bg-gradient-to-b from-background via-muted/20 to-background relative overflow-hidden">
+    <section className="py-24 md:py-32 bg-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-1/2 h-full">
-        <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-blue-500/5 to-blue-600/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-40 w-72 h-72 bg-gradient-to-br from-blue-400/5 to-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-blue-100/50 to-blue-200/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-40 w-72 h-72 bg-gradient-to-br from-blue-50/50 to-blue-100/30 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6">
@@ -57,13 +57,13 @@ const InteractiveSection = () => {
           viewport={{ once: true }}
         >
           <motion.span
-            className="inline-block px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary rounded-full border border-primary/20 mb-4"
+            className="inline-block px-4 py-1.5 text-sm font-medium bg-blue-50 text-[#2563EB] rounded-full border border-blue-200 mb-4"
           >
             One Platform, Two Experiences
           </motion.span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-slate-900 mb-4">
             Built for everyone in the{" "}
-            <span className="text-gradient">career journey</span>
+            <span className="bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">career journey</span>
           </h2>
         </motion.div>
 
@@ -79,10 +79,10 @@ const InteractiveSection = () => {
             <div className="sticky top-32 space-y-4">
               {/* Students tab */}
               <motion.button
-                className={`w-full relative group text-left p-6 rounded-2xl border transition-all duration-300 ${
+              className={`w-full relative group text-left p-6 rounded-2xl border transition-all duration-300 ${
                   activeTab === "students"
                     ? "bg-[#2563EB] text-white border-transparent shadow-xl shadow-blue-500/25"
-                    : "bg-card border-border hover:border-blue-300 hover:bg-blue-50/50"
+                    : "bg-white border-slate-200 hover:border-blue-300 hover:bg-blue-50/50"
                 }`}
                 onClick={() => setActiveTab("students")}
                 whileHover={{ scale: 1.02 }}
@@ -100,10 +100,10 @@ const InteractiveSection = () => {
                   </div>
                   <div>
                     <h3 className={`font-display font-bold text-lg ${
-                      activeTab === "students" ? "text-white" : "text-foreground"
+                      activeTab === "students" ? "text-white" : "text-slate-900"
                     }`}>Students</h3>
                     <p className={`text-sm ${
-                      activeTab === "students" ? "text-white/80" : "text-muted-foreground"
+                      activeTab === "students" ? "text-white/80" : "text-slate-500"
                     }`}>Your journey, one view</p>
                   </div>
                 </div>
@@ -122,7 +122,7 @@ const InteractiveSection = () => {
                 className={`w-full relative group text-left p-6 rounded-2xl border transition-all duration-300 ${
                   activeTab === "staff"
                     ? "bg-[#1e40af] text-white border-transparent shadow-xl shadow-blue-600/25"
-                    : "bg-card border-border hover:border-blue-300 hover:bg-blue-50/50"
+                    : "bg-white border-slate-200 hover:border-blue-300 hover:bg-blue-50/50"
                 }`}
                 onClick={() => setActiveTab("staff")}
                 whileHover={{ scale: 1.02 }}
@@ -140,10 +140,10 @@ const InteractiveSection = () => {
                   </div>
                   <div>
                     <h3 className={`font-display font-bold text-lg ${
-                      activeTab === "staff" ? "text-white" : "text-foreground"
+                      activeTab === "staff" ? "text-white" : "text-slate-900"
                     }`}>Career Teams</h3>
                     <p className={`text-sm ${
-                      activeTab === "staff" ? "text-white/80" : "text-muted-foreground"
+                      activeTab === "staff" ? "text-white/80" : "text-slate-500"
                     }`}>Real visibility, real insight</p>
                   </div>
                 </div>
@@ -158,13 +158,13 @@ const InteractiveSection = () => {
 
               {/* Trust indicator */}
               <motion.div
-                className="pt-6 mt-6 border-t border-border"
+                className="pt-6 mt-6 border-t border-slate-200"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
               >
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2 text-sm text-slate-500">
                   <CheckCircle className="w-4 h-4 text-emerald-500" />
                   <span>Trusted by universities</span>
                 </div>
@@ -187,7 +187,7 @@ const InteractiveSection = () => {
                   {/* Student panel header */}
                   <div className="mb-8">
                     <motion.h3
-                      className="text-2xl md:text-3xl font-display font-bold text-foreground mb-3"
+                      className="text-2xl md:text-3xl font-display font-bold text-slate-900 mb-3"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 }}
@@ -198,7 +198,7 @@ const InteractiveSection = () => {
                       </span>
                     </motion.h3>
                     <motion.p
-                      className="text-muted-foreground text-lg"
+                      className="text-slate-500 text-lg"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.15 }}
@@ -314,7 +314,7 @@ const InteractiveSection = () => {
                   {/* Staff panel header */}
                   <div className="mb-8">
                     <motion.h3
-                      className="text-2xl md:text-3xl font-display font-bold text-foreground mb-3"
+                      className="text-2xl md:text-3xl font-display font-bold text-slate-900 mb-3"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 }}
@@ -325,7 +325,7 @@ const InteractiveSection = () => {
                       </span>
                     </motion.h3>
                     <motion.p
-                      className="text-muted-foreground text-lg"
+                      className="text-slate-500 text-lg"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.15 }}

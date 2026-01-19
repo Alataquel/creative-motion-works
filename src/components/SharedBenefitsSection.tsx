@@ -34,12 +34,11 @@ const SharedBenefitsSection = () => {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-gradient-to-br from-[#0c1929] via-[#1e3a5f] to-[#1e40af] relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 md:py-32 bg-white relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-100/50 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-50/50 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
@@ -49,16 +48,16 @@ const SharedBenefitsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
         >
-          <span className="inline-block px-4 py-1.5 text-sm font-medium bg-white/10 text-blue-300 rounded-full border border-white/20 mb-4 backdrop-blur-sm">
+          <span className="inline-block px-4 py-1.5 text-sm font-medium bg-blue-50 text-[#2563EB] rounded-full border border-blue-200 mb-4">
             One Platform, Shared Success
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-slate-900 mb-4">
             Built for{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
               students & teams
             </span>
           </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
             Every feature creates value for both sides of the career journey
           </p>
         </motion.div>
@@ -73,15 +72,15 @@ const SharedBenefitsSection = () => {
               transition={{ delay: 0.2 + i * 0.1, duration: 0.5 }}
             >
               <motion.div
-                className="relative bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/10 p-6 md:p-8 overflow-hidden group"
+                className="relative bg-white backdrop-blur-sm rounded-2xl border border-slate-200 p-6 md:p-8 overflow-hidden group shadow-sm"
                 whileHover={{ 
-                  backgroundColor: "rgba(255,255,255,0.06)",
+                  backgroundColor: "rgba(239,246,255,0.5)",
                   borderColor: "rgba(59,130,246,0.3)"
                 }}
               >
                 {/* Hover glow effect */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  className="absolute inset-0 bg-gradient-to-r from-blue-100/0 via-blue-100/30 to-blue-100/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 />
 
                 <div className="relative z-10 flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
@@ -96,23 +95,23 @@ const SharedBenefitsSection = () => {
 
                   {/* Title - visible on mobile */}
                   <div className="lg:hidden text-center">
-                    <h3 className="text-xl font-display font-bold text-white">{benefit.title}</h3>
+                    <h3 className="text-xl font-display font-bold text-slate-900">{benefit.title}</h3>
                   </div>
 
                   {/* Two columns */}
                   <div className="flex-1 grid md:grid-cols-2 gap-4 md:gap-8 w-full">
                     {/* Student side */}
                     <motion.div
-                      className="relative p-5 rounded-xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10"
+                      className="relative p-5 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100/50 border border-blue-200"
                       whileHover={{ scale: 1.02, y: -2 }}
                     >
                       <div className="flex items-center gap-3 mb-3">
                         <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                          <GraduationCap className="w-4 h-4 text-blue-400" />
+                          <GraduationCap className="w-4 h-4 text-blue-600" />
                         </div>
-                        <span className="text-xs font-medium uppercase tracking-wider text-blue-400">For Students</span>
+                        <span className="text-xs font-medium uppercase tracking-wider text-blue-600">For Students</span>
                       </div>
-                      <p className="text-white/80 font-medium">{benefit.student}</p>
+                      <p className="text-slate-700 font-medium">{benefit.student}</p>
                     </motion.div>
 
                     {/* Hidden title between columns on desktop */}
@@ -122,23 +121,23 @@ const SharedBenefitsSection = () => {
 
                     {/* Staff side */}
                     <motion.div
-                      className="relative p-5 rounded-xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10"
+                      className="relative p-5 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100/50 border border-slate-200"
                       whileHover={{ scale: 1.02, y: -2 }}
                     >
                       <div className="flex items-center gap-3 mb-3">
-                        <div className="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center">
-                          <Building2 className="w-4 h-4 text-cyan-400" />
+                        <div className="w-8 h-8 rounded-lg bg-slate-500/20 flex items-center justify-center">
+                          <Building2 className="w-4 h-4 text-slate-600" />
                         </div>
-                        <span className="text-xs font-medium uppercase tracking-wider text-cyan-400">For Career Teams</span>
+                        <span className="text-xs font-medium uppercase tracking-wider text-slate-600">For Career Teams</span>
                       </div>
-                      <p className="text-white/80 font-medium">{benefit.staff}</p>
+                      <p className="text-slate-700 font-medium">{benefit.staff}</p>
                     </motion.div>
                   </div>
                 </div>
 
                 {/* Desktop title overlay */}
                 <div className="hidden lg:block absolute top-6 right-8">
-                  <h3 className="text-lg font-display font-bold text-white/40">{benefit.title}</h3>
+                  <h3 className="text-lg font-display font-bold text-slate-400">{benefit.title}</h3>
                 </div>
               </motion.div>
             </motion.div>
@@ -152,7 +151,7 @@ const SharedBenefitsSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.8 }}
         >
-          <p className="text-white/50 text-sm">
+          <p className="text-slate-500 text-sm">
             When students succeed, everyone wins
           </p>
         </motion.div>
