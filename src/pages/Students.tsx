@@ -478,15 +478,15 @@ const Students = () => {
         </div>
       </section>
 
-      {/* Scroll-Triggered Features - Light Background */}
-      <section ref={sectionRef} className="bg-gradient-to-b from-white via-slate-50 to-white relative">
+      {/* Scroll-Triggered Features */}
+      <section ref={sectionRef} className="bg-gradient-to-br from-[#0c1929] via-[#1e3a5f] to-[#2563EB] relative">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div 
-            className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-blue-100/50 to-blue-50/30 rounded-full blur-3xl"
+            className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-full blur-3xl"
             style={{ y: useTransform(scrollYProgress, [0, 1], [0, -100]) }}
           />
           <motion.div 
-            className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-gradient-to-br from-blue-50/50 to-indigo-50/30 rounded-full blur-3xl"
+            className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-gradient-to-br from-blue-400/10 to-blue-500/5 rounded-full blur-3xl"
             style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]) }}
           />
         </div>
@@ -499,13 +499,13 @@ const Students = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-slate-900 mb-4">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
               Everything you need in{" "}
-              <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#93c5fd] via-[#60a5fa] to-[#3b82f6] bg-clip-text text-transparent">
                 one place
               </span>
             </h3>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            <p className="text-xl text-white/60 max-w-2xl mx-auto">
               From job discovery to interview prep, we've got you covered.
             </p>
           </motion.div>
@@ -532,36 +532,36 @@ const Students = () => {
                       <feature.icon className="w-10 h-10 text-white" />
                     </motion.div>
                     
-                    <h4 className="text-3xl md:text-4xl font-display font-bold text-slate-900 mb-4">
+                    <h4 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
                       {feature.title}
                     </h4>
-                    <p className="text-xl text-slate-600 mb-6">
+                    <p className="text-xl text-white/70 mb-6">
                       {feature.desc}
                     </p>
-                    <p className="text-lg text-slate-500 leading-relaxed">
+                    <p className="text-lg text-white/50 leading-relaxed">
                       {feature.detail}
                     </p>
                   </div>
 
-                  {/* Visual Card - Dark themed mockup */}
+                  {/* Visual Card */}
                   <motion.div 
                     className={`${i % 2 === 1 ? "lg:order-1" : ""}`}
                     whileHover={{ scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <div className="relative p-6 bg-gradient-to-br from-[#0c1929] to-[#1e3a5f] backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden shadow-2xl shadow-blue-900/20">
+                    <div className="relative p-6 bg-white/[0.05] backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden">
                       <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-2xl" />
                       
                       <div className="relative z-10">
                         <div className="flex items-center gap-2 mb-4">
-                          <div className="w-3 h-3 rounded-full bg-red-400" />
-                          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                          <div className="w-3 h-3 rounded-full bg-green-400" />
+                          <div className="w-3 h-3 rounded-full bg-red-400/60" />
+                          <div className="w-3 h-3 rounded-full bg-yellow-400/60" />
+                          <div className="w-3 h-3 rounded-full bg-green-400/60" />
                         </div>
                         
                         <MockupComponent />
                         
-                        <div className="mt-4 flex items-center justify-between pt-3 border-t border-white/10">
+                        <div className="mt-4 flex items-center justify-between pt-3 border-t border-white/5">
                           <span className="text-sm text-white/40">Feature {i + 1} of {studentFeatures.length}</span>
                           <div className="flex items-center gap-1">
                             {[...Array(studentFeatures.length)].map((_, j) => (
