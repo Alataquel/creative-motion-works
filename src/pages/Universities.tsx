@@ -396,47 +396,6 @@ const Universities = () => {
         </div>
       </section>
 
-      {/* Feature Tabs Section */}
-      <section ref={sectionRef} className="relative bg-gradient-to-b from-background via-muted/20 to-background py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          {/* Tab Selector */}
-          <div className="flex justify-center gap-4 mb-16">
-            <Link to="/">
-              <motion.div
-                className="relative group px-8 py-4 rounded-2xl border bg-white border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 shadow-sm cursor-pointer"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-blue-100">
-                    <GraduationCap className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <div className="text-left">
-                    <h3 className="font-display font-bold text-lg text-foreground">For Students</h3>
-                    <p className="text-sm text-muted-foreground">Your journey, one view</p>
-                  </div>
-                </div>
-              </motion.div>
-            </Link>
-
-            <motion.div
-              className="relative group px-8 py-4 rounded-2xl border bg-[#2563EB] text-white border-transparent shadow-xl shadow-blue-500/25"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-white/20">
-                  <Building2 className="w-6 h-6 text-white" />
-                </div>
-                <div className="text-left">
-                  <h3 className="font-display font-bold text-lg text-white">For Career Teams</h3>
-                  <p className="text-sm text-white/80">Real visibility, real insight</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* Scroll-Triggered Features */}
       <section className="bg-gradient-to-br from-[#0c1929] via-[#1e3a5f] to-[#2563EB] relative">
