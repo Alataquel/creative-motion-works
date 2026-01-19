@@ -1,66 +1,16 @@
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { ArrowRight, GraduationCap, Building2, Activity, FileText, Send, TrendingUp, ChevronDown } from "lucide-react";
-import { useRef } from "react";
+import { ArrowRight, GraduationCap, Building2, Activity, FileText, Send, TrendingUp } from "lucide-react";
 
 const HeroSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  // Scroll progress - tracks as the section scrolls out of view
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-
-  // Smooth spring for animations
-  const springConfig = { stiffness: 100, damping: 22, mass: 0.5 };
-  const progress = useSpring(scrollYProgress, springConfig);
-
-  // ===== DNA HELIX ANIMATION =====
-  // Panels descend, converge to center, and overlap as user scrolls
-
-  // VERTICAL DESCENT - panels travel down
-  const panelY = useTransform(progress, [0, 0.5, 1], [0, 200, 400]);
-
-  // LEFT PANEL - Moves RIGHT to center
-  const leftX = useTransform(progress, [0, 0.4, 0.7, 1], [0, 80, 160, 220]);
-  const leftRotateY = useTransform(progress, [0, 0.35, 0.7, 1], [0, 20, 10, 0]);
-  const leftRotateZ = useTransform(progress, [0, 0.5, 1], [0, -12, 0]);
-  const leftScale = useTransform(progress, [0, 0.5, 1], [1, 0.9, 0.8]);
-
-  // RIGHT PANEL - Moves LEFT to center
-  const rightX = useTransform(progress, [0, 0.4, 0.7, 1], [0, -80, -160, -220]);
-  const rightRotateY = useTransform(progress, [0, 0.35, 0.7, 1], [0, -20, -10, 0]);
-  const rightRotateZ = useTransform(progress, [0, 0.5, 1], [0, 12, 0]);
-  const rightScale = useTransform(progress, [0, 0.5, 1], [1, 0.9, 0.8]);
-
-  // PANEL OPACITY - Fade as they converge
-  const panelOpacity = useTransform(progress, [0, 0.7, 1], [1, 0.8, 0.3]);
-
-  // Headline transitions
-  const headlineScale = useTransform(progress, [0, 0.5], [1, 1.05]);
-  const subtitleOpacity = useTransform(progress, [0, 0.4], [1, 0]);
-
-  // Scroll indicator
-  const scrollIndicatorOpacity = useTransform(progress, [0, 0.1], [1, 0]);
-
-  // Sparkle at convergence
-  const sparkleOpacity = useTransform(progress, [0.5, 0.7, 0.9, 1], [0, 1, 1, 0]);
-  const sparkleScale = useTransform(progress, [0.5, 0.8, 1], [0.3, 1.2, 1.5]);
-
   return (
-    <section ref={containerRef} className="relative min-h-screen bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB] overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB] overflow-hidden">
       {/* Background effects */}
-      <motion.div
+      <div
         className="absolute top-0 left-1/4 w-[800px] h-[800px] rounded-full"
         style={{ background: "radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%)" }}
-        animate={{ x: [0, 80, 0], y: [0, 40, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div
+      <div
         className="absolute bottom-0 right-1/4 w-[600px] h-[600px] rounded-full"
         style={{ background: "radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%)" }}
-        animate={{ x: [0, -60, 0], y: [0, -40, 0] }}
-        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 5 }}
       />
       <div className="absolute inset-0 opacity-[0.02]" style={{
         backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
@@ -70,102 +20,30 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-center items-center max-w-7xl mx-auto px-6 pt-24 pb-16">
         {/* HEADLINE */}
-        <motion.div 
-          className="text-center mb-6"
-          style={{ scale: headlineScale }}
-        >
-          <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight text-white"
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
+        <div className="text-center mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight text-white">
             See what students are doing.
-          </motion.h1>
-          <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight"
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          >
+          </h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#93c5fd] via-[#60a5fa] to-[#3b82f6]">
               Give them clarity on their journey.
             </span>
-          </motion.h1>
-        </motion.div>
+          </h1>
+        </div>
 
         {/* SUBTITLE */}
-        <motion.p
-          className="text-center text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed text-white/60"
-          style={{ opacity: subtitleOpacity }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
+        <p className="text-center text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed text-white/60">
           ApplyLab brings student career activity into one clear system — helping students stay on track and career teams gain{" "}
           <span className="text-white/90 font-medium">real visibility</span>.
-        </motion.p>
+        </p>
 
-        {/* DNA PANELS CONTAINER */}
-        <div
-          className="relative w-full max-w-6xl mx-auto"
-          style={{ perspective: 1400 }}
-        >
-          {/* SPARKLE at convergence point */}
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none"
-            style={{ 
-              opacity: sparkleOpacity, 
-              scale: sparkleScale,
-            }}
-          >
-            <div
-              className="w-72 h-72 rounded-full"
-              style={{
-                background: "radial-gradient(circle, rgba(255,255,255,0.98) 0%, rgba(147, 197, 253, 0.7) 20%, rgba(59, 130, 246, 0.4) 45%, transparent 70%)",
-                boxShadow: "0 0 150px 80px rgba(255, 255, 255, 0.6), 0 0 250px 120px rgba(59, 130, 246, 0.4)",
-              }}
-            />
-            {/* Sparkle particles */}
-            {[...Array(12)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute top-1/2 left-1/2 w-3 h-3 bg-white rounded-full"
-                style={{
-                  x: Math.cos((i * Math.PI) / 6) * 100 - 6,
-                  y: Math.sin((i * Math.PI) / 6) * 100 - 6,
-                  boxShadow: "0 0 10px 5px rgba(255,255,255,0.8)"
-                }}
-                animate={{
-                  scale: [1, 1.8, 1],
-                  opacity: [0.7, 1, 0.7],
-                }}
-                transition={{
-                  duration: 1.2,
-                  delay: i * 0.08,
-                  repeat: Infinity,
-                }}
-              />
-            ))}
-          </motion.div>
-
-          {/* DNA PANELS */}
-          <div className="relative grid md:grid-cols-2 gap-4 md:gap-6 items-stretch" style={{ transformStyle: 'preserve-3d' }}>
+        {/* PANELS CONTAINER */}
+        <div className="relative w-full max-w-6xl mx-auto">
+          {/* PANELS */}
+          <div className="relative grid md:grid-cols-2 gap-4 md:gap-6 items-stretch">
             
             {/* LEFT PANEL - Students */}
-            <motion.div
-              className="relative h-full"
-              style={{
-                y: panelY,
-                x: leftX,
-                rotateY: leftRotateY,
-                rotateZ: leftRotateZ,
-                scale: leftScale,
-                opacity: panelOpacity,
-                transformStyle: 'preserve-3d',
-                transformOrigin: 'right center',
-              }}
-            >
+            <div className="relative h-full">
               <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
                   <div className="flex items-center gap-2">
@@ -186,13 +64,10 @@ const HeroSection = () => {
                       { icon: FileText, text: "Resume uploaded", time: "2m ago", color: "from-blue-500 to-blue-600" },
                       { icon: Send, text: "Applied to Google", time: "1h ago", color: "from-blue-600 to-blue-700" },
                       { icon: Activity, text: "Interview prep complete", time: "3h ago", color: "from-indigo-500 to-indigo-600" },
-                    ].map((item, i) => (
-                      <motion.div
+                    ].map((item) => (
+                      <div
                         key={item.text}
                         className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.8 + i * 0.1 }}
                       >
                         <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center shadow-sm`}>
                           <item.icon className="w-4 h-4 text-white" />
@@ -201,26 +76,18 @@ const HeroSection = () => {
                           <p className="text-sm font-medium text-slate-800">{item.text}</p>
                           <p className="text-xs text-slate-500">{item.time}</p>
                         </div>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
 
-                  <motion.div
-                    className="p-4 rounded-xl bg-slate-50 border border-slate-200"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.2 }}
-                  >
+                  <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
                     <div className="flex items-center gap-4">
                       <div className="relative w-16 h-16">
                         <svg className="w-16 h-16 -rotate-90">
                           <circle cx="32" cy="32" r="28" fill="none" strokeWidth="4" stroke="#e2e8f0" />
-                          <motion.circle
+                          <circle
                             cx="32" cy="32" r="28" fill="none" stroke="url(#gradientStudent)" strokeWidth="4"
-                            strokeLinecap="round" strokeDasharray="176"
-                            initial={{ strokeDashoffset: 176 }}
-                            animate={{ strokeDashoffset: 44 }}
-                            transition={{ delay: 1.4, duration: 1, ease: "easeOut" }}
+                            strokeLinecap="round" strokeDasharray="176" strokeDashoffset="44"
                           />
                           <defs>
                             <linearGradient id="gradientStudent" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -236,7 +103,7 @@ const HeroSection = () => {
                         <p className="text-xs text-slate-500">3 tasks remaining</p>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
 
                   <div className="flex-1" />
 
@@ -247,22 +114,10 @@ const HeroSection = () => {
                   </button>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* RIGHT PANEL - Universities */}
-            <motion.div
-              className="relative h-full"
-              style={{
-                y: panelY,
-                x: rightX,
-                rotateY: rightRotateY,
-                rotateZ: rightRotateZ,
-                scale: rightScale,
-                opacity: panelOpacity,
-                transformStyle: 'preserve-3d',
-                transformOrigin: 'left center',
-              }}
-            >
+            <div className="relative h-full">
               <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
                   <div className="flex items-center gap-2">
@@ -284,36 +139,23 @@ const HeroSection = () => {
                       { label: "Applications", value: "8,234", trend: "+24%" },
                       { label: "Interviews", value: "456", trend: "+18%" },
                       { label: "Placed", value: "189", trend: "+31%" },
-                    ].map((stat, i) => (
-                      <motion.div
+                    ].map((stat) => (
+                      <div
                         key={stat.label}
                         className="p-3 rounded-xl bg-slate-50 border border-slate-200"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.9 + i * 0.08 }}
                       >
-                        <motion.p
-                          className="text-xl font-bold text-slate-800"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ delay: 1.1 + i * 0.08 }}
-                        >
+                        <p className="text-xl font-bold text-slate-800">
                           {stat.value}
-                        </motion.p>
+                        </p>
                         <div className="flex items-center justify-between">
                           <span className="text-xs text-slate-500">{stat.label}</span>
                           <span className="text-xs text-emerald-600 font-medium">{stat.trend}</span>
                         </div>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
 
-                  <motion.div
-                    className="p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.3 }}
-                  >
+                  <div className="p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100">
                     <div className="flex items-center gap-3">
                       <TrendingUp className="w-5 h-5 text-blue-600" />
                       <div>
@@ -321,7 +163,7 @@ const HeroSection = () => {
                         <p className="text-xs text-slate-500">Based on application activity</p>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
 
                   <div className="flex-1" />
 
@@ -332,23 +174,9 @@ const HeroSection = () => {
                   </button>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          style={{ opacity: scrollIndicatorOpacity }}
-        >
-          <span className="text-xs text-white/40 uppercase tracking-widest">Scroll</span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <ChevronDown className="w-5 h-5 text-white/40" />
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );
