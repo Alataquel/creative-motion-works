@@ -17,6 +17,7 @@ import {
   Star,
   Quote
 } from "lucide-react";
+import { FeatureMockup } from "./FeatureMockups";
 
 const studentFeatures = [
   { 
@@ -253,47 +254,28 @@ const InteractiveSection = () => {
                   </p>
                 </div>
 
-                {/* Visual Card */}
+                {/* Visual Card - Authentic Feature Mockup */}
                 <motion.div 
                   className={`${i % 2 === 1 ? "lg:order-1" : ""}`}
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="relative p-8 bg-white/[0.05] backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden">
+                  <div className="relative p-6 bg-white/[0.05] backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden">
                     {/* Glow effect */}
                     <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-2xl" />
                     
-                    {/* Mock UI */}
+                    {/* Authentic Feature UI */}
                     <div className="relative z-10">
-                      <div className="flex items-center gap-2 mb-6">
+                      <div className="flex items-center gap-2 mb-4">
                         <div className="w-3 h-3 rounded-full bg-red-400/60" />
                         <div className="w-3 h-3 rounded-full bg-yellow-400/60" />
                         <div className="w-3 h-3 rounded-full bg-green-400/60" />
                       </div>
                       
-                      <div className="space-y-4">
-                        {[...Array(3)].map((_, j) => (
-                          <motion.div 
-                            key={j}
-                            className="h-12 bg-white/[0.08] rounded-xl flex items-center px-4 gap-3"
-                            initial={{ width: "60%" }}
-                            whileInView={{ width: `${70 + j * 10}%` }}
-                            transition={{ delay: 0.2 + j * 0.1, duration: 0.5 }}
-                          >
-                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500/30 to-blue-600/30" />
-                            <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
-                              <motion.div 
-                                className="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full"
-                                initial={{ width: 0 }}
-                                whileInView={{ width: `${60 + j * 15}%` }}
-                                transition={{ delay: 0.4 + j * 0.1, duration: 0.8 }}
-                              />
-                            </div>
-                          </motion.div>
-                        ))}
-                      </div>
+                      {/* Feature-specific mockup */}
+                      <FeatureMockup featureIndex={i} isStaff={activeTab === "staff"} />
                       
-                      <div className="mt-6 flex items-center justify-between">
+                      <div className="mt-4 flex items-center justify-between pt-3 border-t border-white/5">
                         <span className="text-sm text-white/40">Feature {i + 1} of {features.length}</span>
                         <div className="flex items-center gap-1">
                           {[...Array(features.length)].map((_, j) => (
