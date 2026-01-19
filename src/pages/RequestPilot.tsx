@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowLeft, ArrowRight, Building2, Mail, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import logo from "@/assets/applylab-logo.png";
 
 const RequestPilot = () => {
   const [formData, setFormData] = useState({
@@ -39,9 +40,9 @@ const RequestPilot = () => {
 
       {/* Simple Navbar */}
       <nav className="relative z-10 max-w-7xl mx-auto px-6 py-6 w-full flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 w-fit">
-          <div className="w-8 h-8 rounded-lg bg-[#2563EB] flex items-center justify-center">
-            <span className="text-white font-bold text-sm">A</span>
+        <Link to="/" className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg">
+            <img src={logo} alt="ApplyLab" className="h-6 w-auto" />
           </div>
           <span className="text-xl font-display font-bold text-white">ApplyLab</span>
         </Link>
