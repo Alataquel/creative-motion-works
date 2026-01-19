@@ -82,7 +82,7 @@ const InteractiveSection = () => {
                 className={`w-full relative group text-left p-6 rounded-2xl border transition-all duration-300 ${
                   activeTab === "students"
                     ? "bg-[#2563EB] text-white border-transparent shadow-xl shadow-blue-500/25"
-                    : "bg-card border-border hover:border-blue-300 hover:bg-blue-50/50"
+                    : "bg-white border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 shadow-sm"
                 }`}
                 onClick={() => setActiveTab("students")}
                 whileHover={{ scale: 1.02 }}
@@ -122,7 +122,7 @@ const InteractiveSection = () => {
                 className={`w-full relative group text-left p-6 rounded-2xl border transition-all duration-300 ${
                   activeTab === "staff"
                     ? "bg-[#1e40af] text-white border-transparent shadow-xl shadow-blue-600/25"
-                    : "bg-card border-border hover:border-blue-300 hover:bg-blue-50/50"
+                    : "bg-white border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 shadow-sm"
                 }`}
                 onClick={() => setActiveTab("staff")}
                 whileHover={{ scale: 1.02 }}
