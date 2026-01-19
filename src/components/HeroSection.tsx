@@ -101,7 +101,7 @@ const HeroSection = () => {
                       { icon: Mail, text: "Cover Letter Maker" },
                       { icon: Calendar, text: "Events" },
                       { icon: BookOpen, text: "Case Study Prep" },
-                      { icon: MessageSquare, text: "Interview Prep" },
+                      { icon: MessageSquare, text: "Interview Preparation" },
                       { icon: ClipboardList, text: "Application Tracking" },
                     ].map((item) => (
                       <div
