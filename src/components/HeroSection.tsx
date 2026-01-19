@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, GraduationCap, Building2, TrendingUp, Briefcase, FileText, Mail, Calendar, BookOpen, MessageSquare, ClipboardList } from "lucide-react";
+import { ArrowRight, GraduationCap, Building2, TrendingUp, Briefcase, FileText, Mail, Calendar, BookOpen, MessageSquare, ClipboardList, Award, BarChart3, PieChart } from "lucide-react";
 import { motion } from "framer-motion";
 
 type HoveredSide = "left" | "right" | null;
@@ -98,6 +98,7 @@ const HeroSection = () => {
                     {[
                       { icon: Briefcase, text: "Job Board" },
                       { icon: FileText, text: "Resume Builder" },
+                      { icon: Award, text: "Resume Grader" },
                       { icon: Mail, text: "Cover Letter Maker" },
                       { icon: Calendar, text: "Events" },
                       { icon: BookOpen, text: "Case Study Preparation" },
@@ -250,6 +251,54 @@ const HeroSection = () => {
                     ))}
                   </div>
 
+                  {/* Mini Charts Row */}
+                  <div className="grid grid-cols-2 gap-3 mb-4">
+                    {/* Degree Types Mini Chart */}
+                    <div className={`p-3 rounded-xl transition-colors duration-500 ${
+                      hoveredSide === "right" 
+                        ? "bg-slate-50 border border-slate-200" 
+                        : "bg-white/5 border border-white/10"
+                    }`}>
+                      <div className="flex items-center gap-2 mb-2">
+                        <PieChart className={`w-4 h-4 transition-colors duration-500 ${hoveredSide === "right" ? "text-blue-600" : "text-blue-400"}`} />
+                        <span className={`text-xs font-medium transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-600" : "text-white/70"}`}>By Degree</span>
+                      </div>
+                      <div className="flex items-end gap-1 h-8">
+                        {[65, 45, 30, 20].map((h, i) => (
+                          <div key={i} className={`flex-1 rounded-sm transition-colors duration-500 ${hoveredSide === "right" ? "bg-blue-500" : "bg-blue-400/60"}`} style={{ height: `${h}%` }} />
+                        ))}
+                      </div>
+                      <div className="flex justify-between mt-1">
+                        <span className={`text-[10px] transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-500" : "text-white/50"}`}>CS</span>
+                        <span className={`text-[10px] transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-500" : "text-white/50"}`}>Bus</span>
+                        <span className={`text-[10px] transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-500" : "text-white/50"}`}>Eng</span>
+                        <span className={`text-[10px] transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-500" : "text-white/50"}`}>Other</span>
+                      </div>
+                    </div>
+
+                    {/* Monthly Applications */}
+                    <div className={`p-3 rounded-xl transition-colors duration-500 ${
+                      hoveredSide === "right" 
+                        ? "bg-slate-50 border border-slate-200" 
+                        : "bg-white/5 border border-white/10"
+                    }`}>
+                      <div className="flex items-center gap-2 mb-2">
+                        <BarChart3 className={`w-4 h-4 transition-colors duration-500 ${hoveredSide === "right" ? "text-blue-600" : "text-blue-400"}`} />
+                        <span className={`text-xs font-medium transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-600" : "text-white/70"}`}>Apps/Month</span>
+                      </div>
+                      <div className="flex items-end gap-1 h-8">
+                        {[40, 55, 70, 85, 60, 90].map((h, i) => (
+                          <div key={i} className={`flex-1 rounded-sm transition-colors duration-500 ${hoveredSide === "right" ? "bg-emerald-500" : "bg-emerald-400/60"}`} style={{ height: `${h}%` }} />
+                        ))}
+                      </div>
+                      <div className="flex justify-between mt-1">
+                        <span className={`text-[10px] transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-500" : "text-white/50"}`}>Sep</span>
+                        <span className={`text-[10px] transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-500" : "text-white/50"}`}>Feb</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Success Insight */}
                   <div className={`p-4 rounded-xl transition-colors duration-500 ${
                     hoveredSide === "right" 
                       ? "bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100" 
@@ -262,10 +311,10 @@ const HeroSection = () => {
                       <div>
                         <p className={`text-sm font-medium transition-colors duration-500 ${
                           hoveredSide === "right" ? "text-slate-800" : "text-white"
-                        }`}>Engagement up 24% this week</p>
+                        }`}>CS majors: 78% placement rate</p>
                         <p className={`text-xs transition-colors duration-500 ${
                           hoveredSide === "right" ? "text-slate-500" : "text-white/60"
-                        }`}>Based on application activity</p>
+                        }`}>Highest success by degree type</p>
                       </div>
                     </div>
                   </div>
