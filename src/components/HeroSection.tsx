@@ -60,8 +60,8 @@ const HeroSection = () => {
     <section ref={containerRef} className="relative h-[350vh]">
       {/* STICKY CONTAINER - Full height runway */}
       <div className="sticky top-0 h-screen overflow-hidden">
-        {/* DARK BLUE BACKGROUND - Extended, stays visible throughout */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB] z-0">
+        {/* DARK BLUE BACKGROUND - Extended, stays visible throughout - z-10 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB] z-10">
           <motion.div
             className="absolute top-0 left-1/4 w-[800px] h-[800px] rounded-full"
             style={{ background: "radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%)" }}
@@ -80,13 +80,13 @@ const HeroSection = () => {
           }} />
         </div>
 
-        {/* WHITE BACKGROUND - Fades in at very end */}
+        {/* WHITE BACKGROUND - Fades in at very end - z-0 (BELOW panels) */}
         <motion.div 
-          className="absolute inset-0 bg-white z-10" 
+          className="absolute inset-0 bg-white z-0" 
           style={{ opacity: bgWhiteOpacity }} 
         />
 
-        {/* CONTENT LAYER */}
+        {/* CONTENT LAYER - z-20 to stay above blue bg */}
         <div className="relative z-20 h-full flex flex-col justify-center items-center max-w-7xl mx-auto px-6">
           {/* HEADLINE */}
           <motion.div 
@@ -142,14 +142,14 @@ const HeroSection = () => {
             <span className="text-white/90 font-medium">real visibility</span>.
           </motion.p>
 
-          {/* PANELS CONTAINER - High z-index to stay on top */}
+          {/* PANELS CONTAINER - z-50 to stay ABOVE everything including white */}
           <div
-            className="relative w-full max-w-6xl mx-auto z-40"
+            className="relative w-full max-w-6xl mx-auto z-50"
             style={{ perspective: 1400 }}
           >
             {/* SPARKLE at convergence point */}
             <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 z-60 pointer-events-none"
               style={{ 
                 opacity: sparkleOpacity, 
                 scale: sparkleScale,
@@ -189,9 +189,9 @@ const HeroSection = () => {
             {/* DNA PANELS - Stay visible throughout descent */}
             <div className="relative grid md:grid-cols-2 gap-4 md:gap-6 items-stretch" style={{ transformStyle: 'preserve-3d' }}>
               
-              {/* LEFT PANEL */}
+              {/* LEFT PANEL - z-50 to stay on top */}
               <motion.div
-                className="relative h-full z-30"
+                className="relative h-full z-50"
                 style={{
                   y: panelY,
                   x: leftX,
@@ -286,9 +286,9 @@ const HeroSection = () => {
                 </div>
               </motion.div>
 
-              {/* RIGHT PANEL */}
+              {/* RIGHT PANEL - z-50 to stay on top */}
               <motion.div
-                className="relative h-full z-30"
+                className="relative h-full z-50"
                 style={{
                   y: panelY,
                   x: rightX,
