@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, GraduationCap, Building2, Activity, FileText, Send, TrendingUp } from "lucide-react";
+import { ArrowRight, GraduationCap, Building2, TrendingUp, Briefcase, FileText, Mail, Calendar, BookOpen, MessageSquare, ClipboardList } from "lucide-react";
 import { motion } from "framer-motion";
 
 type HoveredSide = "left" | "right" | null;
@@ -94,31 +94,30 @@ const HeroSection = () => {
 
                 {/* Content */}
                 <div className="p-6 flex-1 flex flex-col">
-                  <div className="space-y-3 mb-4">
+                  <div className="grid grid-cols-2 gap-2 mb-4">
                     {[
-                      { icon: FileText, text: "Resume uploaded", time: "2m ago", color: "from-blue-500 to-blue-600" },
-                      { icon: Send, text: "Applied to Google", time: "1h ago", color: "from-blue-600 to-blue-700" },
-                      { icon: Activity, text: "Interview prep complete", time: "3h ago", color: "from-indigo-500 to-indigo-600" },
+                      { icon: Briefcase, text: "Job Board" },
+                      { icon: FileText, text: "Resume Builder" },
+                      { icon: Mail, text: "Cover Letter Maker" },
+                      { icon: Calendar, text: "Events" },
+                      { icon: BookOpen, text: "Case Study Prep" },
+                      { icon: MessageSquare, text: "Interview Prep" },
+                      { icon: ClipboardList, text: "Application Tracking" },
                     ].map((item) => (
                       <div
                         key={item.text}
-                        className={`flex items-center gap-3 p-3 rounded-xl transition-colors duration-500 ${
+                        className={`flex items-center gap-2 p-2.5 rounded-lg transition-colors duration-500 ${
                           hoveredSide === "left" 
                             ? "bg-slate-50 border border-slate-200" 
                             : "bg-white/5 border border-white/10"
                         }`}
                       >
-                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center shadow-sm`}>
-                          <item.icon className="w-4 h-4 text-white" />
+                        <div className={`w-7 h-7 rounded-md bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center shadow-sm`}>
+                          <item.icon className="w-3.5 h-3.5 text-white" />
                         </div>
-                        <div className="flex-1">
-                          <p className={`text-sm font-medium transition-colors duration-500 ${hoveredSide === "left" ? "text-slate-800" : "text-white"}`}>
-                            {item.text}
-                          </p>
-                          <p className={`text-xs transition-colors duration-500 ${hoveredSide === "left" ? "text-slate-500" : "text-white/60"}`}>
-                            {item.time}
-                          </p>
-                        </div>
+                        <p className={`text-sm font-medium transition-colors duration-500 ${hoveredSide === "left" ? "text-slate-800" : "text-white"}`}>
+                          {item.text}
+                        </p>
                       </div>
                     ))}
                   </div>
