@@ -100,7 +100,7 @@ const HeroSection = () => {
                       { icon: FileText, text: "Resume Builder" },
                       { icon: Mail, text: "Cover Letter Maker" },
                       { icon: Calendar, text: "Events" },
-                      { icon: BookOpen, text: "Case Study Prep" },
+                      { icon: BookOpen, text: "Case Study Preparation" },
                       { icon: MessageSquare, text: "Interview Preparation" },
                       { icon: ClipboardList, text: "Application Tracking" },
                     ].map((item) => (
