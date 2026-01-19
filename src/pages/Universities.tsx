@@ -550,14 +550,59 @@ const Universities = () => {
 
         <div className="relative z-10 max-w-6xl mx-auto px-6">
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10 mb-8">
               <CheckCircle className="w-5 h-5 text-emerald-400" />
-              <span className="text-white/80 font-medium">Trusted by leading universities worldwide</span>
+              <span className="text-white/80 font-medium">Trusted by top universities worldwide</span>
+            </div>
+
+            {/* University Logos */}
+            <div className="flex flex-wrap justify-center items-center gap-8 mb-12">
+              {[
+                { name: "ETH Zürich", country: "Switzerland" },
+                { name: "TU Munich", country: "Germany" },
+                { name: "IE Business School", country: "Spain" },
+                { name: "University of St. Gallen", country: "Switzerland" },
+                { name: "ESADE", country: "Spain" },
+                { name: "LMU Munich", country: "Germany" },
+              ].map((uni, i) => (
+                <motion.div
+                  key={uni.name}
+                  className="px-5 py-3 bg-white/[0.05] rounded-xl border border-white/10 text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <div className="text-white font-medium text-sm">{uni.name}</div>
+                  <div className="text-white/40 text-xs">{uni.country}</div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-16">
+              {[
+                { value: "10+", label: "Universities" },
+                { value: "5/5", label: "Satisfaction" },
+                { value: "10k+", label: "Job Positions" },
+              ].map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  className="text-center"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                >
+                  <div className="text-4xl font-display font-bold text-blue-400 mb-1">{stat.value}</div>
+                  <div className="text-white/50 text-sm">{stat.label}</div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 
@@ -580,7 +625,7 @@ const Universities = () => {
               
               <div className="flex items-center justify-center gap-6">
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-xl shadow-blue-500/30">
-                  SM
+                  MK
                 </div>
                 <div className="text-left">
                   <div className="flex items-center gap-2 mb-1">
@@ -588,8 +633,8 @@ const Universities = () => {
                       <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <p className="text-white font-medium text-lg">Sarah Mitchell</p>
-                  <p className="text-white/50">Director of Career Services • Stanford University</p>
+                  <p className="text-white font-medium text-lg">Dr. Maria Keller</p>
+                  <p className="text-white/50">Director of Career Services • ETH Zürich</p>
                 </div>
               </div>
             </div>
