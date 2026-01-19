@@ -2,6 +2,7 @@ import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import applyLabLogo from "@/assets/applylab-logo.png";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,11 +33,12 @@ const Navbar = () => {
         <nav className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <motion.div whileHover={{ scale: 1.02 }}>
-              <Link to="/" className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-[#2563EB] flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">A</span>
-                </div>
-                <span className="text-xl font-display font-bold text-white">ApplyLab</span>
+              <Link to="/" className="flex items-center">
+                <img 
+                  src={applyLabLogo} 
+                  alt="ApplyLab" 
+                  className="h-8 w-auto"
+                />
               </Link>
             </motion.div>
 
