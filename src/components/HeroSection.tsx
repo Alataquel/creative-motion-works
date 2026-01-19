@@ -4,57 +4,56 @@ import { useRef } from "react";
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const stickyRef = useRef<HTMLDivElement>(null);
   
-  // Scroll progress for the entire 200vh container
+  // Scroll progress for the entire 300vh container
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
-  // Spring physics for smooth, bouncy animations with lock-in feel
-  const springConfig = { stiffness: 80, damping: 25, mass: 1.2 };
+  // Spring physics for smooth animations
+  const springConfig = { stiffness: 60, damping: 30, mass: 1 };
   const smoothProgress = useSpring(scrollYProgress, springConfig);
 
-  // DNA Spiral transformations for left panel (Student)
-  // Start at 45deg, twirl past center at 50%, lock at 0deg
-  const leftRotateY = useTransform(smoothProgress, [0, 0.3, 0.5, 0.7, 1], [45, 20, -15, -5, 0]);
-  const leftRotateZ = useTransform(smoothProgress, [0, 0.3, 0.5, 0.7, 1], [-12, -6, 6, 2, 0]);
-  const leftTranslateX = useTransform(smoothProgress, [0, 0.3, 0.5, 0.7, 1], [150, 60, -30, -10, 0]);
-  const leftTranslateZ = useTransform(smoothProgress, [0, 0.3, 0.5, 0.7, 1], [-200, -100, 80, 20, 0]);
-  const leftScale = useTransform(smoothProgress, [0, 0.5, 0.8, 1], [0.75, 0.95, 1.02, 1]);
+  // DNA Spiral transformations - panels RECEDE into the distance
+  // Left panel spirals clockwise as it moves away
+  const leftRotateY = useTransform(smoothProgress, [0, 0.3, 0.5, 0.7, 1], [0, -30, -90, -150, -180]);
+  const leftRotateZ = useTransform(smoothProgress, [0, 0.5, 1], [0, 15, 30]);
+  const leftTranslateX = useTransform(smoothProgress, [0, 0.3, 0.6, 1], [0, 50, 100, 150]);
+  const leftTranslateZ = useTransform(smoothProgress, [0, 0.3, 0.6, 1], [0, -300, -600, -1000]);
+  const leftScale = useTransform(smoothProgress, [0, 0.3, 0.6, 1], [1, 0.8, 0.5, 0.2]);
+  const leftY = useTransform(smoothProgress, [0, 0.5, 1], [0, -50, -150]);
 
-  // DNA Spiral transformations for right panel (University)
-  // Mirror of left panel
-  const rightRotateY = useTransform(smoothProgress, [0, 0.3, 0.5, 0.7, 1], [-45, -20, 15, 5, 0]);
-  const rightRotateZ = useTransform(smoothProgress, [0, 0.3, 0.5, 0.7, 1], [12, 6, -6, -2, 0]);
-  const rightTranslateX = useTransform(smoothProgress, [0, 0.3, 0.5, 0.7, 1], [-150, -60, 30, 10, 0]);
-  const rightTranslateZ = useTransform(smoothProgress, [0, 0.3, 0.5, 0.7, 1], [-200, -100, 80, 20, 0]);
-  const rightScale = useTransform(smoothProgress, [0, 0.5, 0.8, 1], [0.75, 0.95, 1.02, 1]);
+  // Right panel spirals counter-clockwise as it moves away
+  const rightRotateY = useTransform(smoothProgress, [0, 0.3, 0.5, 0.7, 1], [0, 30, 90, 150, 180]);
+  const rightRotateZ = useTransform(smoothProgress, [0, 0.5, 1], [0, -15, -30]);
+  const rightTranslateX = useTransform(smoothProgress, [0, 0.3, 0.6, 1], [0, -50, -100, -150]);
+  const rightTranslateZ = useTransform(smoothProgress, [0, 0.3, 0.6, 1], [0, -300, -600, -1000]);
+  const rightScale = useTransform(smoothProgress, [0, 0.3, 0.6, 1], [1, 0.8, 0.5, 0.2]);
+  const rightY = useTransform(smoothProgress, [0, 0.5, 1], [0, -50, -150]);
 
-  // Shared opacity and vertical movement
-  const panelOpacity = useTransform(smoothProgress, [0, 0.2, 0.5, 1], [0.3, 0.7, 0.9, 1]);
-  const panelY = useTransform(smoothProgress, [0, 0.5, 1], [100, 30, 0]);
+  // Panel opacity - fade out as they recede
+  const panelOpacity = useTransform(smoothProgress, [0, 0.5, 0.8, 1], [1, 0.8, 0.4, 0]);
 
-  // Connection line animation (the DNA "backbone")
-  const lineOpacity = useTransform(smoothProgress, [0, 0.3, 0.7, 0.9], [1, 0.8, 0.4, 0]);
-  const lineScale = useTransform(smoothProgress, [0, 0.5, 1], [1.5, 1, 0]);
-  const lineHeight = useTransform(smoothProgress, [0, 0.5, 1], [300, 200, 0]);
+  // DNA backbone / portal glow at center (appears as panels spiral)
+  const portalOpacity = useTransform(smoothProgress, [0, 0.2, 0.6, 0.9], [0, 0.5, 1, 0]);
+  const portalScale = useTransform(smoothProgress, [0, 0.3, 0.7, 1], [0.5, 1, 1.5, 2]);
+  const portalGlow = useTransform(smoothProgress, [0.3, 0.7], [20, 60]);
 
-  // Overall container perspective shift
-  const containerRotateX = useTransform(smoothProgress, [0, 0.5, 1], [15, 5, 0]);
-  const containerScale = useTransform(smoothProgress, [0, 0.5, 1], [0.9, 0.95, 1]);
+  // Scroll indicator opacity
+  const scrollIndicatorOpacity = useTransform(smoothProgress, [0, 0.1], [1, 0]);
 
-  // Scroll indicator opacity (fade out as user scrolls)
-  const scrollIndicatorOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
+  // Background transition to white
+  const bgWhiteOpacity = useTransform(smoothProgress, [0.8, 1], [0, 1]);
 
-  // Background transition - stays dark until panels lock in
-  const bgOpacity = useTransform(smoothProgress, [0.7, 1], [0, 1]);
+  // Headline color transition
+  const headlineColor = useTransform(smoothProgress, [0.85, 1], ["#ffffff", "#1e293b"]);
+  const subtitleColor = useTransform(smoothProgress, [0.85, 1], ["rgba(255,255,255,0.6)", "rgba(100,116,139,1)"]);
 
   return (
-    <section ref={containerRef} className="relative h-[200vh]">
-      {/* Sticky container that stays in viewport */}
-      <div ref={stickyRef} className="sticky top-0 h-screen overflow-hidden">
+    <section ref={containerRef} className="relative h-[300vh]">
+      {/* Sticky container that stays pinned in viewport */}
+      <div className="sticky top-0 h-screen overflow-hidden">
         {/* Dark hero background */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB]">
           {/* Animated mesh background */}
@@ -81,18 +80,16 @@ const HeroSection = () => {
         {/* White background that fades in at the end */}
         <motion.div
           className="absolute inset-0 bg-white"
-          style={{ opacity: bgOpacity }}
+          style={{ opacity: bgWhiteOpacity }}
         />
 
         <div className="relative z-10 h-full flex flex-col justify-center max-w-7xl mx-auto px-6">
-          {/* Main dual headline */}
-          <div className="text-center mb-6">
+          {/* Main dual headline - STAYS PINNED */}
+          <div className="text-center mb-6 relative z-30">
             <div className="overflow-hidden">
               <motion.h1
                 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight"
-                style={{ 
-                  color: useTransform(smoothProgress, [0.7, 1], ["#ffffff", "#1e293b"])
-                }}
+                style={{ color: headlineColor }}
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -112,7 +109,7 @@ const HeroSection = () => {
                   style={{
                     backgroundImage: useTransform(
                       smoothProgress,
-                      [0.7, 1],
+                      [0.85, 1],
                       [
                         "linear-gradient(to right, #93c5fd, #60a5fa, #3b82f6)",
                         "linear-gradient(to right, #3b82f6, #2563eb, #1d4ed8)"
@@ -126,12 +123,10 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Subtitle */}
+          {/* Subtitle - STAYS PINNED */}
           <motion.p
-            className="text-center text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed"
-            style={{
-              color: useTransform(smoothProgress, [0.7, 1], ["rgba(255,255,255,0.6)", "rgba(100,116,139,1)"])
-            }}
+            className="text-center text-lg md:text-xl max-w-3xl mx-auto mb-16 leading-relaxed relative z-30"
+            style={{ color: subtitleColor }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -139,80 +134,73 @@ const HeroSection = () => {
             ApplyLab brings student career activity into one clear system — helping students stay on track and career teams gain{" "}
             <motion.span 
               className="font-medium"
-              style={{
-                color: useTransform(smoothProgress, [0.7, 1], ["rgba(255,255,255,0.9)", "#1e293b"])
-              }}
+              style={{ color: useTransform(smoothProgress, [0.85, 1], ["rgba(255,255,255,0.9)", "#1e293b"]) }}
             >
               real visibility
             </motion.span>.
           </motion.p>
 
-          {/* DNA Spiral Panels Container */}
+          {/* DNA Spiral Panels Container - RECEDES INTO DISTANCE */}
           <motion.div
-            className="relative max-w-6xl mx-auto w-full"
+            className="relative max-w-6xl mx-auto w-full z-20"
             style={{ 
-              perspective: 1500,
-              rotateX: containerRotateX,
-              scale: containerScale,
-              y: panelY,
+              perspective: 2000,
+              perspectiveOrigin: "center center",
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
           >
-            {/* DNA Connection Line / Backbone */}
+            {/* Portal / Vanishing Point Glow */}
             <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none"
-              style={{ opacity: lineOpacity, scale: lineScale }}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none"
+              style={{ 
+                opacity: portalOpacity, 
+                scale: portalScale,
+              }}
             >
-              <motion.div 
-                className="relative flex flex-col items-center"
-                style={{ height: lineHeight }}
-              >
-                {/* Glowing core */}
-                <div className="w-4 h-full bg-gradient-to-b from-transparent via-blue-400 to-transparent rounded-full blur-sm" />
-                {/* Outer glow */}
-                <div className="absolute inset-0 w-8 -left-2 bg-gradient-to-b from-transparent via-blue-300/40 to-transparent rounded-full blur-lg" />
-                {/* Pulsing center orb */}
-                <motion.div
-                  className="absolute top-1/2 -translate-y-1/2 w-6 h-6 bg-blue-400 rounded-full"
-                  animate={{ 
-                    scale: [1, 1.3, 1],
-                    opacity: [0.8, 1, 0.8]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  style={{ boxShadow: "0 0 30px 10px rgba(96, 165, 250, 0.5)" }}
-                />
-                {/* Rotating ring indicators */}
-                <motion.div
-                  className="absolute top-1/4 left-1/2 -translate-x-1/2 w-10 h-10 border-2 border-blue-400/60 rounded-full"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                />
-                <motion.div
-                  className="absolute top-3/4 left-1/2 -translate-x-1/2 w-8 h-8 border-2 border-blue-300/50 rounded-full"
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                />
-              </motion.div>
+              {/* Outer glow ring */}
+              <motion.div
+                className="w-32 h-32 rounded-full"
+                style={{
+                  background: "radial-gradient(circle, rgba(96, 165, 250, 0.4) 0%, rgba(59, 130, 246, 0.2) 40%, transparent 70%)",
+                  boxShadow: useTransform(portalGlow, (v) => `0 0 ${v}px ${v/2}px rgba(59, 130, 246, 0.3)`),
+                }}
+              />
+              {/* Inner bright core */}
+              <motion.div
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80"
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  opacity: [0.8, 1, 0.8]
+                }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                style={{ boxShadow: "0 0 40px 15px rgba(255, 255, 255, 0.5)" }}
+              />
+              {/* Rotating energy rings */}
+              <motion.div
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 border-2 border-blue-400/40 rounded-full"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+              />
+              <motion.div
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-blue-300/20 rounded-full"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+              />
             </motion.div>
 
-            {/* Dashboard glow */}
-            <motion.div 
-              className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-blue-400/20 to-blue-600/20 rounded-3xl blur-2xl"
-              style={{ opacity: useTransform(smoothProgress, [0.7, 1], [0.5, 0]) }}
-            />
-            
-            {/* Split container - equal height with grid */}
+            {/* Split container */}
             <div className="relative grid md:grid-cols-2 gap-4 md:gap-6 items-stretch" style={{ transformStyle: 'preserve-3d' }}>
-              {/* Left: Student Side */}
+              {/* Left: Student Side - SPIRALS AWAY */}
               <motion.div
-                className="relative h-full"
+                className="relative h-full origin-center"
                 style={{
                   rotateY: leftRotateY,
                   rotateZ: leftRotateZ,
                   x: leftTranslateX,
                   z: leftTranslateZ,
+                  y: leftY,
                   scale: leftScale,
                   opacity: panelOpacity,
                   transformStyle: 'preserve-3d',
@@ -298,7 +286,6 @@ const HeroSection = () => {
                       </div>
                     </motion.div>
 
-                    {/* Spacer to push button to bottom */}
                     <div className="flex-1" />
 
                     {/* CTA Button */}
@@ -315,14 +302,15 @@ const HeroSection = () => {
                 </div>
               </motion.div>
 
-              {/* Right: University/Career Team Side */}
+              {/* Right: University Side - SPIRALS AWAY (opposite direction) */}
               <motion.div
-                className="relative h-full"
+                className="relative h-full origin-center"
                 style={{
                   rotateY: rightRotateY,
                   rotateZ: rightRotateZ,
                   x: rightTranslateX,
                   z: rightTranslateZ,
+                  y: rightY,
                   scale: rightScale,
                   opacity: panelOpacity,
                   transformStyle: 'preserve-3d',
@@ -392,7 +380,6 @@ const HeroSection = () => {
                       </div>
                     </motion.div>
 
-                    {/* Spacer to push button to bottom */}
                     <div className="flex-1" />
 
                     {/* CTA Button */}
@@ -409,34 +396,11 @@ const HeroSection = () => {
                 </div>
               </motion.div>
             </div>
-
-            {/* Center lock-in indicator (appears when panels settle) */}
-            <motion.div
-              className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
-              style={{ 
-                opacity: useTransform(smoothProgress, [0.85, 1], [0, 1]),
-                scale: useTransform(smoothProgress, [0.85, 1], [0.3, 1]),
-              }}
-            >
-              <motion.div 
-                className="w-14 h-14 rounded-full bg-white shadow-xl border border-slate-200 flex items-center justify-center"
-                animate={{ 
-                  boxShadow: [
-                    "0 10px 40px -10px rgba(37, 99, 235, 0.3)",
-                    "0 10px 60px -10px rgba(37, 99, 235, 0.5)",
-                    "0 10px 40px -10px rgba(37, 99, 235, 0.3)"
-                  ]
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <div className="w-7 h-7 rounded-full bg-gradient-to-r from-blue-500 to-blue-600" />
-              </motion.div>
-            </motion.div>
           </motion.div>
 
           {/* Scroll to Discover Indicator */}
           <motion.div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-30"
             style={{ opacity: scrollIndicatorOpacity }}
           >
             <span className="text-white/60 text-sm font-medium tracking-wide">Scroll to Discover</span>
