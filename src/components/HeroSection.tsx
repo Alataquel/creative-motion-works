@@ -1,14 +1,32 @@
-import { useState } from "react";
-import { ArrowRight, GraduationCap, Building2, TrendingUp, Briefcase, FileText, Mail, Calendar, BookOpen, MessageSquare, ClipboardList, Award, BarChart3, PieChart } from "lucide-react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { ArrowRight, GraduationCap, Building2, TrendingUp, Briefcase, FileText, Mail, Calendar, BookOpen, MessageSquare, ClipboardList, Award, BarChart3, PieChart, Rocket } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 type HoveredSide = "left" | "right" | null;
 
 const HeroSection = () => {
   const [hoveredSide, setHoveredSide] = useState<HoveredSide>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  // Scroll progress tracking
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  });
+  
+  // Transform scroll progress to percentage (0-100)
+  const progressValue = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const [displayProgress, setDisplayProgress] = useState(0);
+  
+  useEffect(() => {
+    const unsubscribe = progressValue.on("change", (latest) => {
+      setDisplayProgress(Math.min(100, Math.round(latest)));
+    });
+    return () => unsubscribe();
+  }, [progressValue]);
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB] overflow-hidden">
+    <section ref={sectionRef} className="relative min-h-screen bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB] overflow-hidden">
       {/* Background effects */}
       <div
         className="absolute top-0 left-1/4 w-[800px] h-[800px] rounded-full pointer-events-none"
@@ -42,6 +60,86 @@ const HeroSection = () => {
           ApplyLab brings student career activity into one clear system — helping students stay on track and career teams gain{" "}
           <span className="text-white/90 font-medium">real visibility</span>.
         </p>
+
+        {/* CAREER READINESS PROGRESS BAR */}
+        <motion.div 
+          className="w-full max-w-2xl mx-auto mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+        >
+          <div className="relative p-4 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center">
+                  <Rocket className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-sm font-semibold text-white">Career Readiness</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className={`text-lg font-bold transition-colors duration-300 ${
+                  displayProgress >= 100 ? "text-emerald-400" : "text-[#3B82F6]"
+                }`}>
+                  {displayProgress >= 100 ? "Ready!" : `${displayProgress}%`}
+                </span>
+              </div>
+            </div>
+            
+            {/* Progress bar track */}
+            <div className="h-3 bg-white/10 rounded-full overflow-hidden relative">
+              {/* Animated shimmer overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" 
+                   style={{ backgroundSize: '200% 100%' }} />
+              
+              {/* Progress fill */}
+              <motion.div
+                className={`h-full rounded-full relative overflow-hidden transition-colors duration-500 ${
+                  displayProgress >= 100 
+                    ? "bg-gradient-to-r from-emerald-500 to-emerald-400" 
+                    : "bg-gradient-to-r from-[#2563EB] to-[#3B82F6]"
+                }`}
+                style={{ width: `${displayProgress}%` }}
+              >
+                {/* Inner glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/20" />
+              </motion.div>
+            </div>
+            
+            {/* Milestone markers */}
+            <div className="flex justify-between mt-2 px-1">
+              {[0, 25, 50, 75, 100].map((milestone) => (
+                <div 
+                  key={milestone} 
+                  className={`flex flex-col items-center transition-all duration-300 ${
+                    displayProgress >= milestone ? "opacity-100" : "opacity-40"
+                  }`}
+                >
+                  <div className={`w-1.5 h-1.5 rounded-full mb-1 transition-colors duration-300 ${
+                    displayProgress >= milestone 
+                      ? displayProgress >= 100 ? "bg-emerald-400" : "bg-[#3B82F6]" 
+                      : "bg-white/30"
+                  }`} />
+                  <span className={`text-[10px] font-medium transition-colors duration-300 ${
+                    displayProgress >= milestone ? "text-white/80" : "text-white/40"
+                  }`}>
+                    {milestone === 100 ? "Ready" : `${milestone}%`}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Scroll hint */}
+          {displayProgress < 100 && (
+            <motion.p 
+              className="text-center text-xs text-white/40 mt-3"
+              animate={{ opacity: [0.4, 0.7, 0.4] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              Scroll down to complete your journey ↓
+            </motion.p>
+          )}
+        </motion.div>
 
         {/* SPLIT HERO CONTAINER */}
         <div className="relative w-full max-w-6xl mx-auto mt-8">
