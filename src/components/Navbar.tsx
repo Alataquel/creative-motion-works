@@ -14,8 +14,7 @@ const Navbar = () => {
   });
 
   const navItems = [
-    { label: "Platform", href: "#" },
-    { label: "Solutions", href: "#" },
+    { label: "For Students", href: "/students" },
     { label: "For Universities", href: "/universities" },
     { label: "About", href: "#" },
   ];
