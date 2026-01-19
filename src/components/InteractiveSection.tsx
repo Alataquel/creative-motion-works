@@ -290,37 +290,41 @@ const InteractiveSection = () => {
       </div>
 
       {/* Full-Width Social Proof Section */}
-      <div className="bg-[#0c1929] py-32 relative overflow-hidden">
-        {/* Background decorations */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-blue-600/10 to-transparent rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-gradient-to-br from-blue-500/10 to-transparent rounded-full blur-3xl" />
-        </div>
-
+      <div className="bg-white py-32 relative overflow-hidden">
         <div className="relative z-10 max-w-6xl mx-auto px-6">
-          {/* Trust indicators */}
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10 mb-8">
-              <CheckCircle className="w-5 h-5 text-emerald-400" />
-              <span className="text-white/80 font-medium">Trusted by leading universities worldwide</span>
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-100 border border-slate-200 mb-8">
+              <CheckCircle className="w-5 h-5 text-emerald-500" />
+              <span className="text-slate-700 font-medium">Partnered with universities in Germany, Spain and Switzerland</span>
             </div>
-            
-            {/* University logos placeholder */}
-            <div className="flex justify-center items-center gap-12 opacity-40">
-              {[...Array(5)].map((_, i) => (
-                <div key={i} className="w-24 h-12 bg-white/10 rounded-lg flex items-center justify-center">
-                  <span className="text-white/50 text-xs font-medium">University</span>
-                </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-16">
+              {[
+                { value: "10+", label: "Universities" },
+                { value: "5/5", label: "Satisfaction" },
+                { value: "10k+", label: "Job Positions" },
+              ].map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  className="text-center"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                >
+                  <div className="text-4xl font-display font-bold text-blue-600 mb-1">{stat.value}</div>
+                  <div className="text-slate-500 text-sm">{stat.label}</div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* Hero Testimonial */}
           <motion.div
             className="relative"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -329,18 +333,18 @@ const InteractiveSection = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="absolute -top-8 left-1/2 -translate-x-1/2">
-              <Quote className="w-16 h-16 text-blue-500/20" />
+              <Quote className="w-16 h-16 text-blue-200" />
             </div>
             
             <div className="text-center max-w-4xl mx-auto">
-              <p className="text-3xl md:text-4xl lg:text-5xl font-display text-white leading-tight mb-12">
-                "Finally, I can see my whole career journey in one place. 
-                <span className="text-blue-400"> ApplyLab changed everything</span> about how I approach my job search."
+              <p className="text-3xl md:text-4xl lg:text-5xl font-display text-slate-800 leading-tight mb-12">
+                "ApplyLab gave us visibility we never had before.
+                <span className="text-blue-600"> Now we can actually help students before they fall behind.</span>"
               </p>
               
               <div className="flex items-center justify-center gap-6">
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-xl shadow-blue-500/30">
-                  JD
+                  MK
                 </div>
                 <div className="text-left">
                   <div className="flex items-center gap-2 mb-1">
@@ -348,40 +352,11 @@ const InteractiveSection = () => {
                       <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <p className="text-white font-medium text-lg">Jessica Davis</p>
-                  <p className="text-white/50">Computer Science, Class of 2025 • Stanford University</p>
+                  <p className="text-slate-800 font-medium text-lg">Dr. Maria Keller</p>
+                  <p className="text-slate-500">Director of Career Services • LMU Munich</p>
                 </div>
               </div>
             </div>
-          </motion.div>
-
-          {/* Stats row */}
-          <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 pt-16 border-t border-white/10"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            {[
-              { value: "50,000+", label: "Students empowered" },
-              { value: "200+", label: "University partners" },
-              { value: "92%", label: "Placement rate" },
-              { value: "4.9/5", label: "Student satisfaction" },
-            ].map((stat, i) => (
-              <div key={stat.label} className="text-center">
-                <motion.p 
-                  className="text-4xl md:text-5xl font-display font-bold text-white mb-2"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.1 }}
-                >
-                  {stat.value}
-                </motion.p>
-                <p className="text-white/50">{stat.label}</p>
-              </div>
-            ))}
           </motion.div>
         </div>
       </div>
