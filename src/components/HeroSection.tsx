@@ -5,57 +5,54 @@ import { useRef } from "react";
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Scroll progress for the 250vh container
+  // Scroll progress for 300vh runway
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
-  // Smooth spring for organic feel
-  const springConfig = { stiffness: 50, damping: 20, mass: 0.8 };
+  // Smooth spring physics
+  const springConfig = { stiffness: 60, damping: 25, mass: 1 };
   const progress = useSpring(scrollYProgress, springConfig);
 
   // ===== CORRECT SCROLL MAPPING =====
-  // Scroll DOWN (0 → 1) = Panels SHRINK and move AWAY into distance
-  // Scroll UP (1 → 0) = Panels GROW and come BACK toward user
+  // Scroll DOWN (0→1) = Panels CONVERGE toward CENTER, SHRINK, and FADE
+  // Scroll UP (1→0) = Panels SEPARATE and GROW back to original
 
-  // Left panel - spirals clockwise INTO the screen
-  const leftRotateY = useTransform(progress, [0, 0.25, 0.5, 0.75], [0, 25, 90, 180]);
-  const leftRotateZ = useTransform(progress, [0, 0.5, 0.75], [0, -20, -45]);
-  const leftTranslateX = useTransform(progress, [0, 0.25, 0.5, 0.75], [0, -60, -120, -180]);
-  const leftTranslateY = useTransform(progress, [0, 0.5, 0.75], [0, -80, -200]);
-  const leftScale = useTransform(progress, [0, 0.25, 0.5, 0.75], [1, 0.75, 0.45, 0.15]);
+  // LEFT PANEL - Moves RIGHT toward center as it shrinks
+  const leftTranslateX = useTransform(progress, [0, 0.3, 0.5], [0, 150, 250]); // Move toward center
+  const leftTranslateY = useTransform(progress, [0, 0.3, 0.5], [0, 100, 250]); // Move down into tunnel
+  const leftRotateY = useTransform(progress, [0, 0.25, 0.5], [0, 35, 90]); // Spiral clockwise
+  const leftRotateZ = useTransform(progress, [0, 0.5], [0, -15]); // Slight tilt
+  const leftScale = useTransform(progress, [0, 0.25, 0.5], [1, 0.5, 0]); // Shrink to nothing
 
-  // Right panel - spirals counter-clockwise INTO the screen
-  const rightRotateY = useTransform(progress, [0, 0.25, 0.5, 0.75], [0, -25, -90, -180]);
-  const rightRotateZ = useTransform(progress, [0, 0.5, 0.75], [0, 20, 45]);
-  const rightTranslateX = useTransform(progress, [0, 0.25, 0.5, 0.75], [0, 60, 120, 180]);
-  const rightTranslateY = useTransform(progress, [0, 0.5, 0.75], [0, -80, -200]);
-  const rightScale = useTransform(progress, [0, 0.25, 0.5, 0.75], [1, 0.75, 0.45, 0.15]);
+  // RIGHT PANEL - Moves LEFT toward center as it shrinks
+  const rightTranslateX = useTransform(progress, [0, 0.3, 0.5], [0, -150, -250]); // Move toward center
+  const rightTranslateY = useTransform(progress, [0, 0.3, 0.5], [0, 100, 250]); // Move down into tunnel
+  const rightRotateY = useTransform(progress, [0, 0.25, 0.5], [0, -35, -90]); // Spiral counter-clockwise
+  const rightRotateZ = useTransform(progress, [0, 0.5], [0, 15]); // Slight tilt
+  const rightScale = useTransform(progress, [0, 0.25, 0.5], [1, 0.5, 0]); // Shrink to nothing
 
-  // Panel opacity - FADE OUT by 75% scroll
-  const panelOpacity = useTransform(progress, [0, 0.3, 0.6, 0.75], [1, 0.8, 0.4, 0]);
+  // OPACITY - Panels completely gone by 50% scroll
+  const panelOpacity = useTransform(progress, [0, 0.25, 0.45, 0.5], [1, 0.7, 0.2, 0]);
 
-  // Depth-of-field BLUR as panels recede
-  const panelBlur = useTransform(progress, [0, 0.3, 0.6, 0.75], [0, 2, 6, 12]);
+  // PORTAL at center vanishing point
+  const portalOpacity = useTransform(progress, [0.1, 0.3, 0.5, 0.6], [0, 0.8, 1, 0]);
+  const portalScale = useTransform(progress, [0.1, 0.4, 0.55], [0.5, 1.5, 2.5]);
 
-  // Portal glow at vanishing point
-  const portalOpacity = useTransform(progress, [0.1, 0.4, 0.7, 0.85], [0, 0.6, 1, 0]);
-  const portalScale = useTransform(progress, [0.1, 0.5, 0.75], [0.3, 1.2, 2]);
-
-  // Scroll indicator fades quickly
-  const scrollIndicatorOpacity = useTransform(progress, [0, 0.08], [1, 0]);
+  // Scroll indicator fades immediately
+  const scrollIndicatorOpacity = useTransform(progress, [0, 0.05], [1, 0]);
 
   // Background transitions to white AFTER panels vanish
-  const bgWhiteOpacity = useTransform(progress, [0.75, 0.95], [0, 1]);
+  const bgWhiteOpacity = useTransform(progress, [0.5, 0.75], [0, 1]);
 
-  // Text color transitions
-  const headlineColor = useTransform(progress, [0.8, 1], ["#ffffff", "#1e293b"]);
-  const subtitleOpacity = useTransform(progress, [0, 0.4], [1, 0]);
+  // Headline color transitions with background
+  const headlineWhiteToSlate = useTransform(progress, [0.55, 0.75], ["#ffffff", "#1e293b"]);
+  const subtitleOpacity = useTransform(progress, [0, 0.3], [1, 0]);
 
   return (
-    <section ref={containerRef} className="relative h-[250vh]">
-      {/* STICKY CONTAINER - stays fixed while scrolling through runway */}
+    <section ref={containerRef} className="relative h-[300vh]">
+      {/* STICKY CONTAINER - Pinned while scrolling through runway */}
       <div className="sticky top-0 h-screen overflow-hidden">
         {/* Dark hero background */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB]">
@@ -72,23 +69,23 @@ const HeroSection = () => {
             animate={{ x: [0, -60, 0], y: [0, -40, 0] }}
             transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 5 }}
           />
-          {/* Grid overlay */}
+          {/* Grid */}
           <div className="absolute inset-0 opacity-[0.02]" style={{
             backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
             backgroundSize: '50px 50px'
           }} />
         </div>
 
-        {/* White background fades in AFTER panels vanish */}
+        {/* White background fades in after panels vanish */}
         <motion.div className="absolute inset-0 bg-white" style={{ opacity: bgWhiteOpacity }} />
 
         <div className="relative z-10 h-full flex flex-col justify-center items-center max-w-7xl mx-auto px-6">
-          {/* HEADLINE - Stays pinned and visible */}
+          {/* HEADLINE - Stays pinned */}
           <div className="text-center mb-6 relative z-30">
             <div className="overflow-hidden">
               <motion.h1
                 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight"
-                style={{ color: headlineColor }}
+                style={{ color: headlineWhiteToSlate }}
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -108,7 +105,7 @@ const HeroSection = () => {
                   style={{
                     backgroundImage: useTransform(
                       progress,
-                      [0.8, 1],
+                      [0.55, 0.75],
                       [
                         "linear-gradient(to right, #93c5fd, #60a5fa, #3b82f6)",
                         "linear-gradient(to right, #3b82f6, #2563eb, #1d4ed8)"
@@ -122,7 +119,7 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* SUBTITLE - Fades as panels travel */}
+          {/* SUBTITLE - Fades as panels move */}
           <motion.p
             className="text-center text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed relative z-30 text-white/60"
             style={{ opacity: subtitleOpacity }}
@@ -134,62 +131,48 @@ const HeroSection = () => {
             <span className="text-white/90 font-medium">real visibility</span>.
           </motion.p>
 
-          {/* DNA SPIRAL CONTAINER - 1500px perspective for deep tunnel */}
-          <motion.div
+          {/* DNA PANELS CONTAINER */}
+          <div
             className="relative w-full max-w-6xl mx-auto z-20"
-            style={{ perspective: 1500, perspectiveOrigin: "center center" }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.6 }}
+            style={{ perspective: 1200, perspectiveOrigin: "center 70%" }}
           >
-            {/* VANISHING POINT PORTAL */}
+            {/* CENTRAL VANISHING POINT PORTAL */}
             <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[50%] z-30 pointer-events-none"
               style={{ opacity: portalOpacity, scale: portalScale }}
             >
               {/* Outer glow */}
               <div
-                className="w-40 h-40 rounded-full"
+                className="w-48 h-48 rounded-full"
                 style={{
-                  background: "radial-gradient(circle, rgba(96, 165, 250, 0.5) 0%, rgba(59, 130, 246, 0.25) 40%, transparent 70%)",
-                  boxShadow: "0 0 80px 40px rgba(59, 130, 246, 0.3)",
+                  background: "radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(96, 165, 250, 0.5) 30%, rgba(59, 130, 246, 0.2) 60%, transparent 80%)",
+                  boxShadow: "0 0 100px 50px rgba(255, 255, 255, 0.4), 0 0 150px 75px rgba(59, 130, 246, 0.3)",
                 }}
               />
               {/* Bright core */}
               <motion.div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white"
-                animate={{ scale: [1, 1.3, 1], opacity: [0.9, 1, 0.9] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                style={{ boxShadow: "0 0 50px 20px rgba(255, 255, 255, 0.6)" }}
-              />
-              {/* Rotating rings */}
-              <motion.div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 border-2 border-blue-400/50 rounded-full"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-              />
-              <motion.div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-blue-300/30 rounded-full"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-white"
+                animate={{ scale: [1, 1.2, 1], opacity: [0.95, 1, 0.95] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                style={{ boxShadow: "0 0 60px 30px rgba(255, 255, 255, 0.8)" }}
               />
             </motion.div>
 
-            {/* PANELS GRID */}
+            {/* PANELS - Converge toward center */}
             <div className="relative grid md:grid-cols-2 gap-4 md:gap-6 items-stretch" style={{ transformStyle: 'preserve-3d' }}>
               
-              {/* LEFT PANEL - Student Side */}
+              {/* LEFT PANEL */}
               <motion.div
-                className="relative h-full origin-center"
+                className="relative h-full"
                 style={{
-                  rotateY: leftRotateY,
-                  rotateZ: leftRotateZ,
                   x: leftTranslateX,
                   y: leftTranslateY,
+                  rotateY: leftRotateY,
+                  rotateZ: leftRotateZ,
                   scale: leftScale,
                   opacity: panelOpacity,
-                  filter: useTransform(panelBlur, (v) => `blur(${v}px)`),
                   transformStyle: 'preserve-3d',
+                  transformOrigin: 'right center',
                 }}
               >
                 <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200">
@@ -268,31 +251,27 @@ const HeroSection = () => {
 
                     <div className="flex-1" />
 
-                    <motion.button
-                      className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm group bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
+                    <button className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm group bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20">
                       <GraduationCap className="w-4 h-4" />
                       Explore the Platform
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </motion.button>
+                    </button>
                   </div>
                 </div>
               </motion.div>
 
-              {/* RIGHT PANEL - University Side */}
+              {/* RIGHT PANEL */}
               <motion.div
-                className="relative h-full origin-center"
+                className="relative h-full"
                 style={{
-                  rotateY: rightRotateY,
-                  rotateZ: rightRotateZ,
                   x: rightTranslateX,
                   y: rightTranslateY,
+                  rotateY: rightRotateY,
+                  rotateZ: rightRotateZ,
                   scale: rightScale,
                   opacity: panelOpacity,
-                  filter: useTransform(panelBlur, (v) => `blur(${v}px)`),
                   transformStyle: 'preserve-3d',
+                  transformOrigin: 'left center',
                 }}
               >
                 <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200">
@@ -359,20 +338,16 @@ const HeroSection = () => {
 
                     <div className="flex-1" />
 
-                    <motion.button
-                      className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm group bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
+                    <button className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm group bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20">
                       <Building2 className="w-4 h-4" />
                       Request a Pilot
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </motion.button>
+                    </button>
                   </div>
                 </div>
               </motion.div>
             </div>
-          </motion.div>
+          </div>
 
           {/* SCROLL INDICATOR */}
           <motion.div
