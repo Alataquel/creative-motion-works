@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { ArrowRight, GraduationCap, Building2, TrendingUp, Briefcase, FileText, Mail, Calendar, BookOpen, MessageSquare, ClipboardList, Award, BarChart3, PieChart, Rocket } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, GraduationCap, Building2, TrendingUp, Briefcase, FileText, Mail, Calendar, BookOpen, MessageSquare, ClipboardList, Award, BarChart3, PieChart } from "lucide-react";
+import { motion } from "framer-motion";
 
 type HoveredSide = "left" | "right" | null;
 
@@ -83,22 +83,6 @@ const HeroSection = () => {
     }));
   }, [mousePos, particles.length]);
   
-  // Scroll progress tracking
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"]
-  });
-  
-  // Transform scroll progress to percentage (0-100)
-  const progressValue = useTransform(scrollYProgress, [0, 1], [0, 100]);
-  const [displayProgress, setDisplayProgress] = useState(0);
-  
-  useEffect(() => {
-    const unsubscribe = progressValue.on("change", (latest) => {
-      setDisplayProgress(Math.min(100, Math.round(latest)));
-    });
-    return () => unsubscribe();
-  }, [progressValue]);
 
   return (
     <section 
@@ -158,6 +142,50 @@ const HeroSection = () => {
           )}
         </svg>
       </div>
+      
+      {/* Parallax Floating Icons */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[
+          { Icon: Briefcase, x: 8, y: 15, size: 80, speed: 0.3, opacity: 0.04 },
+          { Icon: FileText, x: 85, y: 25, size: 100, speed: 0.5, opacity: 0.03 },
+          { Icon: GraduationCap, x: 15, y: 70, size: 120, speed: 0.2, opacity: 0.04 },
+          { Icon: TrendingUp, x: 75, y: 60, size: 90, speed: 0.4, opacity: 0.03 },
+          { Icon: MessageSquare, x: 45, y: 85, size: 70, speed: 0.6, opacity: 0.04 },
+          { Icon: Calendar, x: 90, y: 80, size: 85, speed: 0.35, opacity: 0.03 },
+          { Icon: Award, x: 5, y: 45, size: 75, speed: 0.45, opacity: 0.035 },
+        ].map(({ Icon, x, y, size, speed, opacity }, i) => (
+          <motion.div
+            key={i}
+            className="absolute"
+            style={{ 
+              left: `${x}%`, 
+              top: `${y}%`,
+              transform: 'translate(-50%, -50%)',
+            }}
+            animate={{
+              y: [0, -20 * speed, 0],
+              x: [0, 10 * speed, 0],
+              rotate: [0, 5, 0],
+            }}
+            transition={{
+              duration: 8 + i * 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <Icon 
+              style={{ 
+                width: size, 
+                height: size, 
+                opacity,
+                stroke: 'currentColor',
+                strokeWidth: 0.5,
+              }} 
+              className="text-blue-300"
+            />
+          </motion.div>
+        ))}
+      </div>
 
       {/* Background effects */}
       <div
@@ -172,60 +200,6 @@ const HeroSection = () => {
         backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
         backgroundSize: '50px 50px'
       }} />
-      
-      {/* STICKY CAREER READINESS SIDEBAR */}
-      <motion.div 
-        className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden lg:block"
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.8, duration: 0.6 }}
-      >
-        <div className="relative p-3 rounded-2xl bg-[#0c1929]/90 backdrop-blur-xl border border-white/10 shadow-2xl">
-          <div className="flex flex-col items-center gap-3">
-            {/* Icon */}
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center shadow-lg shadow-blue-500/20">
-              <Rocket className={`w-5 h-5 transition-all duration-500 ${displayProgress >= 100 ? "text-white rotate-45" : "text-white"}`} />
-            </div>
-            
-            {/* Vertical Progress Bar */}
-            <div className="relative h-40 w-3 bg-white/10 rounded-full overflow-hidden">
-              <motion.div
-                className={`absolute bottom-0 left-0 right-0 rounded-full transition-colors duration-500 ${
-                  displayProgress >= 100 
-                    ? "bg-gradient-to-t from-emerald-500 to-emerald-400" 
-                    : "bg-gradient-to-t from-[#2563EB] to-[#3B82F6]"
-                }`}
-                style={{ height: `${displayProgress}%` }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-              </motion.div>
-              
-              {/* Milestone dots */}
-              {[0, 25, 50, 75, 100].map((milestone) => (
-                <div 
-                  key={milestone}
-                  className={`absolute left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                    displayProgress >= milestone 
-                      ? displayProgress >= 100 ? "bg-emerald-400 shadow-emerald-400/50" : "bg-white shadow-white/50" 
-                      : "bg-white/20"
-                  }`}
-                  style={{ bottom: `${milestone}%`, boxShadow: displayProgress >= milestone ? '0 0 6px currentColor' : 'none' }}
-                />
-              ))}
-            </div>
-            
-            {/* Percentage */}
-            <div className="text-center">
-              <span className={`text-sm font-bold transition-colors duration-300 ${
-                displayProgress >= 100 ? "text-emerald-400" : "text-[#3B82F6]"
-              }`}>
-                {displayProgress >= 100 ? "Ready!" : `${displayProgress}%`}
-              </span>
-              <p className="text-[10px] text-white/40 mt-0.5">Career</p>
-            </div>
-          </div>
-        </div>
-      </motion.div>
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center max-w-7xl mx-auto px-6 pt-32 pb-16">
@@ -247,10 +221,10 @@ const HeroSection = () => {
           <span className="text-white/90 font-medium">real visibility</span>.
         </p>
 
-        {/* SPLIT HERO CONTAINER */}
-        <div className="relative w-full max-w-6xl mx-auto mt-8">
+        {/* SPLIT HERO CONTAINER - 20% larger */}
+        <div className="relative w-full max-w-7xl mx-auto mt-8">
           <div 
-            className="relative flex flex-col md:flex-row gap-4 md:gap-0 items-stretch min-h-[520px]"
+            className="relative flex flex-col md:flex-row gap-4 md:gap-0 items-stretch min-h-[624px]"
             onMouseLeave={() => setHoveredSide(null)}
           >
             {/* LEFT PANEL - Students */}
