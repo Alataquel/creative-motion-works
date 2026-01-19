@@ -17,6 +17,14 @@ const testimonials = [
   },
 ];
 
+const universities = [
+  "ETH Zürich",
+  "TU Munich", 
+  "IE Business School",
+  "University of St. Gallen",
+  "ESADE",
+  "LMU Munich"
+];
 
 const stats = [
   { value: "10+", label: "Universities" },
@@ -42,9 +50,25 @@ const CTASection = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-blue-400 text-sm font-medium tracking-wider uppercase mb-8">
-              Partnered with universities in Germany, Spain and Switzerland
+            <p className="text-blue-400 text-sm font-medium tracking-wider uppercase mb-4">
+              Trusted by Top Universities Worldwide
             </p>
+            
+            {/* University logos */}
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-12">
+              {universities.map((uni, i) => (
+                <motion.div
+                  key={uni}
+                  className="px-5 py-3 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 text-white/80 text-sm font-medium"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.1 + i * 0.05 }}
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+                >
+                  {uni}
+                </motion.div>
+              ))}
+            </div>
 
             {/* Stats */}
             <div className="flex flex-wrap justify-center gap-8 md:gap-16">

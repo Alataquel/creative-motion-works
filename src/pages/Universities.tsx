@@ -398,89 +398,106 @@ const Universities = () => {
 
 
       {/* Scroll-Triggered Features */}
-      <section className="relative">
-        <div className="max-w-7xl mx-auto">
-          {staffFeatures.map((feature, i) => {
-            const MockupComponent = featureMockups[i];
-            const isEven = i % 2 === 0;
-            
-            return (
-              <motion.div
-                key={feature.title}
-                className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-16 py-24 md:py-32 px-6 ${
-                  isEven ? "bg-white" : "bg-gradient-to-br from-[#0c1929] via-[#1e3a5f] to-[#2563EB]"
-                }`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6 }}
-              >
-                {/* Text Content */}
-                <motion.div
-                  className={`flex-1 max-w-lg ${isEven ? "lg:order-1" : "lg:order-2"}`}
-                  initial={{ opacity: 0, x: isEven ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${
-                      isEven ? "bg-blue-100" : "bg-blue-500/20"
-                    }`}>
-                      <feature.icon className={`w-6 h-6 ${isEven ? "text-blue-600" : "text-blue-400"}`} />
-                    </div>
-                  </div>
-                  <h3 className={`text-3xl md:text-4xl font-display font-bold mb-4 ${
-                    isEven ? "text-slate-900" : "text-white"
-                  }`}>
-                    {feature.title}
-                  </h3>
-                  <p className={`text-lg mb-4 ${isEven ? "text-slate-600" : "text-white/60"}`}>
-                    {feature.desc}
-                  </p>
-                  <p className={`text-base ${isEven ? "text-slate-500" : "text-white/50"}`}>
-                    {feature.detail}
-                  </p>
-                </motion.div>
+      <section className="bg-gradient-to-br from-[#0c1929] via-[#1e3a5f] to-[#2563EB] relative">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div 
+            className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-full blur-3xl"
+            style={{ y: useTransform(scrollYProgress, [0, 1], [0, -100]) }}
+          />
+          <motion.div 
+            className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-gradient-to-br from-blue-400/10 to-blue-500/5 rounded-full blur-3xl"
+            style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]) }}
+          />
+        </div>
 
-                {/* Mockup */}
+        <div className="relative z-10 py-24">
+          {/* Section Title */}
+          <motion.div 
+            className="text-center mb-20 px-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
+              See what your students are{" "}
+              <span className="bg-gradient-to-r from-[#93c5fd] via-[#60a5fa] to-[#3b82f6] bg-clip-text text-transparent">
+                actually doing
+              </span>
+            </h3>
+            <p className="text-xl text-white/60 max-w-2xl mx-auto">
+              Track engagement, activity, and outcomes across your entire cohort.
+            </p>
+          </motion.div>
+
+          {/* Vertical Scroll-Triggered Features */}
+          <div className="max-w-6xl mx-auto px-6 space-y-32">
+            {staffFeatures.map((feature, i) => {
+              const MockupComponent = featureMockups[i];
+              return (
                 <motion.div
-                  className={`flex-1 w-full max-w-md ${isEven ? "lg:order-2" : "lg:order-1"}`}
-                  initial={{ opacity: 0, y: 30 }}
+                  key={feature.title}
+                  className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+                  initial={{ opacity: 0, y: 80 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                  whileHover={{ scale: 1.02 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <div className="relative p-6 bg-[#1a2d47] backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-2xl" />
+                  {/* Content - alternating sides */}
+                  <div className={`${i % 2 === 1 ? "lg:order-2" : ""}`}>
+                    <motion.div
+                      className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center mb-8 shadow-2xl shadow-blue-500/30"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                    >
+                      <feature.icon className="w-10 h-10 text-white" />
+                    </motion.div>
                     
-                    <div className="relative z-10">
-                      <div className="flex items-center gap-2 mb-4">
-                        <div className="w-3 h-3 rounded-full bg-red-400/60" />
-                        <div className="w-3 h-3 rounded-full bg-yellow-400/60" />
-                        <div className="w-3 h-3 rounded-full bg-green-400/60" />
-                      </div>
+                    <h4 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+                      {feature.title}
+                    </h4>
+                    <p className="text-xl text-white/70 mb-6">
+                      {feature.desc}
+                    </p>
+                    <p className="text-lg text-white/50 leading-relaxed">
+                      {feature.detail}
+                    </p>
+                  </div>
+
+                  {/* Visual Card */}
+                  <motion.div 
+                    className={`${i % 2 === 1 ? "lg:order-1" : ""}`}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <div className="relative p-6 bg-white/[0.05] backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden">
+                      <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-2xl" />
                       
-                      <MockupComponent />
-                      
-                      <div className="mt-4 flex items-center justify-between pt-3 border-t border-white/5">
-                        <span className="text-sm text-white/40">Feature {i + 1} of {staffFeatures.length}</span>
-                        <div className="flex items-center gap-1">
-                          {[...Array(staffFeatures.length)].map((_, j) => (
-                            <div 
-                              key={j} 
-                              className={`w-2 h-2 rounded-full transition-colors ${j === i ? "bg-blue-400" : "bg-white/20"}`}
-                            />
-                          ))}
+                      <div className="relative z-10">
+                        <div className="flex items-center gap-2 mb-4">
+                          <div className="w-3 h-3 rounded-full bg-red-400/60" />
+                          <div className="w-3 h-3 rounded-full bg-yellow-400/60" />
+                          <div className="w-3 h-3 rounded-full bg-green-400/60" />
+                        </div>
+                        
+                        <MockupComponent />
+                        
+                        <div className="mt-4 flex items-center justify-between pt-3 border-t border-white/5">
+                          <span className="text-sm text-white/40">Feature {i + 1} of {staffFeatures.length}</span>
+                          <div className="flex items-center gap-1">
+                            {[...Array(staffFeatures.length)].map((_, j) => (
+                              <div 
+                                key={j} 
+                                className={`w-2 h-2 rounded-full transition-colors ${j === i ? "bg-blue-400" : "bg-white/20"}`}
+                              />
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -497,9 +514,33 @@ const Universities = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10 mb-12">
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10 mb-8">
               <CheckCircle className="w-5 h-5 text-emerald-400" />
-              <span className="text-white/80 font-medium">Partnered with universities in Germany, Spain and Switzerland</span>
+              <span className="text-white/80 font-medium">Trusted by top universities worldwide</span>
+            </div>
+
+            {/* University Logos */}
+            <div className="flex flex-wrap justify-center items-center gap-8 mb-12">
+              {[
+                { name: "ETH Zürich", country: "Switzerland" },
+                { name: "TU Munich", country: "Germany" },
+                { name: "IE Business School", country: "Spain" },
+                { name: "University of St. Gallen", country: "Switzerland" },
+                { name: "ESADE", country: "Spain" },
+                { name: "LMU Munich", country: "Germany" },
+              ].map((uni, i) => (
+                <motion.div
+                  key={uni.name}
+                  className="px-5 py-3 bg-white/[0.05] rounded-xl border border-white/10 text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <div className="text-white font-medium text-sm">{uni.name}</div>
+                  <div className="text-white/40 text-xs">{uni.country}</div>
+                </motion.div>
+              ))}
             </div>
 
             {/* Stats */}
