@@ -100,7 +100,7 @@ const InteractiveSection = () => {
     <section ref={sectionRef} className="relative overflow-hidden">
       {/* Full-width Header Section */}
       <div className="bg-gradient-to-b from-background via-muted/20 to-background py-24">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1400px] mx-auto px-6">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
@@ -218,11 +218,11 @@ const InteractiveSection = () => {
           </motion.div>
 
           {/* Vertical Scroll-Triggered Features */}
-          <div className="max-w-6xl mx-auto px-6 space-y-32">
+          <div className="max-w-[1400px] mx-auto px-6 space-y-32">
             {features.map((feature, i) => (
               <motion.div
                 key={feature.title}
-                className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+                className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center"
                 initial={{ opacity: 0, y: 80 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}

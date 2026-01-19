@@ -202,7 +202,7 @@ const HeroSection = () => {
       }} />
 
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col items-center max-w-7xl mx-auto px-6 pt-32 pb-16">
+      <div className="relative z-10 h-full flex flex-col items-center max-w-[1400px] mx-auto px-6 pt-32 pb-16">
         {/* HEADLINE */}
         <div className="text-center mb-6 flex flex-col items-center justify-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight text-white text-center">
@@ -221,10 +221,10 @@ const HeroSection = () => {
           <span className="text-white/90 font-medium">real visibility</span>.
         </p>
 
-        {/* SPLIT HERO CONTAINER - 20% larger */}
-        <div className="relative w-full max-w-7xl mx-auto mt-8">
+        {/* SPLIT HERO CONTAINER - Full width */}
+        <div className="relative w-full max-w-[1400px] mx-auto mt-8">
           <div 
-            className="relative flex flex-col md:flex-row gap-4 md:gap-0 items-stretch min-h-[624px]"
+            className="relative flex flex-col md:flex-row gap-4 md:gap-0 items-stretch min-h-[650px]"
             onMouseLeave={() => setHoveredSide(null)}
           >
             {/* LEFT PANEL - Students */}

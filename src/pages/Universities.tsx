@@ -238,7 +238,7 @@ const Universities = () => {
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6">
+        <div className="relative max-w-[1400px] mx-auto px-6">
           {/* Hero Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -268,7 +268,7 @@ const Universities = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="max-w-3xl mx-auto"
+            className="max-w-5xl mx-auto"
           >
             <div className="relative p-6 bg-[#1a2d47]/80 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl shadow-blue-500/10">
               {/* Window Controls */}
@@ -430,13 +430,13 @@ const Universities = () => {
           </motion.div>
 
           {/* Vertical Scroll-Triggered Features */}
-          <div className="max-w-6xl mx-auto px-6 space-y-32">
+          <div className="max-w-[1400px] mx-auto px-6 space-y-32">
             {staffFeatures.map((feature, i) => {
               const MockupComponent = featureMockups[i];
               return (
                 <motion.div
                   key={feature.title}
-                  className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+                  className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center"
                   initial={{ opacity: 0, y: 80 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
