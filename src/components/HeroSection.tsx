@@ -270,69 +270,98 @@ const HeroSection = () => {
                   <div className="w-16" />
                 </div>
 
-                {/* Content */}
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="grid grid-cols-2 gap-2 mb-4">
-                    {[
-                      { icon: Briefcase, text: "Job Board" },
-                      { icon: FileText, text: "Resume Builder" },
-                      { icon: Award, text: "Resume Grader" },
-                      { icon: Mail, text: "Cover Letter Maker" },
-                      { icon: Calendar, text: "Events" },
-                      { icon: BookOpen, text: "Case Study Preparation" },
-                      { icon: MessageSquare, text: "Interview Preparation" },
-                      { icon: ClipboardList, text: "Application Tracking" },
-                    ].map((item) => (
-                      <div
-                        key={item.text}
-                        className={`flex items-center gap-2 p-2.5 rounded-lg transition-colors duration-500 ${
-                          hoveredSide === "left" 
-                            ? "bg-slate-50 border border-slate-200" 
-                            : "bg-white/5 border border-white/10"
-                        }`}
-                      >
-                        <div className={`w-7 h-7 rounded-md bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center shadow-sm`}>
-                          <item.icon className="w-3.5 h-3.5 text-white" />
-                        </div>
-                        <p className={`text-sm font-medium transition-colors duration-500 ${hoveredSide === "left" ? "text-slate-800" : "text-white"}`}>
-                          {item.text}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className={`p-4 rounded-xl transition-colors duration-500 ${
+                {/* Content - Authentic Student Dashboard */}
+                <div className="p-5 flex-1 flex flex-col">
+                  {/* Job Discovery Interface */}
+                  <div className={`p-3 rounded-xl mb-3 transition-colors duration-500 ${
                     hoveredSide === "left" 
                       ? "bg-slate-50 border border-slate-200" 
                       : "bg-white/5 border border-white/10"
                   }`}>
-                    <div className="flex items-center gap-4">
-                      <div className="relative w-16 h-16">
-                        <svg className="w-16 h-16 -rotate-90">
-                          <circle cx="32" cy="32" r="28" fill="none" strokeWidth="4" stroke={hoveredSide === "left" ? "#e2e8f0" : "rgba(255,255,255,0.2)"} />
-                          <circle
-                            cx="32" cy="32" r="28" fill="none" stroke="url(#gradientStudent)" strokeWidth="4"
-                            strokeLinecap="round" strokeDasharray="176" strokeDashoffset="44"
-                          />
-                          <defs>
-                            <linearGradient id="gradientStudent" x1="0%" y1="0%" x2="100%" y2="0%">
-                              <stop offset="0%" stopColor="#3b82f6" />
-                              <stop offset="100%" stopColor="#2563eb" />
-                            </linearGradient>
-                          </defs>
-                        </svg>
-                        <span className={`absolute inset-0 flex items-center justify-center font-bold text-sm transition-colors duration-500 ${
-                          hoveredSide === "left" ? "text-slate-800" : "text-white"
-                        }`}>75%</span>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Briefcase className={`w-4 h-4 transition-colors duration-500 ${hoveredSide === "left" ? "text-blue-600" : "text-blue-400"}`} />
+                      <span className={`text-xs font-semibold transition-colors duration-500 ${hoveredSide === "left" ? "text-slate-700" : "text-white/80"}`}>Smart Job Discovery</span>
+                    </div>
+                    {/* Job Cards */}
+                    <div className="space-y-2">
+                      {[
+                        { company: "Stripe", role: "Product Intern", match: "94%", logo: "S" },
+                        { company: "Figma", role: "Design Engineer", match: "89%", logo: "F" },
+                      ].map((job) => (
+                        <div key={job.role} className={`flex items-center gap-2 p-2 rounded-lg transition-colors duration-500 ${
+                          hoveredSide === "left" ? "bg-white border border-slate-100" : "bg-white/5 border border-white/5"
+                        }`}>
+                          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xs">
+                            {job.logo}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className={`text-xs font-medium truncate transition-colors duration-500 ${hoveredSide === "left" ? "text-slate-800" : "text-white"}`}>{job.role}</p>
+                            <p className={`text-[10px] transition-colors duration-500 ${hoveredSide === "left" ? "text-slate-500" : "text-white/50"}`}>{job.company}</p>
+                          </div>
+                          <div className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${hoveredSide === "left" ? "bg-emerald-100 text-emerald-700" : "bg-emerald-500/20 text-emerald-300"}`}>
+                            {job.match}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Resume Builder Preview */}
+                  <div className={`p-3 rounded-xl mb-3 transition-colors duration-500 ${
+                    hoveredSide === "left" 
+                      ? "bg-slate-50 border border-slate-200" 
+                      : "bg-white/5 border border-white/10"
+                  }`}>
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <FileText className={`w-4 h-4 transition-colors duration-500 ${hoveredSide === "left" ? "text-blue-600" : "text-blue-400"}`} />
+                        <span className={`text-xs font-semibold transition-colors duration-500 ${hoveredSide === "left" ? "text-slate-700" : "text-white/80"}`}>Resume Builder</span>
                       </div>
-                      <div>
-                        <p className={`font-medium transition-colors duration-500 ${hoveredSide === "left" ? "text-slate-800" : "text-white"}`}>
-                          Career Ready
-                        </p>
-                        <p className={`text-xs transition-colors duration-500 ${hoveredSide === "left" ? "text-slate-500" : "text-white/60"}`}>
-                          3 tasks remaining
-                        </p>
+                      <div className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium ${hoveredSide === "left" ? "bg-amber-100 text-amber-700" : "bg-amber-500/20 text-amber-300"}`}>
+                        <Award className="w-3 h-3" />
+                        Score: 82/100
                       </div>
+                    </div>
+                    {/* Mini Resume Preview */}
+                    <div className={`p-2 rounded-lg transition-colors duration-500 ${hoveredSide === "left" ? "bg-white border border-slate-100" : "bg-white/5 border border-white/5"}`}>
+                      <div className="space-y-1.5">
+                        <div className={`h-2 w-24 rounded transition-colors duration-500 ${hoveredSide === "left" ? "bg-slate-300" : "bg-white/30"}`} />
+                        <div className={`h-1.5 w-full rounded transition-colors duration-500 ${hoveredSide === "left" ? "bg-slate-200" : "bg-white/15"}`} />
+                        <div className={`h-1.5 w-3/4 rounded transition-colors duration-500 ${hoveredSide === "left" ? "bg-slate-200" : "bg-white/15"}`} />
+                        <div className="flex gap-1 mt-2">
+                          <div className={`h-4 w-12 rounded transition-colors duration-500 ${hoveredSide === "left" ? "bg-blue-100" : "bg-blue-500/20"}`} />
+                          <div className={`h-4 w-10 rounded transition-colors duration-500 ${hoveredSide === "left" ? "bg-blue-100" : "bg-blue-500/20"}`} />
+                          <div className={`h-4 w-8 rounded transition-colors duration-500 ${hoveredSide === "left" ? "bg-blue-100" : "bg-blue-500/20"}`} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Application Tracker */}
+                  <div className={`p-3 rounded-xl transition-colors duration-500 ${
+                    hoveredSide === "left" 
+                      ? "bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100" 
+                      : "bg-white/5 border border-white/10"
+                  }`}>
+                    <div className="flex items-center gap-2 mb-2">
+                      <ClipboardList className={`w-4 h-4 transition-colors duration-500 ${hoveredSide === "left" ? "text-blue-600" : "text-blue-400"}`} />
+                      <span className={`text-xs font-semibold transition-colors duration-500 ${hoveredSide === "left" ? "text-slate-700" : "text-white/80"}`}>Application Tracker</span>
+                    </div>
+                    <div className="flex gap-2">
+                      {[
+                        { stage: "Applied", count: 12, color: "blue" },
+                        { stage: "Interview", count: 4, color: "amber" },
+                        { stage: "Offer", count: 1, color: "emerald" },
+                      ].map((item) => (
+                        <div key={item.stage} className="flex-1 text-center">
+                          <div className={`text-lg font-bold transition-colors duration-500 ${
+                            hoveredSide === "left" 
+                              ? item.color === "blue" ? "text-blue-600" : item.color === "amber" ? "text-amber-600" : "text-emerald-600"
+                              : item.color === "blue" ? "text-blue-400" : item.color === "amber" ? "text-amber-400" : "text-emerald-400"
+                          }`}>{item.count}</div>
+                          <div className={`text-[10px] transition-colors duration-500 ${hoveredSide === "left" ? "text-slate-500" : "text-white/50"}`}>{item.stage}</div>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
@@ -397,102 +426,100 @@ const HeroSection = () => {
                   <div className="w-16" />
                 </div>
 
-                {/* Content */}
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="grid grid-cols-2 gap-3 mb-4">
+                {/* Content - Authentic University Analytics Dashboard */}
+                <div className="p-5 flex-1 flex flex-col">
+                  {/* Student Engagement Overview */}
+                  <div className={`p-3 rounded-xl mb-3 transition-colors duration-500 ${
+                    hoveredSide === "right" 
+                      ? "bg-slate-50 border border-slate-200" 
+                      : "bg-white/5 border border-white/10"
+                  }`}>
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <BarChart3 className={`w-4 h-4 transition-colors duration-500 ${hoveredSide === "right" ? "text-blue-600" : "text-blue-400"}`} />
+                        <span className={`text-xs font-semibold transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-700" : "text-white/80"}`}>Student Engagement</span>
+                      </div>
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full transition-colors duration-500 ${hoveredSide === "right" ? "bg-emerald-100 text-emerald-700" : "bg-emerald-500/20 text-emerald-300"}`}>Live</span>
+                    </div>
+                    {/* Activity Heat Timeline */}
+                    <div className="grid grid-cols-7 gap-1 mb-2">
+                      {[75, 45, 80, 90, 60, 30, 85].map((val, i) => (
+                        <div key={i} className={`h-6 rounded transition-colors duration-500`} style={{
+                          backgroundColor: hoveredSide === "right" 
+                            ? `rgba(37, 99, 235, ${val / 100})` 
+                            : `rgba(96, 165, 250, ${val / 100 * 0.6})`
+                        }} />
+                      ))}
+                    </div>
+                    <div className="flex justify-between">
+                      <span className={`text-[10px] transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-500" : "text-white/50"}`}>Mon</span>
+                      <span className={`text-[10px] transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-500" : "text-white/50"}`}>Sun</span>
+                    </div>
+                  </div>
+
+                  {/* Key Metrics Grid */}
+                  <div className="grid grid-cols-3 gap-2 mb-3">
                     {[
-                      { label: "Active", value: "2,847", trend: "+12%" },
-                      { label: "Applications", value: "8,234", trend: "+24%" },
-                      { label: "Interviews", value: "456", trend: "+18%" },
-                      { label: "Placed", value: "189", trend: "+31%" },
-                    ].map((stat) => (
-                      <div
-                        key={stat.label}
-                        className={`p-3 rounded-xl transition-colors duration-500 ${
-                          hoveredSide === "right" 
-                            ? "bg-slate-50 border border-slate-200" 
-                            : "bg-white/5 border border-white/10"
-                        }`}
-                      >
-                        <p className={`text-xl font-bold transition-colors duration-500 ${
-                          hoveredSide === "right" ? "text-slate-800" : "text-white"
-                        }`}>
-                          {stat.value}
-                        </p>
-                        <div className="flex items-center justify-between">
-                          <span className={`text-xs transition-colors duration-500 ${
-                            hoveredSide === "right" ? "text-slate-500" : "text-white/60"
-                          }`}>{stat.label}</span>
-                          <span className="text-xs text-emerald-400 font-medium">{stat.trend}</span>
-                        </div>
+                      { label: "Active Users", value: "2,847", icon: GraduationCap },
+                      { label: "Resumes Built", value: "1,234", icon: FileText },
+                      { label: "Jobs Applied", value: "8,456", icon: Briefcase },
+                    ].map((metric) => (
+                      <div key={metric.label} className={`p-2 rounded-lg text-center transition-colors duration-500 ${
+                        hoveredSide === "right" ? "bg-white border border-slate-100" : "bg-white/5 border border-white/5"
+                      }`}>
+                        <metric.icon className={`w-4 h-4 mx-auto mb-1 transition-colors duration-500 ${hoveredSide === "right" ? "text-blue-600" : "text-blue-400"}`} />
+                        <div className={`text-sm font-bold transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-800" : "text-white"}`}>{metric.value}</div>
+                        <div className={`text-[9px] transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-500" : "text-white/50"}`}>{metric.label}</div>
                       </div>
                     ))}
                   </div>
 
-                  {/* Mini Charts Row */}
-                  <div className="grid grid-cols-2 gap-3 mb-4">
-                    {/* Degree Types Mini Chart */}
-                    <div className={`p-3 rounded-xl transition-colors duration-500 ${
-                      hoveredSide === "right" 
-                        ? "bg-slate-50 border border-slate-200" 
-                        : "bg-white/5 border border-white/10"
-                    }`}>
-                      <div className="flex items-center gap-2 mb-2">
-                        <PieChart className={`w-4 h-4 transition-colors duration-500 ${hoveredSide === "right" ? "text-blue-600" : "text-blue-400"}`} />
-                        <span className={`text-xs font-medium transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-600" : "text-white/70"}`}>By Degree</span>
-                      </div>
-                      <div className="flex items-end gap-1 h-8">
-                        {[65, 45, 30, 20].map((h, i) => (
-                          <div key={i} className={`flex-1 rounded-sm transition-colors duration-500 ${hoveredSide === "right" ? "bg-blue-500" : "bg-blue-400/60"}`} style={{ height: `${h}%` }} />
-                        ))}
-                      </div>
-                      <div className="flex justify-between mt-1">
-                        <span className={`text-[10px] transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-500" : "text-white/50"}`}>CS</span>
-                        <span className={`text-[10px] transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-500" : "text-white/50"}`}>Bus</span>
-                        <span className={`text-[10px] transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-500" : "text-white/50"}`}>Eng</span>
-                        <span className={`text-[10px] transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-500" : "text-white/50"}`}>Other</span>
-                      </div>
+                  {/* Intelligence Insights */}
+                  <div className={`p-3 rounded-xl mb-3 transition-colors duration-500 ${
+                    hoveredSide === "right" 
+                      ? "bg-slate-50 border border-slate-200" 
+                      : "bg-white/5 border border-white/10"
+                  }`}>
+                    <div className="flex items-center gap-2 mb-2">
+                      <TrendingUp className={`w-4 h-4 transition-colors duration-500 ${hoveredSide === "right" ? "text-blue-600" : "text-blue-400"}`} />
+                      <span className={`text-xs font-semibold transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-700" : "text-white/80"}`}>Actionable Insights</span>
                     </div>
-
-                    {/* Monthly Applications */}
-                    <div className={`p-3 rounded-xl transition-colors duration-500 ${
-                      hoveredSide === "right" 
-                        ? "bg-slate-50 border border-slate-200" 
-                        : "bg-white/5 border border-white/10"
-                    }`}>
-                      <div className="flex items-center gap-2 mb-2">
-                        <BarChart3 className={`w-4 h-4 transition-colors duration-500 ${hoveredSide === "right" ? "text-blue-600" : "text-blue-400"}`} />
-                        <span className={`text-xs font-medium transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-600" : "text-white/70"}`}>Apps/Month</span>
-                      </div>
-                      <div className="flex items-end gap-1 h-8">
-                        {[40, 55, 70, 85, 60, 90].map((h, i) => (
-                          <div key={i} className={`flex-1 rounded-sm transition-colors duration-500 ${hoveredSide === "right" ? "bg-emerald-500" : "bg-emerald-400/60"}`} style={{ height: `${h}%` }} />
-                        ))}
-                      </div>
-                      <div className="flex justify-between mt-1">
-                        <span className={`text-[10px] transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-500" : "text-white/50"}`}>Sep</span>
-                        <span className={`text-[10px] transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-500" : "text-white/50"}`}>Feb</span>
-                      </div>
+                    <div className="space-y-2">
+                      {[
+                        { insight: "CS majors need more interview prep", tag: "Action", color: "amber" },
+                        { insight: "Finance internship demand up 40%", tag: "Trend", color: "blue" },
+                      ].map((item) => (
+                        <div key={item.insight} className={`flex items-center gap-2 p-2 rounded-lg transition-colors duration-500 ${
+                          hoveredSide === "right" ? "bg-white border border-slate-100" : "bg-white/5 border border-white/5"
+                        }`}>
+                          <div className={`w-1.5 h-1.5 rounded-full ${item.color === "amber" ? "bg-amber-500" : "bg-blue-500"}`} />
+                          <span className={`text-[11px] flex-1 transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-700" : "text-white/80"}`}>{item.insight}</span>
+                          <span className={`text-[9px] px-1.5 py-0.5 rounded transition-colors duration-500 ${
+                            hoveredSide === "right" 
+                              ? item.color === "amber" ? "bg-amber-100 text-amber-700" : "bg-blue-100 text-blue-700"
+                              : item.color === "amber" ? "bg-amber-500/20 text-amber-300" : "bg-blue-500/20 text-blue-300"
+                          }`}>{item.tag}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
-                  {/* Success Insight */}
-                  <div className={`p-4 rounded-xl transition-colors duration-500 ${
+                  {/* Placement Success Rate */}
+                  <div className={`p-3 rounded-xl transition-colors duration-500 ${
                     hoveredSide === "right" 
-                      ? "bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100" 
+                      ? "bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100" 
                       : "bg-white/5 border border-white/10"
                   }`}>
-                    <div className="flex items-center gap-3">
-                      <TrendingUp className={`w-5 h-5 transition-colors duration-500 ${
-                        hoveredSide === "right" ? "text-blue-600" : "text-blue-400"
-                      }`} />
+                    <div className="flex items-center justify-between">
                       <div>
-                        <p className={`text-sm font-medium transition-colors duration-500 ${
-                          hoveredSide === "right" ? "text-slate-800" : "text-white"
-                        }`}>CS majors: 78% placement rate</p>
-                        <p className={`text-xs transition-colors duration-500 ${
-                          hoveredSide === "right" ? "text-slate-500" : "text-white/60"
-                        }`}>Highest success by degree type</p>
+                        <p className={`text-xs font-medium transition-colors duration-500 ${hoveredSide === "right" ? "text-slate-600" : "text-white/70"}`}>Placement Rate</p>
+                        <p className={`text-xl font-bold transition-colors duration-500 ${hoveredSide === "right" ? "text-emerald-600" : "text-emerald-400"}`}>78.5%</p>
+                      </div>
+                      <div className="relative w-12 h-12">
+                        <svg className="w-12 h-12 -rotate-90">
+                          <circle cx="24" cy="24" r="20" fill="none" strokeWidth="4" stroke={hoveredSide === "right" ? "#d1fae5" : "rgba(16, 185, 129, 0.2)"} />
+                          <circle cx="24" cy="24" r="20" fill="none" stroke={hoveredSide === "right" ? "#10b981" : "#34d399"} strokeWidth="4" strokeLinecap="round" strokeDasharray="126" strokeDashoffset="27" />
+                        </svg>
                       </div>
                     </div>
                   </div>
