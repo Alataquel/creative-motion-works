@@ -57,7 +57,7 @@ const HeroSection = () => {
   const sparkleScale = useTransform(progress, [0.6, 0.8, 0.9], [0.3, 1.2, 1.5]);
 
   return (
-    <section ref={containerRef} className="relative h-[350vh]">
+    <section ref={containerRef} className="relative h-[350vh] bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB]">
       {/* STICKY CONTAINER - Full height runway */}
       <div className="sticky top-0 h-screen overflow-hidden">
         {/* DARK BLUE BACKGROUND - Extended, stays visible throughout - z-10 */}
