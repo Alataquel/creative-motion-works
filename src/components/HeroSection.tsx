@@ -1,4 +1,5 @@
 import { ArrowRight, GraduationCap, Building2, Activity, FileText, Send, TrendingUp } from "lucide-react";
+import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
@@ -43,8 +44,13 @@ const HeroSection = () => {
           <div className="relative grid md:grid-cols-2 gap-4 md:gap-8 items-stretch">
             
             {/* LEFT PANEL - Students */}
-            <div className="relative h-full min-h-[480px]">
-              <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200">
+            <motion.div 
+              className="relative h-full min-h-[480px]"
+              initial={{ rotate: -2 }}
+              whileHover={{ rotate: 0, scale: 1.02, y: -8 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
+              <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200 cursor-pointer">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-red-400" />
@@ -114,11 +120,16 @@ const HeroSection = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* RIGHT PANEL - Universities */}
-            <div className="relative h-full min-h-[480px]">
-              <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200">
+            <motion.div 
+              className="relative h-full min-h-[480px]"
+              initial={{ rotate: 2 }}
+              whileHover={{ rotate: 0, scale: 1.02, y: -8 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
+              <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200 cursor-pointer">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-red-400" />
@@ -174,7 +185,7 @@ const HeroSection = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
