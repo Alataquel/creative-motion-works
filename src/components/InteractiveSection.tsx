@@ -41,7 +41,7 @@ const InteractiveSection = () => {
   const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
 
   return (
-    <section className="py-24 md:py-32 bg-gradient-to-b from-background via-muted/20 to-background relative overflow-hidden">
+    <section className="pt-0 pb-24 md:pb-32 bg-gradient-to-b from-background via-muted/20 to-background relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-1/2 h-full">
         <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-blue-500/5 to-blue-600/5 rounded-full blur-3xl" />
