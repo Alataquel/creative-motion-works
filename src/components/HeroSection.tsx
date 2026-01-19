@@ -87,7 +87,7 @@ const HeroSection = () => {
   return (
     <section 
       ref={sectionRef} 
-      className="relative min-h-screen bg-gradient-to-b from-[#e8f1fc] via-[#f0f6ff] to-white overflow-hidden"
+      className="relative min-h-screen bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB] overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       {/* Floating Particles Background */}
@@ -95,14 +95,14 @@ const HeroSection = () => {
         {particles.map((particle) => (
           <motion.div
             key={particle.id}
-            className="absolute rounded-full bg-blue-400/30"
+            className="absolute rounded-full bg-blue-400"
             style={{
               left: `${particle.x}%`,
               top: `${particle.y}%`,
               width: particle.size,
               height: particle.size,
-              opacity: particle.opacity * 0.5,
-              boxShadow: `0 0 ${particle.size * 2}px ${particle.size}px rgba(37, 99, 235, ${particle.opacity * 0.3})`,
+              opacity: particle.opacity,
+              boxShadow: `0 0 ${particle.size * 2}px ${particle.size}px rgba(96, 165, 250, ${particle.opacity})`,
             }}
             animate={{
               left: `${particle.x}%`,
@@ -124,7 +124,7 @@ const HeroSection = () => {
               const dy = p1.y - p2.y;
               const distance = Math.sqrt(dx * dx + dy * dy);
               if (distance < 12) {
-                const opacity = (1 - distance / 12) * 0.08;
+                const opacity = (1 - distance / 12) * 0.15;
                 return (
                   <line
                     key={`${p1.id}-${p2.id}`}
@@ -132,7 +132,7 @@ const HeroSection = () => {
                     y1={`${p1.y}%`}
                     x2={`${p2.x}%`}
                     y2={`${p2.y}%`}
-                    stroke={`rgba(37, 99, 235, ${opacity})`}
+                    stroke={`rgba(96, 165, 250, ${opacity})`}
                     strokeWidth="1"
                   />
                 );
@@ -146,13 +146,13 @@ const HeroSection = () => {
       {/* Parallax Floating Icons */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[
-          { Icon: Briefcase, x: 8, y: 15, size: 80, speed: 0.3, opacity: 0.06 },
-          { Icon: FileText, x: 85, y: 25, size: 100, speed: 0.5, opacity: 0.05 },
-          { Icon: GraduationCap, x: 15, y: 70, size: 120, speed: 0.2, opacity: 0.06 },
-          { Icon: TrendingUp, x: 75, y: 60, size: 90, speed: 0.4, opacity: 0.05 },
-          { Icon: MessageSquare, x: 45, y: 85, size: 70, speed: 0.6, opacity: 0.06 },
-          { Icon: Calendar, x: 90, y: 80, size: 85, speed: 0.35, opacity: 0.05 },
-          { Icon: Award, x: 5, y: 45, size: 75, speed: 0.45, opacity: 0.055 },
+          { Icon: Briefcase, x: 8, y: 15, size: 80, speed: 0.3, opacity: 0.04 },
+          { Icon: FileText, x: 85, y: 25, size: 100, speed: 0.5, opacity: 0.03 },
+          { Icon: GraduationCap, x: 15, y: 70, size: 120, speed: 0.2, opacity: 0.04 },
+          { Icon: TrendingUp, x: 75, y: 60, size: 90, speed: 0.4, opacity: 0.03 },
+          { Icon: MessageSquare, x: 45, y: 85, size: 70, speed: 0.6, opacity: 0.04 },
+          { Icon: Calendar, x: 90, y: 80, size: 85, speed: 0.35, opacity: 0.03 },
+          { Icon: Award, x: 5, y: 45, size: 75, speed: 0.45, opacity: 0.035 },
         ].map(({ Icon, x, y, size, speed, opacity }, i) => (
           <motion.div
             key={i}
@@ -181,7 +181,7 @@ const HeroSection = () => {
                 stroke: 'currentColor',
                 strokeWidth: 0.5,
               }} 
-              className="text-blue-500"
+              className="text-blue-300"
             />
           </motion.div>
         ))}
@@ -190,14 +190,14 @@ const HeroSection = () => {
       {/* Background effects */}
       <div
         className="absolute top-0 left-1/4 w-[800px] h-[800px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%)" }}
       />
       <div
         className="absolute bottom-0 right-1/4 w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%)" }}
       />
-      <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{
-        backgroundImage: `linear-gradient(rgba(37,99,235,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.3) 1px, transparent 1px)`,
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{
+        backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
         backgroundSize: '50px 50px'
       }} />
 
@@ -205,20 +205,20 @@ const HeroSection = () => {
       <div className="relative z-10 h-full flex flex-col items-center max-w-[1400px] mx-auto px-6 pt-32 pb-16">
         {/* HEADLINE */}
         <div className="text-center mb-6 flex flex-col items-center justify-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight text-[#1e3a5f] text-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight text-white text-center">
             See what students are doing.
           </h1>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight text-center">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#2563EB] via-[#3b82f6] to-[#60a5fa]">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#93c5fd] via-[#60a5fa] to-[#3b82f6]">
               Give them clarity on their journey.
             </span>
           </h1>
         </div>
 
         {/* SUBTITLE */}
-        <p className="text-center text-lg md:text-xl max-w-3xl mx-auto mb-16 leading-relaxed text-slate-500">
+        <p className="text-center text-lg md:text-xl max-w-3xl mx-auto mb-16 leading-relaxed text-white/60">
           ApplyLab brings student career activity into one clear system — helping students stay on track and career teams gain{" "}
-          <span className="text-[#1e3a5f] font-medium">real visibility</span>.
+          <span className="text-white/90 font-medium">real visibility</span>.
         </p>
 
         {/* SPLIT HERO CONTAINER - Full width */}
