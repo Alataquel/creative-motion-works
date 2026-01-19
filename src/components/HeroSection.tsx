@@ -18,13 +18,13 @@ const HeroSection = () => {
       }} />
 
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col justify-center items-center max-w-7xl mx-auto px-6 pt-24 pb-16">
+      <div className="relative z-10 h-full flex flex-col items-center max-w-7xl mx-auto px-6 pt-32 pb-16">
         {/* HEADLINE */}
-        <div className="text-center mb-6">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight text-white">
+        <div className="text-center mb-6 flex flex-col items-center justify-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight text-white text-center">
             See what students are doing.
           </h1>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight text-center">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#93c5fd] via-[#60a5fa] to-[#3b82f6]">
               Give them clarity on their journey.
             </span>
@@ -32,18 +32,18 @@ const HeroSection = () => {
         </div>
 
         {/* SUBTITLE */}
-        <p className="text-center text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed text-white/60">
+        <p className="text-center text-lg md:text-xl max-w-3xl mx-auto mb-16 leading-relaxed text-white/60">
           ApplyLab brings student career activity into one clear system — helping students stay on track and career teams gain{" "}
           <span className="text-white/90 font-medium">real visibility</span>.
         </p>
 
         {/* PANELS CONTAINER */}
-        <div className="relative w-full max-w-6xl mx-auto">
+        <div className="relative w-full max-w-6xl mx-auto mt-8">
           {/* PANELS */}
-          <div className="relative grid md:grid-cols-2 gap-4 md:gap-6 items-stretch">
+          <div className="relative grid md:grid-cols-2 gap-4 md:gap-8 items-stretch">
             
             {/* LEFT PANEL - Students */}
-            <div className="relative h-full">
+            <div className="relative h-full min-h-[480px]">
               <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
                   <div className="flex items-center gap-2">
@@ -117,7 +117,7 @@ const HeroSection = () => {
             </div>
 
             {/* RIGHT PANEL - Universities */}
-            <div className="relative h-full">
+            <div className="relative h-full min-h-[480px]">
               <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
                   <div className="flex items-center gap-2">
