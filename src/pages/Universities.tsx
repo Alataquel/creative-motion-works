@@ -502,11 +502,7 @@ const Universities = () => {
       </section>
 
       {/* Social Proof */}
-      <section className="bg-[#0c1929] py-32 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-blue-600/10 to-transparent rounded-full blur-3xl" />
-        </div>
-
+      <section className="bg-white py-32 relative overflow-hidden">
         <div className="relative z-10 max-w-6xl mx-auto px-6">
           <motion.div 
             className="text-center mb-12"
@@ -514,33 +510,9 @@ const Universities = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10 mb-8">
-              <CheckCircle className="w-5 h-5 text-emerald-400" />
-              <span className="text-white/80 font-medium">Trusted by top universities worldwide</span>
-            </div>
-
-            {/* University Logos */}
-            <div className="flex flex-wrap justify-center items-center gap-8 mb-12">
-              {[
-                { name: "ETH Zürich", country: "Switzerland" },
-                { name: "TU Munich", country: "Germany" },
-                { name: "IE Business School", country: "Spain" },
-                { name: "University of St. Gallen", country: "Switzerland" },
-                { name: "ESADE", country: "Spain" },
-                { name: "LMU Munich", country: "Germany" },
-              ].map((uni, i) => (
-                <motion.div
-                  key={uni.name}
-                  className="px-5 py-3 bg-white/[0.05] rounded-xl border border-white/10 text-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                >
-                  <div className="text-white font-medium text-sm">{uni.name}</div>
-                  <div className="text-white/40 text-xs">{uni.country}</div>
-                </motion.div>
-              ))}
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-100 border border-slate-200 mb-8">
+              <CheckCircle className="w-5 h-5 text-emerald-500" />
+              <span className="text-slate-700 font-medium">Partnered with universities in Germany, Spain and Switzerland</span>
             </div>
 
             {/* Stats */}
@@ -558,8 +530,8 @@ const Universities = () => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 + i * 0.1 }}
                 >
-                  <div className="text-4xl font-display font-bold text-blue-400 mb-1">{stat.value}</div>
-                  <div className="text-white/50 text-sm">{stat.label}</div>
+                  <div className="text-4xl font-display font-bold text-blue-600 mb-1">{stat.value}</div>
+                  <div className="text-slate-500 text-sm">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -573,13 +545,13 @@ const Universities = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="absolute -top-8 left-1/2 -translate-x-1/2">
-              <Quote className="w-16 h-16 text-blue-500/20" />
+              <Quote className="w-16 h-16 text-blue-200" />
             </div>
             
             <div className="text-center max-w-4xl mx-auto">
-              <p className="text-3xl md:text-4xl lg:text-5xl font-display text-white leading-tight mb-12">
+              <p className="text-3xl md:text-4xl lg:text-5xl font-display text-slate-800 leading-tight mb-12">
                 "ApplyLab gave us visibility we never had before.
-                <span className="text-blue-400"> Now we can actually help students before they fall behind.</span>"
+                <span className="text-blue-600"> Now we can actually help students before they fall behind.</span>"
               </p>
               
               <div className="flex items-center justify-center gap-6">
@@ -592,8 +564,8 @@ const Universities = () => {
                       <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <p className="text-white font-medium text-lg">Dr. Maria Keller</p>
-                  <p className="text-white/50">Director of Career Services • ETH Zürich</p>
+                  <p className="text-slate-800 font-medium text-lg">Dr. Maria Keller</p>
+                  <p className="text-slate-500">Director of Career Services • TU Munich</p>
                 </div>
               </div>
             </div>
