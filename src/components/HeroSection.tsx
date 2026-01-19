@@ -80,11 +80,7 @@ const HeroSection = () => {
           }} />
         </div>
 
-        {/* WHITE BACKGROUND - Fades in at very end - z-0 (BELOW panels) */}
-        <motion.div 
-          className="absolute inset-0 bg-white z-0" 
-          style={{ opacity: bgWhiteOpacity }} 
-        />
+        {/* WHITE BACKGROUND REMOVED - Dark blue stays throughout */}
 
         {/* CONTENT LAYER - z-20 to stay above blue bg */}
         <div className="relative z-20 h-full flex flex-col justify-center items-center max-w-7xl mx-auto px-6">
