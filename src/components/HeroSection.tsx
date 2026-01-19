@@ -24,9 +24,9 @@ const HeroSection = () => {
       }} />
 
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col items-center max-w-7xl mx-auto px-6 pt-32 pb-16">
+      <div className="relative z-10 h-full flex flex-col items-center justify-center max-w-7xl mx-auto px-6 pt-28 pb-12">
         {/* HEADLINE */}
-        <div className="text-center mb-6 flex flex-col items-center justify-center">
+        <div className="text-center mb-4 flex flex-col items-center justify-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight text-white text-center">
             See what students are doing.
           </h1>
@@ -38,15 +38,15 @@ const HeroSection = () => {
         </div>
 
         {/* SUBTITLE */}
-        <p className="text-center text-lg md:text-xl max-w-3xl mx-auto mb-16 leading-relaxed text-white/60">
+        <p className="text-center text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed text-white/60">
           ApplyLab brings student career activity into one clear system — helping students stay on track and career teams gain{" "}
           <span className="text-white/90 font-medium">real visibility</span>.
         </p>
 
         {/* SPLIT HERO CONTAINER */}
-        <div className="relative w-full max-w-6xl mx-auto mt-8">
+        <div className="relative w-full max-w-6xl mx-auto mt-4">
           <div 
-            className="relative flex flex-col md:flex-row gap-4 md:gap-0 items-stretch min-h-[520px]"
+            className="relative flex flex-col md:flex-row gap-4 md:gap-0 items-stretch min-h-[580px]"
             onMouseLeave={() => setHoveredSide(null)}
           >
             {/* LEFT PANEL - Students */}
