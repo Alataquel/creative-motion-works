@@ -1,12 +1,87 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { ArrowRight, GraduationCap, Building2, TrendingUp, Briefcase, FileText, Mail, Calendar, BookOpen, MessageSquare, ClipboardList, Award, BarChart3, PieChart, Rocket } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 type HoveredSide = "left" | "right" | null;
 
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+  baseX: number;
+  baseY: number;
+  size: number;
+  opacity: number;
+  speed: number;
+}
+
+const PARTICLE_COUNT = 40;
+
 const HeroSection = () => {
   const [hoveredSide, setHoveredSide] = useState<HoveredSide>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [particles, setParticles] = useState<Particle[]>([]);
+  
+  // Initialize particles
+  useEffect(() => {
+    const initialParticles: Particle[] = [];
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const x = Math.random() * 100;
+      const y = Math.random() * 100;
+      initialParticles.push({
+        id: i,
+        x,
+        y,
+        baseX: x,
+        baseY: y,
+        size: Math.random() * 3 + 1,
+        opacity: Math.random() * 0.4 + 0.1,
+        speed: Math.random() * 0.5 + 0.2,
+      });
+    }
+    setParticles(initialParticles);
+  }, []);
+  
+  // Handle mouse movement for particle repulsion
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    if (!sectionRef.current) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setMousePos({ x, y });
+  }, []);
+  
+  // Update particles based on mouse position
+  useEffect(() => {
+    if (particles.length === 0) return;
+    
+    const repulsionRadius = 15; // percentage
+    const repulsionStrength = 8;
+    
+    setParticles(prev => prev.map(particle => {
+      const dx = particle.baseX - mousePos.x;
+      const dy = particle.baseY - mousePos.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      if (distance < repulsionRadius && distance > 0) {
+        const force = (repulsionRadius - distance) / repulsionRadius;
+        const angle = Math.atan2(dy, dx);
+        return {
+          ...particle,
+          x: particle.baseX + Math.cos(angle) * force * repulsionStrength,
+          y: particle.baseY + Math.sin(angle) * force * repulsionStrength,
+        };
+      }
+      
+      // Gradually return to base position
+      return {
+        ...particle,
+        x: particle.x + (particle.baseX - particle.x) * 0.1,
+        y: particle.y + (particle.baseY - particle.y) * 0.1,
+      };
+    }));
+  }, [mousePos, particles.length]);
   
   // Scroll progress tracking
   const { scrollYProgress } = useScroll({
@@ -26,7 +101,64 @@ const HeroSection = () => {
   }, [progressValue]);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB] overflow-hidden">
+    <section 
+      ref={sectionRef} 
+      className="relative min-h-screen bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB] overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Floating Particles Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {particles.map((particle) => (
+          <motion.div
+            key={particle.id}
+            className="absolute rounded-full bg-blue-400"
+            style={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              width: particle.size,
+              height: particle.size,
+              opacity: particle.opacity,
+              boxShadow: `0 0 ${particle.size * 2}px ${particle.size}px rgba(96, 165, 250, ${particle.opacity})`,
+            }}
+            animate={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              damping: 20,
+            }}
+          />
+        ))}
+        
+        {/* Connection lines between nearby particles */}
+        <svg className="absolute inset-0 w-full h-full">
+          {particles.map((p1, i) => 
+            particles.slice(i + 1).map((p2) => {
+              const dx = p1.x - p2.x;
+              const dy = p1.y - p2.y;
+              const distance = Math.sqrt(dx * dx + dy * dy);
+              if (distance < 12) {
+                const opacity = (1 - distance / 12) * 0.15;
+                return (
+                  <line
+                    key={`${p1.id}-${p2.id}`}
+                    x1={`${p1.x}%`}
+                    y1={`${p1.y}%`}
+                    x2={`${p2.x}%`}
+                    y2={`${p2.y}%`}
+                    stroke={`rgba(96, 165, 250, ${opacity})`}
+                    strokeWidth="1"
+                  />
+                );
+              }
+              return null;
+            })
+          )}
+        </svg>
+      </div>
+
       {/* Background effects */}
       <div
         className="absolute top-0 left-1/4 w-[800px] h-[800px] rounded-full pointer-events-none"
@@ -40,6 +172,60 @@ const HeroSection = () => {
         backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
         backgroundSize: '50px 50px'
       }} />
+      
+      {/* STICKY CAREER READINESS SIDEBAR */}
+      <motion.div 
+        className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden lg:block"
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
+      >
+        <div className="relative p-3 rounded-2xl bg-[#0c1929]/90 backdrop-blur-xl border border-white/10 shadow-2xl">
+          <div className="flex flex-col items-center gap-3">
+            {/* Icon */}
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center shadow-lg shadow-blue-500/20">
+              <Rocket className={`w-5 h-5 transition-all duration-500 ${displayProgress >= 100 ? "text-white rotate-45" : "text-white"}`} />
+            </div>
+            
+            {/* Vertical Progress Bar */}
+            <div className="relative h-40 w-3 bg-white/10 rounded-full overflow-hidden">
+              <motion.div
+                className={`absolute bottom-0 left-0 right-0 rounded-full transition-colors duration-500 ${
+                  displayProgress >= 100 
+                    ? "bg-gradient-to-t from-emerald-500 to-emerald-400" 
+                    : "bg-gradient-to-t from-[#2563EB] to-[#3B82F6]"
+                }`}
+                style={{ height: `${displayProgress}%` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+              </motion.div>
+              
+              {/* Milestone dots */}
+              {[0, 25, 50, 75, 100].map((milestone) => (
+                <div 
+                  key={milestone}
+                  className={`absolute left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                    displayProgress >= milestone 
+                      ? displayProgress >= 100 ? "bg-emerald-400 shadow-emerald-400/50" : "bg-white shadow-white/50" 
+                      : "bg-white/20"
+                  }`}
+                  style={{ bottom: `${milestone}%`, boxShadow: displayProgress >= milestone ? '0 0 6px currentColor' : 'none' }}
+                />
+              ))}
+            </div>
+            
+            {/* Percentage */}
+            <div className="text-center">
+              <span className={`text-sm font-bold transition-colors duration-300 ${
+                displayProgress >= 100 ? "text-emerald-400" : "text-[#3B82F6]"
+              }`}>
+                {displayProgress >= 100 ? "Ready!" : `${displayProgress}%`}
+              </span>
+              <p className="text-[10px] text-white/40 mt-0.5">Career</p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center max-w-7xl mx-auto px-6 pt-32 pb-16">
@@ -60,86 +246,6 @@ const HeroSection = () => {
           ApplyLab brings student career activity into one clear system — helping students stay on track and career teams gain{" "}
           <span className="text-white/90 font-medium">real visibility</span>.
         </p>
-
-        {/* CAREER READINESS PROGRESS BAR */}
-        <motion.div 
-          className="w-full max-w-2xl mx-auto mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-        >
-          <div className="relative p-4 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center">
-                  <Rocket className="w-4 h-4 text-white" />
-                </div>
-                <span className="text-sm font-semibold text-white">Career Readiness</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className={`text-lg font-bold transition-colors duration-300 ${
-                  displayProgress >= 100 ? "text-emerald-400" : "text-[#3B82F6]"
-                }`}>
-                  {displayProgress >= 100 ? "Ready!" : `${displayProgress}%`}
-                </span>
-              </div>
-            </div>
-            
-            {/* Progress bar track */}
-            <div className="h-3 bg-white/10 rounded-full overflow-hidden relative">
-              {/* Animated shimmer overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" 
-                   style={{ backgroundSize: '200% 100%' }} />
-              
-              {/* Progress fill */}
-              <motion.div
-                className={`h-full rounded-full relative overflow-hidden transition-colors duration-500 ${
-                  displayProgress >= 100 
-                    ? "bg-gradient-to-r from-emerald-500 to-emerald-400" 
-                    : "bg-gradient-to-r from-[#2563EB] to-[#3B82F6]"
-                }`}
-                style={{ width: `${displayProgress}%` }}
-              >
-                {/* Inner glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/20" />
-              </motion.div>
-            </div>
-            
-            {/* Milestone markers */}
-            <div className="flex justify-between mt-2 px-1">
-              {[0, 25, 50, 75, 100].map((milestone) => (
-                <div 
-                  key={milestone} 
-                  className={`flex flex-col items-center transition-all duration-300 ${
-                    displayProgress >= milestone ? "opacity-100" : "opacity-40"
-                  }`}
-                >
-                  <div className={`w-1.5 h-1.5 rounded-full mb-1 transition-colors duration-300 ${
-                    displayProgress >= milestone 
-                      ? displayProgress >= 100 ? "bg-emerald-400" : "bg-[#3B82F6]" 
-                      : "bg-white/30"
-                  }`} />
-                  <span className={`text-[10px] font-medium transition-colors duration-300 ${
-                    displayProgress >= milestone ? "text-white/80" : "text-white/40"
-                  }`}>
-                    {milestone === 100 ? "Ready" : `${milestone}%`}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          {/* Scroll hint */}
-          {displayProgress < 100 && (
-            <motion.p 
-              className="text-center text-xs text-white/40 mt-3"
-              animate={{ opacity: [0.4, 0.7, 0.4] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              Scroll down to complete your journey ↓
-            </motion.p>
-          )}
-        </motion.div>
 
         {/* SPLIT HERO CONTAINER */}
         <div className="relative w-full max-w-6xl mx-auto mt-8">
