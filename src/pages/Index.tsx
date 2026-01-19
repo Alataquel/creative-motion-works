@@ -4,13 +4,11 @@ import InteractiveSection from "@/components/InteractiveSection";
 import SharedBenefitsSection from "@/components/SharedBenefitsSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
-import GlobalProgressSidebar from "@/components/GlobalProgressSidebar";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Navbar />
-      <GlobalProgressSidebar />
       <HeroSection />
       <InteractiveSection />
       <SharedBenefitsSection />
