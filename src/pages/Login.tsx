@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/applylab-logo.png";
 
 const Login = () => {
   const [staffEmail, setStaffEmail] = useState("");
@@ -27,18 +28,29 @@ const Login = () => {
       {/* Back button - fixed */}
       <Link
         to="/"
-        className="fixed top-6 left-6 z-50 inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors bg-[#0a1628]/50 backdrop-blur-sm px-4 py-2 rounded-full"
+        className="fixed top-6 left-6 z-50 inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors bg-slate-900/50 backdrop-blur-sm px-4 py-2 rounded-full"
       >
         <ArrowLeft className="w-4 h-4" />
         Back
       </Link>
 
-      {/* Left side - University Staff (Dark Blue) */}
+      {/* Logo - centered at top */}
+      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
+        <Link to="/">
+          <img 
+            src={logo} 
+            alt="ApplyLab" 
+            className="h-10 brightness-0 invert drop-shadow-lg"
+          />
+        </Link>
+      </div>
+
+      {/* Left side - University Staff (Dark Blue matching landing) */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-1/2 bg-[#0a1628] flex items-center justify-center p-8"
+        className="w-1/2 bg-gradient-to-br from-[#0c1929] via-[#1e3a5f] to-[#2563EB] flex items-center justify-center p-8"
       >
         <div className="w-full max-w-sm">
           <h1 className="text-3xl font-display font-bold text-white text-center mb-10">
@@ -52,7 +64,7 @@ const Login = () => {
                 placeholder="Staff email"
                 value={staffEmail}
                 onChange={(e) => setStaffEmail(e.target.value)}
-                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-white/40 text-white placeholder-white/60 focus:border-white focus:outline-none transition-colors"
+                className="w-full px-5 py-3.5 rounded-full bg-white/10 border-2 border-white/30 text-white placeholder-white/60 focus:border-white focus:outline-none transition-colors backdrop-blur-sm"
               />
             </div>
 
@@ -62,7 +74,7 @@ const Login = () => {
                 placeholder="Password"
                 value={staffPassword}
                 onChange={(e) => setStaffPassword(e.target.value)}
-                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-white/40 text-white placeholder-white/60 focus:border-white focus:outline-none transition-colors pr-12"
+                className="w-full px-5 py-3.5 rounded-full bg-white/10 border-2 border-white/30 text-white placeholder-white/60 focus:border-white focus:outline-none transition-colors pr-12 backdrop-blur-sm"
               />
               <button
                 type="button"
@@ -75,7 +87,7 @@ const Login = () => {
 
             <motion.button
               type="submit"
-              className="w-full py-3.5 rounded-full bg-white text-[#2563EB] font-semibold hover:bg-white/90 transition-colors"
+              className="w-full py-3.5 rounded-full bg-white text-blue-600 font-semibold hover:bg-white/90 transition-colors shadow-lg shadow-blue-500/20"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -106,7 +118,7 @@ const Login = () => {
         className="w-1/2 bg-white flex items-center justify-center p-8"
       >
         <div className="w-full max-w-sm">
-          <h1 className="text-3xl font-display font-bold text-[#2563EB] text-center mb-10">
+          <h1 className="text-3xl font-display font-bold text-blue-600 text-center mb-10">
             Students
           </h1>
 
@@ -117,7 +129,7 @@ const Login = () => {
                 placeholder="Email"
                 value={studentEmail}
                 onChange={(e) => setStudentEmail(e.target.value)}
-                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#2563EB] focus:outline-none transition-colors"
+                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-slate-200 text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors"
               />
             </div>
 
@@ -127,12 +139,12 @@ const Login = () => {
                 placeholder="Password"
                 value={studentPassword}
                 onChange={(e) => setStudentPassword(e.target.value)}
-                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#2563EB] focus:outline-none transition-colors pr-12"
+                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-slate-200 text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors pr-12"
               />
               <button
                 type="button"
                 onClick={() => setStudentShowPassword(!studentShowPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
               >
                 {studentShowPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
@@ -140,7 +152,7 @@ const Login = () => {
 
             <motion.button
               type="submit"
-              className="w-full py-3.5 rounded-full bg-[#2563EB] text-white font-semibold hover:bg-[#2563EB]/90 transition-colors"
+              className="w-full py-3.5 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/25"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -148,9 +160,9 @@ const Login = () => {
             </motion.button>
           </form>
 
-          <p className="text-center text-gray-500 mt-6">
+          <p className="text-center text-slate-500 mt-6">
             Don't have an account yet?{" "}
-            <a href="#" className="text-[#2563EB] font-semibold hover:underline">
+            <a href="#" className="text-blue-600 font-semibold hover:underline">
               Sign Up
             </a>
           </p>
