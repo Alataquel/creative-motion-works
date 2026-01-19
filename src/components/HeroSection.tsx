@@ -11,44 +11,46 @@ const HeroSection = () => {
     offset: ["start start", "end end"]
   });
 
-  // Smooth spring
-  const springConfig = { stiffness: 50, damping: 20, mass: 0.8 };
+  // Tight spring for snappy convergence
+  const springConfig = { stiffness: 80, damping: 20, mass: 0.6 };
   const progress = useSpring(scrollYProgress, springConfig);
 
-  // ===== FALLING LEAF ANIMATION =====
-  // Scroll DOWN = Panels fall DOWN off screen while twirling
-  // Scroll UP = Panels rise UP back into view
+  // ===== COIL & CONVERGE ANIMATION =====
+  // Panels move DOWN while converging INWARD toward center
+  // They overlap and "snap" together, then morph into tab buttons
 
-  // STRONG DOWNWARD MOVEMENT - Primary motion is DOWN
-  const panelY = useTransform(progress, [0, 0.3, 0.6], [0, 400, 1000]); // Falls off bottom
+  // SHARED DOWNWARD MOVEMENT - Both panels descend together
+  const panelY = useTransform(progress, [0, 0.4, 0.7], [0, 300, 600]);
 
-  // LEFT PANEL - Drifts slightly left while falling
-  const leftX = useTransform(progress, [0, 0.3, 0.6], [0, -80, -150]);
-  const leftRotateY = useTransform(progress, [0, 0.3, 0.6], [0, 25, 60]);
-  const leftRotateZ = useTransform(progress, [0, 0.6], [0, -20]);
-  const leftScale = useTransform(progress, [0, 0.3, 0.6], [1, 0.75, 0.5]);
+  // LEFT PANEL - Moves RIGHT toward center (converging)
+  const leftX = useTransform(progress, [0, 0.35, 0.6, 0.7], [0, 100, 200, 250]); // Toward center
+  const leftRotateY = useTransform(progress, [0, 0.3, 0.5, 0.7], [0, 15, 8, 0]); // Spiral then flatten
+  const leftRotateZ = useTransform(progress, [0, 0.35, 0.7], [0, -12, 0]); // Tilt then straighten
+  const leftScale = useTransform(progress, [0, 0.4, 0.7], [1, 0.85, 0.8]); // Slight shrink
 
-  // RIGHT PANEL - Drifts slightly right while falling
-  const rightX = useTransform(progress, [0, 0.3, 0.6], [0, 80, 150]);
-  const rightRotateY = useTransform(progress, [0, 0.3, 0.6], [0, -25, -60]);
-  const rightRotateZ = useTransform(progress, [0, 0.6], [0, 20]);
-  const rightScale = useTransform(progress, [0, 0.3, 0.6], [1, 0.75, 0.5]);
+  // RIGHT PANEL - Moves LEFT toward center (converging)
+  const rightX = useTransform(progress, [0, 0.35, 0.6, 0.7], [0, -100, -200, -250]); // Toward center
+  const rightRotateY = useTransform(progress, [0, 0.3, 0.5, 0.7], [0, -15, -8, 0]); // Spiral then flatten
+  const rightRotateZ = useTransform(progress, [0, 0.35, 0.7], [0, 12, 0]); // Tilt then straighten
+  const rightScale = useTransform(progress, [0, 0.4, 0.7], [1, 0.85, 0.8]); // Slight shrink
 
-  // OPACITY - Fade out as they exit viewport (by 60%)
-  const panelOpacity = useTransform(progress, [0, 0.2, 0.5, 0.6], [1, 0.9, 0.4, 0]);
+  // OPACITY - Panels stay visible until they overlap, then fade for morph
+  const panelOpacity = useTransform(progress, [0, 0.5, 0.65, 0.75], [1, 1, 0.8, 0]);
 
-  // Scroll indicator fades and bounces faster
-  const scrollIndicatorOpacity = useTransform(progress, [0, 0.1], [1, 0]);
+  // SPARKLE at overlap point
+  const sparkleOpacity = useTransform(progress, [0.5, 0.6, 0.7, 0.8], [0, 1, 1, 0]);
+  const sparkleScale = useTransform(progress, [0.5, 0.65, 0.75], [0.5, 1.2, 1.5]);
 
-  // Background transitions to white after panels exit
-  const bgWhiteOpacity = useTransform(progress, [0.55, 0.8], [0, 1]);
+  // Background transition - synced with panel exit
+  const bgWhiteOpacity = useTransform(progress, [0.65, 0.85], [0, 1]);
 
-  // Headline color transition
-  const headlineColor = useTransform(progress, [0.6, 0.8], ["#ffffff", "#1e293b"]);
-  const subtitleOpacity = useTransform(progress, [0, 0.25], [1, 0]);
+  // Headline transitions
+  const headlineColor = useTransform(progress, [0.7, 0.9], ["#ffffff", "#1e293b"]);
+  const headlineScale = useTransform(progress, [0, 0.5], [1, 1.08]);
+  const subtitleOpacity = useTransform(progress, [0, 0.3], [1, 0]);
 
-  // Subtle headline zoom as panels fall away
-  const headlineScale = useTransform(progress, [0, 0.4], [1, 1.05]);
+  // Scroll indicator
+  const scrollIndicatorOpacity = useTransform(progress, [0, 0.08], [1, 0]);
 
   return (
     <section ref={containerRef} className="relative h-[300vh]">
@@ -78,7 +80,7 @@ const HeroSection = () => {
         <motion.div className="absolute inset-0 bg-white" style={{ opacity: bgWhiteOpacity }} />
 
         <div className="relative z-10 h-full flex flex-col justify-center items-center max-w-7xl mx-auto px-6">
-          {/* HEADLINE - Stays pinned with subtle zoom */}
+          {/* HEADLINE - Stays pinned with zoom effect */}
           <motion.div 
             className="text-center mb-6 relative z-30"
             style={{ scale: headlineScale }}
@@ -106,7 +108,7 @@ const HeroSection = () => {
                   style={{
                     backgroundImage: useTransform(
                       progress,
-                      [0.6, 0.8],
+                      [0.7, 0.9],
                       [
                         "linear-gradient(to right, #93c5fd, #60a5fa, #3b82f6)",
                         "linear-gradient(to right, #3b82f6, #2563eb, #1d4ed8)"
@@ -120,7 +122,7 @@ const HeroSection = () => {
             </div>
           </motion.div>
 
-          {/* SUBTITLE - Fades as panels descend */}
+          {/* SUBTITLE */}
           <motion.p
             className="text-center text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed relative z-30 text-white/60"
             style={{ opacity: subtitleOpacity }}
@@ -132,14 +134,54 @@ const HeroSection = () => {
             <span className="text-white/90 font-medium">real visibility</span>.
           </motion.p>
 
-          {/* PANELS CONTAINER - Falls downward */}
+          {/* PANELS CONTAINER */}
           <div
             className="relative w-full max-w-6xl mx-auto z-20"
-            style={{ perspective: 1000 }}
+            style={{ perspective: 1200 }}
           >
+            {/* SPARKLE/GLOW at convergence point */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none"
+              style={{ 
+                opacity: sparkleOpacity, 
+                scale: sparkleScale,
+                y: panelY
+              }}
+            >
+              {/* Central glow burst */}
+              <div
+                className="w-64 h-64 rounded-full"
+                style={{
+                  background: "radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(96, 165, 250, 0.6) 25%, rgba(59, 130, 246, 0.3) 50%, transparent 70%)",
+                  boxShadow: "0 0 120px 60px rgba(255, 255, 255, 0.5), 0 0 200px 100px rgba(59, 130, 246, 0.4)",
+                }}
+              />
+              {/* Sparkle particles */}
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute top-1/2 left-1/2 w-2 h-2 bg-white rounded-full"
+                  style={{
+                    x: Math.cos((i * Math.PI) / 4) * 80 - 4,
+                    y: Math.sin((i * Math.PI) / 4) * 80 - 4,
+                  }}
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.8, 1, 0.8],
+                  }}
+                  transition={{
+                    duration: 1,
+                    delay: i * 0.1,
+                    repeat: Infinity,
+                  }}
+                />
+              ))}
+            </motion.div>
+
+            {/* PANELS - Converge toward center */}
             <div className="relative grid md:grid-cols-2 gap-4 md:gap-6 items-stretch" style={{ transformStyle: 'preserve-3d' }}>
               
-              {/* LEFT PANEL - Falls down and drifts left */}
+              {/* LEFT PANEL - Moves RIGHT toward center */}
               <motion.div
                 className="relative h-full"
                 style={{
@@ -150,6 +192,7 @@ const HeroSection = () => {
                   scale: leftScale,
                   opacity: panelOpacity,
                   transformStyle: 'preserve-3d',
+                  transformOrigin: 'right center',
                 }}
               >
                 <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200">
@@ -237,7 +280,7 @@ const HeroSection = () => {
                 </div>
               </motion.div>
 
-              {/* RIGHT PANEL - Falls down and drifts right */}
+              {/* RIGHT PANEL - Moves LEFT toward center */}
               <motion.div
                 className="relative h-full"
                 style={{
@@ -248,6 +291,7 @@ const HeroSection = () => {
                   scale: rightScale,
                   opacity: panelOpacity,
                   transformStyle: 'preserve-3d',
+                  transformOrigin: 'left center',
                 }}
               >
                 <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200">
@@ -325,7 +369,7 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* SCROLL INDICATOR - Fades out */}
+          {/* SCROLL INDICATOR */}
           <motion.div
             className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-30"
             style={{ opacity: scrollIndicatorOpacity }}
