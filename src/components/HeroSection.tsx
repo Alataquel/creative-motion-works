@@ -86,16 +86,16 @@ const HeroSection = () => {
           {/* Dashboard glow */}
           <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-blue-400/20 to-blue-600/20 rounded-3xl blur-2xl opacity-50" />
           
-          {/* Split container */}
-          <div className="relative grid md:grid-cols-2 gap-4 md:gap-6">
+          {/* Split container - equal height with grid */}
+          <div className="relative grid md:grid-cols-2 gap-4 md:gap-6 items-stretch">
             {/* Left: Student Side */}
             <motion.div
-              className="relative cursor-pointer group"
+              className="relative cursor-pointer group h-full"
               onMouseEnter={() => setHoveredSide('student')}
               onMouseLeave={() => setHoveredSide(null)}
               animate={{
                 scale: hoveredSide === 'student' ? 1.02 : hoveredSide === 'university' ? 0.98 : 1,
-                opacity: hoveredSide === 'university' ? 0.6 : 1,
+                opacity: hoveredSide === 'university' ? 0.7 : 1,
               }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
@@ -106,84 +106,43 @@ const HeroSection = () => {
                 transition={{ duration: 0.3 }}
               />
               
-              <motion.div
-                className="relative rounded-2xl overflow-hidden shadow-2xl transition-all duration-500"
-                animate={{
-                  backgroundColor: hoveredSide === 'student' ? 'rgba(255,255,255,1)' : 'rgba(12,25,41,0.9)',
-                }}
-                transition={{ duration: 0.4 }}
-              >
+              <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200">
                 {/* Header */}
-                <div 
-                  className="flex items-center justify-between px-5 py-4 border-b transition-colors duration-400"
-                  style={{
-                    borderColor: hoveredSide === 'student' ? 'rgba(226,232,240,1)' : 'rgba(255,255,255,0.05)',
-                    backgroundColor: hoveredSide === 'student' ? 'rgba(248,250,252,1)' : 'rgba(255,255,255,0.02)'
-                  }}
-                >
+                <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
                   <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-red-400" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                    <div className="w-3 h-3 rounded-full bg-green-400" />
                   </div>
-                  <motion.div 
-                    className="flex items-center gap-2 px-4 py-1.5 rounded-full transition-colors duration-400"
-                    style={{
-                      backgroundColor: hoveredSide === 'student' ? 'rgba(37,99,235,0.1)' : 'rgba(255,255,255,0.05)'
-                    }}
-                  >
-                    <GraduationCap 
-                      className="w-4 h-4 transition-colors duration-400"
-                      style={{ color: hoveredSide === 'student' ? '#2563EB' : '#60a5fa' }}
-                    />
-                    <span 
-                      className="text-sm font-semibold transition-colors duration-400"
-                      style={{ color: hoveredSide === 'student' ? '#1e293b' : 'rgba(255,255,255,0.8)' }}
-                    >
-                      For Students
-                    </span>
-                  </motion.div>
+                  <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100">
+                    <GraduationCap className="w-4 h-4 text-blue-600" />
+                    <span className="text-sm font-semibold text-slate-800">For Students</span>
+                  </div>
                   <div className="w-16" />
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
+                <div className="p-6 flex-1 flex flex-col">
                   {/* Activity stream */}
                   <div className="space-y-3 mb-4">
                     {[
-                      { icon: FileText, text: "Resume uploaded", time: "2m ago", color: "from-blue-400 to-blue-500" },
-                      { icon: Send, text: "Applied to Google", time: "1h ago", color: "from-blue-500 to-blue-600" },
-                      { icon: Activity, text: "Interview prep complete", time: "3h ago", color: "from-blue-600 to-blue-700" },
+                      { icon: FileText, text: "Resume uploaded", time: "2m ago", color: "from-blue-500 to-blue-600" },
+                      { icon: Send, text: "Applied to Google", time: "1h ago", color: "from-blue-600 to-blue-700" },
+                      { icon: Activity, text: "Interview prep complete", time: "3h ago", color: "from-indigo-500 to-indigo-600" },
                     ].map((item, i) => (
                       <motion.div
                         key={item.text}
-                        className="flex items-center gap-3 p-3 rounded-xl transition-all duration-400"
-                        style={{
-                          backgroundColor: hoveredSide === 'student' ? 'rgba(241,245,249,1)' : 'rgba(255,255,255,0.03)',
-                          borderWidth: '1px',
-                          borderStyle: 'solid',
-                          borderColor: hoveredSide === 'student' ? 'rgba(226,232,240,1)' : 'rgba(255,255,255,0.05)'
-                        }}
+                        className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.8 + i * 0.1 }}
                       >
-                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center`}>
+                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center shadow-sm`}>
                           <item.icon className="w-4 h-4 text-white" />
                         </div>
                         <div className="flex-1">
-                          <p 
-                            className="text-sm font-medium transition-colors duration-400"
-                            style={{ color: hoveredSide === 'student' ? '#1e293b' : 'white' }}
-                          >
-                            {item.text}
-                          </p>
-                          <p 
-                            className="text-xs transition-colors duration-400"
-                            style={{ color: hoveredSide === 'student' ? '#64748b' : 'rgba(255,255,255,0.4)' }}
-                          >
-                            {item.time}
-                          </p>
+                          <p className="text-sm font-medium text-slate-800">{item.text}</p>
+                          <p className="text-xs text-slate-500">{item.time}</p>
                         </div>
                       </motion.div>
                     ))}
@@ -191,13 +150,7 @@ const HeroSection = () => {
 
                   {/* Progress ring */}
                   <motion.div
-                    className="p-4 rounded-xl transition-all duration-400"
-                    style={{
-                      backgroundColor: hoveredSide === 'student' ? 'rgba(241,245,249,1)' : 'rgba(255,255,255,0.02)',
-                      borderWidth: '1px',
-                      borderStyle: 'solid',
-                      borderColor: hoveredSide === 'student' ? 'rgba(226,232,240,1)' : 'rgba(255,255,255,0.05)'
-                    }}
+                    className="p-4 rounded-xl bg-slate-50 border border-slate-200"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.2 }}
@@ -207,10 +160,10 @@ const HeroSection = () => {
                         <svg className="w-16 h-16 -rotate-90">
                           <circle 
                             cx="32" cy="32" r="28" fill="none" strokeWidth="4"
-                            stroke={hoveredSide === 'student' ? 'rgba(226,232,240,1)' : 'rgba(255,255,255,0.1)'}
+                            stroke="#e2e8f0"
                           />
                           <motion.circle
-                            cx="32" cy="32" r="28" fill="none" stroke="url(#gradient)" strokeWidth="4"
+                            cx="32" cy="32" r="28" fill="none" stroke="url(#gradientStudent)" strokeWidth="4"
                             strokeLinecap="round"
                             strokeDasharray="176"
                             initial={{ strokeDashoffset: 176 }}
@@ -218,46 +171,27 @@ const HeroSection = () => {
                             transition={{ delay: 1.4, duration: 1, ease: "easeOut" }}
                           />
                           <defs>
-                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <linearGradient id="gradientStudent" x1="0%" y1="0%" x2="100%" y2="0%">
                               <stop offset="0%" stopColor="#3b82f6" />
                               <stop offset="100%" stopColor="#2563eb" />
                             </linearGradient>
                           </defs>
                         </svg>
-                        <span 
-                          className="absolute inset-0 flex items-center justify-center font-bold text-sm transition-colors duration-400"
-                          style={{ color: hoveredSide === 'student' ? '#1e293b' : 'white' }}
-                        >
-                          75%
-                        </span>
+                        <span className="absolute inset-0 flex items-center justify-center font-bold text-sm text-slate-800">75%</span>
                       </div>
                       <div>
-                        <p 
-                          className="font-medium transition-colors duration-400"
-                          style={{ color: hoveredSide === 'student' ? '#1e293b' : 'white' }}
-                        >
-                          Career Ready
-                        </p>
-                        <p 
-                          className="text-xs transition-colors duration-400"
-                          style={{ color: hoveredSide === 'student' ? '#64748b' : 'rgba(255,255,255,0.4)' }}
-                        >
-                          3 tasks remaining
-                        </p>
+                        <p className="font-medium text-slate-800">Career Ready</p>
+                        <p className="text-xs text-slate-500">3 tasks remaining</p>
                       </div>
                     </div>
                   </motion.div>
 
+                  {/* Spacer to push button to bottom */}
+                  <div className="flex-1" />
+
                   {/* CTA Button */}
                   <motion.button
-                    className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm group transition-all duration-400"
-                    style={{
-                      backgroundColor: hoveredSide === 'student' ? '#2563EB' : 'rgba(37,99,235,0.2)',
-                      color: hoveredSide === 'student' ? 'white' : 'rgba(255,255,255,0.9)',
-                      borderWidth: '1px',
-                      borderStyle: 'solid',
-                      borderColor: hoveredSide === 'student' ? '#2563EB' : 'rgba(59,130,246,0.3)'
-                    }}
+                    className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm group bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -266,17 +200,17 @@ const HeroSection = () => {
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </motion.button>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
 
             {/* Right: University/Career Team Side */}
             <motion.div
-              className="relative cursor-pointer group"
+              className="relative cursor-pointer group h-full"
               onMouseEnter={() => setHoveredSide('university')}
               onMouseLeave={() => setHoveredSide(null)}
               animate={{
                 scale: hoveredSide === 'university' ? 1.02 : hoveredSide === 'student' ? 0.98 : 1,
-                opacity: hoveredSide === 'student' ? 0.6 : 1,
+                opacity: hoveredSide === 'student' ? 0.7 : 1,
               }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
@@ -287,48 +221,23 @@ const HeroSection = () => {
                 transition={{ duration: 0.3 }}
               />
               
-              <motion.div
-                className="relative rounded-2xl overflow-hidden shadow-2xl transition-all duration-500"
-                animate={{
-                  backgroundColor: hoveredSide === 'university' ? 'rgba(255,255,255,1)' : 'rgba(12,25,41,0.9)',
-                }}
-                transition={{ duration: 0.4 }}
-              >
+              <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col border border-slate-200">
                 {/* Header */}
-                <div 
-                  className="flex items-center justify-between px-5 py-4 border-b transition-colors duration-400"
-                  style={{
-                    borderColor: hoveredSide === 'university' ? 'rgba(226,232,240,1)' : 'rgba(255,255,255,0.05)',
-                    backgroundColor: hoveredSide === 'university' ? 'rgba(248,250,252,1)' : 'rgba(255,255,255,0.02)'
-                  }}
-                >
+                <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
                   <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-red-400" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                    <div className="w-3 h-3 rounded-full bg-green-400" />
                   </div>
-                  <motion.div 
-                    className="flex items-center gap-2 px-4 py-1.5 rounded-full transition-colors duration-400"
-                    style={{
-                      backgroundColor: hoveredSide === 'university' ? 'rgba(37,99,235,0.1)' : 'rgba(255,255,255,0.05)'
-                    }}
-                  >
-                    <Building2 
-                      className="w-4 h-4 transition-colors duration-400"
-                      style={{ color: hoveredSide === 'university' ? '#2563EB' : '#60a5fa' }}
-                    />
-                    <span 
-                      className="text-sm font-semibold transition-colors duration-400"
-                      style={{ color: hoveredSide === 'university' ? '#1e293b' : 'rgba(255,255,255,0.8)' }}
-                    >
-                      For Universities
-                    </span>
-                  </motion.div>
+                  <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100">
+                    <Building2 className="w-4 h-4 text-blue-600" />
+                    <span className="text-sm font-semibold text-slate-800">For Universities</span>
+                  </div>
                   <div className="w-16" />
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
+                <div className="p-6 flex-1 flex flex-col">
                   {/* Stats grid */}
                   <div className="grid grid-cols-2 gap-3 mb-4">
                     {[
@@ -339,20 +248,13 @@ const HeroSection = () => {
                     ].map((stat, i) => (
                       <motion.div
                         key={stat.label}
-                        className="p-3 rounded-xl transition-all duration-400"
-                        style={{
-                          backgroundColor: hoveredSide === 'university' ? 'rgba(241,245,249,1)' : 'rgba(255,255,255,0.03)',
-                          borderWidth: '1px',
-                          borderStyle: 'solid',
-                          borderColor: hoveredSide === 'university' ? 'rgba(226,232,240,1)' : 'rgba(255,255,255,0.05)'
-                        }}
+                        className="p-3 rounded-xl bg-slate-50 border border-slate-200"
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.9 + i * 0.08 }}
                       >
                         <motion.p
-                          className="text-xl font-bold transition-colors duration-400"
-                          style={{ color: hoveredSide === 'university' ? '#1e293b' : 'white' }}
+                          className="text-xl font-bold text-slate-800"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ delay: 1.1 + i * 0.08 }}
@@ -360,13 +262,8 @@ const HeroSection = () => {
                           {stat.value}
                         </motion.p>
                         <div className="flex items-center justify-between">
-                          <span 
-                            className="text-xs transition-colors duration-400"
-                            style={{ color: hoveredSide === 'university' ? '#64748b' : 'rgba(255,255,255,0.4)' }}
-                          >
-                            {stat.label}
-                          </span>
-                          <span className="text-xs text-emerald-500 font-medium">{stat.trend}</span>
+                          <span className="text-xs text-slate-500">{stat.label}</span>
+                          <span className="text-xs text-emerald-600 font-medium">{stat.trend}</span>
                         </div>
                       </motion.div>
                     ))}
@@ -374,45 +271,26 @@ const HeroSection = () => {
 
                   {/* Insight bar */}
                   <motion.div
-                    className="p-4 rounded-xl transition-all duration-400"
-                    style={{
-                      background: hoveredSide === 'university' 
-                        ? 'linear-gradient(to right, rgba(37,99,235,0.08), rgba(59,130,246,0.08))'
-                        : 'linear-gradient(to right, rgba(37,99,235,0.1), rgba(59,130,246,0.1))',
-                      borderWidth: '1px',
-                      borderStyle: 'solid',
-                      borderColor: hoveredSide === 'university' ? 'rgba(37,99,235,0.2)' : 'rgba(59,130,246,0.2)'
-                    }}
+                    className="p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1.3 }}
                   >
                     <div className="flex items-center gap-3">
-                      <TrendingUp className="w-5 h-5 text-blue-500" />
+                      <TrendingUp className="w-5 h-5 text-blue-600" />
                       <div>
-                        <p 
-                          className="text-sm font-medium transition-colors duration-400"
-                          style={{ color: hoveredSide === 'university' ? '#1e293b' : 'white' }}
-                        >
-                          Engagement up 24% this week
-                        </p>
-                        <p 
-                          className="text-xs transition-colors duration-400"
-                          style={{ color: hoveredSide === 'university' ? '#64748b' : 'rgba(255,255,255,0.4)' }}
-                        >
-                          Compared to last week
-                        </p>
+                        <p className="text-sm font-medium text-slate-800">Engagement up 24% this week</p>
+                        <p className="text-xs text-slate-500">Compared to last week</p>
                       </div>
                     </div>
                   </motion.div>
 
+                  {/* Spacer to push button to bottom */}
+                  <div className="flex-1" />
+
                   {/* CTA Button */}
                   <motion.button
-                    className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm group transition-all duration-400"
-                    style={{
-                      backgroundColor: hoveredSide === 'university' ? '#2563EB' : 'rgba(255,255,255,1)',
-                      color: hoveredSide === 'university' ? 'white' : '#2563EB',
-                    }}
+                    className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm group bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -421,7 +299,7 @@ const HeroSection = () => {
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </motion.button>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
           </div>
 
@@ -432,8 +310,8 @@ const HeroSection = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.5, duration: 0.5 }}
           >
-            <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 animate-pulse" />
+            <div className="w-12 h-12 rounded-full bg-white shadow-lg border border-slate-200 flex items-center justify-center">
+              <div className="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 animate-pulse" />
             </div>
           </motion.div>
         </motion.div>
