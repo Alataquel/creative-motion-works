@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { 
   GraduationCap, 
   Building2, 
@@ -12,444 +12,401 @@ import {
   CheckCircle, 
   Activity,
   Target,
-  Briefcase,
-  MessageSquare,
-  Star,
   BookOpen,
-  Globe
+  Globe,
+  Star,
+  Quote
 } from "lucide-react";
 
 const studentFeatures = [
-  { icon: Search, title: "Smart Job Discovery", desc: "AI-matched opportunities tailored to your skills" },
-  { icon: FileText, title: "Resume Building", desc: "Get real-time feedback to stand out" },
-  { icon: Send, title: "Application Tracking", desc: "Know where every application stands" },
-  { icon: BookOpen, title: "Case Study Prep", desc: "Master consulting & finance case interviews" },
-  { icon: Globe, title: "Global Events", desc: "Discover career fairs & networking worldwide" },
-  { icon: TrendingUp, title: "Progress Insights", desc: "See your growth over time" },
+  { 
+    icon: Search, 
+    title: "Smart Job Discovery", 
+    desc: "AI-matched opportunities tailored to your skills and career goals",
+    detail: "Our intelligent matching algorithm analyzes your profile, skills, and preferences to surface the most relevant opportunities from thousands of listings."
+  },
+  { 
+    icon: FileText, 
+    title: "Resume Building", 
+    desc: "Get real-time feedback to stand out from the crowd",
+    detail: "Build ATS-optimized resumes with instant feedback on formatting, keywords, and impact statements."
+  },
+  { 
+    icon: Send, 
+    title: "Application Tracking", 
+    desc: "Know where every application stands at a glance",
+    detail: "Never lose track of an application again. Visual pipeline shows you exactly where you are in each process."
+  },
+  { 
+    icon: BookOpen, 
+    title: "Case Study Prep", 
+    desc: "Master consulting & finance case interviews",
+    detail: "Interactive case library with frameworks, practice problems, and AI-powered feedback on your solutions."
+  },
+  { 
+    icon: Globe, 
+    title: "Global Events", 
+    desc: "Discover career fairs & networking worldwide",
+    detail: "Curated calendar of recruiting events, info sessions, and networking opportunities tailored to your interests."
+  },
+  { 
+    icon: TrendingUp, 
+    title: "Progress Insights", 
+    desc: "See your growth over time with detailed analytics",
+    detail: "Track your career readiness score, skill development, and activity trends with beautiful visualizations."
+  },
 ];
 
 const staffFeatures = [
-  { icon: Users, title: "Cohort Engagement", desc: "See who's active and who needs support" },
-  { icon: Activity, title: "Activity Tracking", desc: "Real-time visibility into student actions" },
-  { icon: BarChart3, title: "Application Funnel", desc: "Track applications to placements" },
-  { icon: Target, title: "Material Quality", desc: "Monitor resume and prep quality" },
-  { icon: TrendingUp, title: "Outcome Analytics", desc: "Connect actions to results" },
+  { 
+    icon: Users, 
+    title: "Cohort Engagement", 
+    desc: "See who's active and who needs support",
+    detail: "Real-time dashboard showing student engagement levels, helping you identify and support students who may be falling behind."
+  },
+  { 
+    icon: Activity, 
+    title: "Activity Tracking", 
+    desc: "Real-time visibility into student actions",
+    detail: "Comprehensive activity feeds showing resume updates, applications submitted, and events attended."
+  },
+  { 
+    icon: BarChart3, 
+    title: "Application Funnel", 
+    desc: "Track applications to placements",
+    detail: "Visual funnel analytics from initial applications through interviews to final placements."
+  },
+  { 
+    icon: Target, 
+    title: "Material Quality", 
+    desc: "Monitor resume and prep quality",
+    detail: "Aggregate quality scores across your cohort with drill-down into individual student materials."
+  },
+  { 
+    icon: TrendingUp, 
+    title: "Outcome Analytics", 
+    desc: "Connect actions to results",
+    detail: "Correlation analysis showing which activities drive the best placement outcomes."
+  },
 ];
 
 const InteractiveSection = () => {
   const [activeTab, setActiveTab] = useState<"students" | "staff">("students");
-  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  const features = activeTab === "students" ? studentFeatures : staffFeatures;
 
   return (
-    <section className="pt-0 pb-24 md:pb-32 bg-gradient-to-b from-background via-muted/20 to-background relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-1/2 h-full">
-        <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-blue-500/5 to-blue-600/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-40 w-72 h-72 bg-gradient-to-br from-blue-400/5 to-blue-500/5 rounded-full blur-3xl" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Section header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <motion.span
-            className="inline-block px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary rounded-full border border-primary/20 mb-4"
-          >
-            One Platform, Two Experiences
-          </motion.span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground mb-4">
-            Built for everyone in the{" "}
-            <span className="text-gradient">career journey</span>
-          </h2>
-        </motion.div>
-
-        {/* Interactive layout */}
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
-          {/* Left navigation */}
+    <section ref={sectionRef} className="relative overflow-hidden">
+      {/* Full-width Header Section */}
+      <div className="bg-gradient-to-b from-background via-muted/20 to-background py-24">
+        <div className="max-w-7xl mx-auto px-6">
           <motion.div
-            className="lg:w-72 flex-shrink-0"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="sticky top-32 space-y-4">
-              {/* Students tab */}
-              <motion.button
-                className={`w-full relative group text-left p-6 rounded-2xl border transition-all duration-300 ${
-                  activeTab === "students"
-                    ? "bg-[#2563EB] text-white border-transparent shadow-xl shadow-blue-500/25"
-                    : "bg-white border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 shadow-sm"
-                }`}
-                onClick={() => setActiveTab("students")}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div className="flex items-center gap-4">
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                    activeTab === "students" 
-                      ? "bg-white/20" 
-                      : "bg-blue-100 group-hover:bg-blue-200"
-                  }`}>
-                    <GraduationCap className={`w-6 h-6 ${
-                      activeTab === "students" ? "text-white" : "text-blue-600"
-                    }`} />
-                  </div>
-                  <div>
-                    <h3 className={`font-display font-bold text-lg ${
-                      activeTab === "students" ? "text-white" : "text-foreground"
-                    }`}>Students</h3>
-                    <p className={`text-sm ${
-                      activeTab === "students" ? "text-white/80" : "text-muted-foreground"
-                    }`}>Your journey, one view</p>
-                  </div>
-                </div>
-                
-                {/* Active indicator */}
-                <motion.div
-                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 rounded-r-full bg-blue-600"
-                  initial={{ height: 0 }}
-                  animate={{ height: activeTab === "students" ? 40 : 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.button>
-
-              {/* Staff tab */}
-              <motion.button
-                className={`w-full relative group text-left p-6 rounded-2xl border transition-all duration-300 ${
-                  activeTab === "staff"
-                    ? "bg-[#2563EB] text-white border-transparent shadow-xl shadow-blue-500/25"
-                    : "bg-white border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 shadow-sm"
-                }`}
-                onClick={() => setActiveTab("staff")}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div className="flex items-center gap-4">
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                    activeTab === "staff" 
-                      ? "bg-white/20" 
-                      : "bg-blue-100 group-hover:bg-blue-200"
-                  }`}>
-                    <Building2 className={`w-6 h-6 ${
-                      activeTab === "staff" ? "text-white" : "text-blue-600"
-                    }`} />
-                  </div>
-                  <div>
-                    <h3 className={`font-display font-bold text-lg ${
-                      activeTab === "staff" ? "text-white" : "text-foreground"
-                    }`}>Career Teams</h3>
-                    <p className={`text-sm ${
-                      activeTab === "staff" ? "text-white/80" : "text-muted-foreground"
-                    }`}>Real visibility, real insight</p>
-                  </div>
-                </div>
-                
-                <motion.div
-                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 rounded-r-full bg-blue-600"
-                  initial={{ height: 0 }}
-                  animate={{ height: activeTab === "staff" ? 40 : 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.button>
-
-              {/* Trust indicator */}
-              <motion.div
-                className="pt-6 mt-6 border-t border-border"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-              >
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <CheckCircle className="w-4 h-4 text-emerald-500" />
-                  <span>Trusted by universities</span>
-                </div>
-              </motion.div>
-            </div>
+            <motion.span
+              className="inline-block px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary rounded-full border border-primary/20 mb-6"
+            >
+              One Platform, Two Experiences
+            </motion.span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6">
+              Built for everyone in the{" "}
+              <span className="bg-gradient-to-r from-[#2563EB] to-[#3B82F6] bg-clip-text text-transparent">
+                career journey
+              </span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Whether you're a student navigating your path or a career team guiding the way, ApplyLab brings clarity to every step.
+            </p>
           </motion.div>
 
-          {/* Right content panel */}
-          <div className="flex-1 min-h-[600px]">
-            <AnimatePresence mode="wait">
-              {activeTab === "students" ? (
-                <motion.div
-                  key="students"
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="h-full"
-                >
-                  {/* Student panel header */}
-                  <div className="mb-8">
-                    <motion.h3
-                      className="text-2xl md:text-3xl font-display font-bold text-foreground mb-3"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 }}
-                    >
-                    Your journey in{" "}
-                      <span className="bg-gradient-to-r from-[#2563EB] to-[#3B82F6] bg-clip-text text-transparent">
-                        one view
-                      </span>
-                    </motion.h3>
-                    <motion.p
-                      className="text-muted-foreground text-lg"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.15 }}
-                    >
-                      Discover jobs, build better materials, and track your progress — all in one place.
-                    </motion.p>
-                  </div>
+          {/* Tab Selector - Centered */}
+          <div className="flex justify-center gap-4 mb-12">
+            <motion.button
+              className={`relative group px-8 py-4 rounded-2xl border transition-all duration-300 ${
+                activeTab === "students"
+                  ? "bg-[#2563EB] text-white border-transparent shadow-xl shadow-blue-500/25"
+                  : "bg-white border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 shadow-sm"
+              }`}
+              onClick={() => setActiveTab("students")}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <div className="flex items-center gap-3">
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                  activeTab === "students" ? "bg-white/20" : "bg-blue-100"
+                }`}>
+                  <GraduationCap className={`w-6 h-6 ${activeTab === "students" ? "text-white" : "text-blue-600"}`} />
+                </div>
+                <div className="text-left">
+                  <h3 className={`font-display font-bold text-lg ${activeTab === "students" ? "text-white" : "text-foreground"}`}>
+                    For Students
+                  </h3>
+                  <p className={`text-sm ${activeTab === "students" ? "text-white/80" : "text-muted-foreground"}`}>
+                    Your journey, one view
+                  </p>
+                </div>
+              </div>
+            </motion.button>
 
-                  {/* Student dashboard mockup - matching dark blue design */}
+            <motion.button
+              className={`relative group px-8 py-4 rounded-2xl border transition-all duration-300 ${
+                activeTab === "staff"
+                  ? "bg-[#2563EB] text-white border-transparent shadow-xl shadow-blue-500/25"
+                  : "bg-white border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 shadow-sm"
+              }`}
+              onClick={() => setActiveTab("staff")}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <div className="flex items-center gap-3">
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                  activeTab === "staff" ? "bg-white/20" : "bg-blue-100"
+                }`}>
+                  <Building2 className={`w-6 h-6 ${activeTab === "staff" ? "text-white" : "text-blue-600"}`} />
+                </div>
+                <div className="text-left">
+                  <h3 className={`font-display font-bold text-lg ${activeTab === "staff" ? "text-white" : "text-foreground"}`}>
+                    For Career Teams
+                  </h3>
+                  <p className={`text-sm ${activeTab === "staff" ? "text-white/80" : "text-muted-foreground"}`}>
+                    Real visibility, real insight
+                  </p>
+                </div>
+              </div>
+            </motion.button>
+          </div>
+        </div>
+      </div>
+
+      {/* Full-Width Scroll-Triggered Feature Journey */}
+      <div className="bg-gradient-to-br from-[#0c1929] via-[#1e3a5f] to-[#2563EB] relative">
+        {/* Parallax background decorations */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div 
+            className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-full blur-3xl"
+            style={{ y: useTransform(scrollYProgress, [0, 1], [0, -100]) }}
+          />
+          <motion.div 
+            className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-gradient-to-br from-blue-400/10 to-blue-500/5 rounded-full blur-3xl"
+            style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]) }}
+          />
+        </div>
+
+        <div className="relative z-10 py-24">
+          {/* Section Title */}
+          <motion.div 
+            className="text-center mb-20 px-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
+              {activeTab === "students" ? "Your journey in " : "See what your students are "}
+              <span className="bg-gradient-to-r from-[#93c5fd] via-[#60a5fa] to-[#3b82f6] bg-clip-text text-transparent">
+                {activeTab === "students" ? "one view" : "actually doing"}
+              </span>
+            </h3>
+            <p className="text-xl text-white/60 max-w-2xl mx-auto">
+              {activeTab === "students" 
+                ? "Discover jobs, build better materials, and track your progress — all in one place."
+                : "Track engagement, activity, and outcomes across your entire cohort."}
+            </p>
+          </motion.div>
+
+          {/* Vertical Scroll-Triggered Features */}
+          <div className="max-w-6xl mx-auto px-6 space-y-32">
+            {features.map((feature, i) => (
+              <motion.div
+                key={feature.title}
+                className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+                initial={{ opacity: 0, y: 80 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {/* Content - alternating sides */}
+                <div className={`${i % 2 === 1 ? "lg:order-2" : ""}`}>
                   <motion.div
-                    className="relative bg-gradient-to-br from-[#0c1929] to-[#2563EB] rounded-3xl border border-[#2563EB]/20 p-6 md:p-8 overflow-hidden"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.2 }}
+                    className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center mb-8 shadow-2xl shadow-blue-500/30"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
                   >
-                    {/* Background glow */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#2563EB]/20 to-[#2563EB]/10 rounded-full blur-3xl" />
-
-                    <div className="relative z-10">
-                      {/* Progress bar */}
-                      <motion.div
-                        className="mb-8"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                      >
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium text-white/80">Career Readiness</span>
-                          <span className="text-sm font-bold text-[#3B82F6]">78%</span>
-                        </div>
-                        <div className="h-3 bg-white/10 rounded-full overflow-hidden">
-                          <motion.div
-                            className="h-full bg-gradient-to-r from-[#2563EB] to-[#3B82F6] rounded-full"
-                            initial={{ width: 0 }}
-                            animate={{ width: "78%" }}
-                            transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
-                          />
-                        </div>
-                      </motion.div>
-
-                      {/* Feature cards */}
-                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {studentFeatures.map((feature, i) => (
-                          <motion.div
-                            key={feature.title}
-                            className="relative p-5 bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/10 cursor-pointer group"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 + i * 0.08 }}
-                            onMouseEnter={() => setHoveredFeature(i)}
-                            onMouseLeave={() => setHoveredFeature(null)}
-                            whileHover={{ 
-                              y: -5, 
-                              borderColor: "rgba(37,99,235,0.4)",
-                              backgroundColor: "rgba(255,255,255,0.05)"
-                            }}
-                          >
-                            <motion.div
-                              className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2563EB]/20 to-[#2563EB]/10 border border-[#2563EB]/20 flex items-center justify-center mb-3 group-hover:from-[#2563EB] group-hover:to-[#3B82F6] transition-all duration-300"
-                            >
-                              <feature.icon className="w-5 h-5 text-[#3B82F6] group-hover:text-white transition-colors" />
-                            </motion.div>
-                            <h4 className="font-semibold text-white mb-1">{feature.title}</h4>
-                            <p className="text-sm text-white/50">{feature.desc}</p>
-
-                            {/* Hover indicator */}
-                            <motion.div
-                              className="absolute bottom-0 left-4 right-4 h-1 bg-gradient-to-r from-[#2563EB] to-[#3B82F6] rounded-full"
-                              initial={{ scaleX: 0 }}
-                              animate={{ scaleX: hoveredFeature === i ? 1 : 0 }}
-                              transition={{ duration: 0.2 }}
-                            />
-                          </motion.div>
-                        ))}
-                      </div>
-
-                      {/* Student testimonial */}
-                      <motion.div
-                        className="mt-6 p-5 bg-white/[0.03] rounded-2xl border border-white/10"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.8 }}
-                      >
-                        <div className="flex items-start gap-4">
-                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
-                            JD
-                          </div>
-                          <div>
-                            <div className="flex items-center gap-2 mb-1">
-                              {[...Array(5)].map((_, i) => (
-                                <Star key={i} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
-                              ))}
-                            </div>
-                            <p className="text-sm text-white/80 italic">
-                              "Finally, I can see my whole career journey in one place. Game changer."
-                            </p>
-                            <p className="text-xs text-white/50 mt-1">— Computer Science, Class of 2025</p>
-                          </div>
-                        </div>
-                      </motion.div>
-                    </div>
+                    <feature.icon className="w-10 h-10 text-white" />
                   </motion.div>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="staff"
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="h-full"
+                  
+                  <h4 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+                    {feature.title}
+                  </h4>
+                  <p className="text-xl text-white/70 mb-6">
+                    {feature.desc}
+                  </p>
+                  <p className="text-lg text-white/50 leading-relaxed">
+                    {feature.detail}
+                  </p>
+                </div>
+
+                {/* Visual Card */}
+                <motion.div 
+                  className={`${i % 2 === 1 ? "lg:order-1" : ""}`}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300 }}
                 >
-                  {/* Staff panel header */}
-                  <div className="mb-8">
-                    <motion.h3
-                      className="text-2xl md:text-3xl font-display font-bold text-foreground mb-3"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 }}
-                    >
-                    See what your students are{" "}
-                      <span className="bg-gradient-to-r from-[#2563EB] to-[#3B82F6] bg-clip-text text-transparent">
-                        actually doing
-                      </span>
-                    </motion.h3>
-                    <motion.p
-                      className="text-muted-foreground text-lg"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.15 }}
-                    >
-                      Track engagement, activity, and outcomes across your entire cohort.
-                    </motion.p>
-                  </div>
-
-                  {/* Staff dashboard mockup */}
-                  <motion.div
-                    className="relative bg-gradient-to-br from-[#0c1929] to-[#2563EB] rounded-3xl border border-[#2563EB]/20 p-6 md:p-8 overflow-hidden"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    {/* Background glow */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#2563EB]/20 to-[#2563EB]/10 rounded-full blur-3xl" />
-
+                  <div className="relative p-8 bg-white/[0.05] backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden">
+                    {/* Glow effect */}
+                    <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-2xl" />
+                    
+                    {/* Mock UI */}
                     <div className="relative z-10">
-                      {/* Stats row */}
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                        {[
-                          { label: "Active Students", value: "2,847", trend: "+12%" },
-                          { label: "Applications", value: "8,234", trend: "+24%" },
-                          { label: "Interviews", value: "1,456", trend: "+18%" },
-                          { label: "Placements", value: "892", trend: "+31%" },
-                        ].map((stat, i) => (
-                          <motion.div
-                            key={stat.label}
-                            className="p-4 rounded-xl bg-white/[0.05] border border-white/10"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 + i * 0.08 }}
-                            whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.08)" }}
+                      <div className="flex items-center gap-2 mb-6">
+                        <div className="w-3 h-3 rounded-full bg-red-400/60" />
+                        <div className="w-3 h-3 rounded-full bg-yellow-400/60" />
+                        <div className="w-3 h-3 rounded-full bg-green-400/60" />
+                      </div>
+                      
+                      <div className="space-y-4">
+                        {[...Array(3)].map((_, j) => (
+                          <motion.div 
+                            key={j}
+                            className="h-12 bg-white/[0.08] rounded-xl flex items-center px-4 gap-3"
+                            initial={{ width: "60%" }}
+                            whileInView={{ width: `${70 + j * 10}%` }}
+                            transition={{ delay: 0.2 + j * 0.1, duration: 0.5 }}
                           >
-                            <motion.p
-                              className="text-2xl font-bold text-white"
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              transition={{ delay: 0.5 + i * 0.08 }}
-                            >
-                              {stat.value}
-                            </motion.p>
-                            <div className="flex items-center justify-between mt-1">
-                              <span className="text-xs text-white/50">{stat.label}</span>
-                              <span className="text-xs text-emerald-400">{stat.trend}</span>
+                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500/30 to-blue-600/30" />
+                            <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+                              <motion.div 
+                                className="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full"
+                                initial={{ width: 0 }}
+                                whileInView={{ width: `${60 + j * 15}%` }}
+                                transition={{ delay: 0.4 + j * 0.1, duration: 0.8 }}
+                              />
                             </div>
                           </motion.div>
                         ))}
                       </div>
-
-                      {/* Feature cards */}
-                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {staffFeatures.map((feature, i) => (
-                          <motion.div
-                            key={feature.title}
-                            className="relative p-5 bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/10 cursor-pointer group"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 + i * 0.08 }}
-                            onMouseEnter={() => setHoveredFeature(i + 10)}
-                            onMouseLeave={() => setHoveredFeature(null)}
-                            whileHover={{ 
-                              y: -5, 
-                              borderColor: "rgba(37,99,235,0.4)",
-                              backgroundColor: "rgba(255,255,255,0.05)"
-                            }}
-                          >
-                            <motion.div
-                              className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-500/20 flex items-center justify-center mb-3 group-hover:from-blue-500 group-hover:to-blue-600 transition-all duration-300"
-                            >
-                              <feature.icon className="w-5 h-5 text-blue-400 group-hover:text-white transition-colors" />
-                            </motion.div>
-                            <h4 className="font-semibold text-white mb-1">{feature.title}</h4>
-                            <p className="text-sm text-white/50">{feature.desc}</p>
-
-                            <motion.div
-                              className="absolute bottom-0 left-4 right-4 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"
-                              initial={{ scaleX: 0 }}
-                              animate={{ scaleX: hoveredFeature === i + 10 ? 1 : 0 }}
-                              transition={{ duration: 0.2 }}
-                            />
-                          </motion.div>
-                        ))}
-                      </div>
-
-                      {/* Activity chart placeholder */}
-                      <motion.div
-                        className="mt-6 p-5 bg-white/[0.03] rounded-2xl border border-white/10"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1 }}
-                      >
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="text-white font-medium">Weekly Activity</span>
-                          <span className="text-emerald-400 text-sm">↑ 24% vs last week</span>
-                        </div>
-                        <div className="flex items-end gap-2 h-20">
-                          {[40, 65, 45, 80, 60, 75, 90].map((height, i) => (
-                            <motion.div
-                              key={i}
-                              className="flex-1 bg-gradient-to-t from-blue-500 to-blue-400 rounded-t"
-                              initial={{ height: 0 }}
-                              animate={{ height: `${height}%` }}
-                              transition={{ delay: 1.1 + i * 0.05, duration: 0.5, ease: "easeOut" }}
+                      
+                      <div className="mt-6 flex items-center justify-between">
+                        <span className="text-sm text-white/40">Feature {i + 1} of {features.length}</span>
+                        <div className="flex items-center gap-1">
+                          {[...Array(features.length)].map((_, j) => (
+                            <div 
+                              key={j} 
+                              className={`w-2 h-2 rounded-full transition-colors ${j === i ? "bg-blue-400" : "bg-white/20"}`}
                             />
                           ))}
                         </div>
-                        <div className="flex justify-between mt-2 text-xs text-white/40">
-                          <span>Mon</span>
-                          <span>Tue</span>
-                          <span>Wed</span>
-                          <span>Thu</span>
-                          <span>Fri</span>
-                          <span>Sat</span>
-                          <span>Sun</span>
-                        </div>
-                      </motion.div>
+                      </div>
                     </div>
-                  </motion.div>
+                  </div>
                 </motion.div>
-              )}
-            </AnimatePresence>
+              </motion.div>
+            ))}
           </div>
+        </div>
+      </div>
+
+      {/* Full-Width Social Proof Section */}
+      <div className="bg-[#0c1929] py-32 relative overflow-hidden">
+        {/* Background decorations */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-blue-600/10 to-transparent rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-gradient-to-br from-blue-500/10 to-transparent rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative z-10 max-w-6xl mx-auto px-6">
+          {/* Trust indicators */}
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10 mb-8">
+              <CheckCircle className="w-5 h-5 text-emerald-400" />
+              <span className="text-white/80 font-medium">Trusted by leading universities worldwide</span>
+            </div>
+            
+            {/* University logos placeholder */}
+            <div className="flex justify-center items-center gap-12 opacity-40">
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="w-24 h-12 bg-white/10 rounded-lg flex items-center justify-center">
+                  <span className="text-white/50 text-xs font-medium">University</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Hero Testimonial */}
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="absolute -top-8 left-1/2 -translate-x-1/2">
+              <Quote className="w-16 h-16 text-blue-500/20" />
+            </div>
+            
+            <div className="text-center max-w-4xl mx-auto">
+              <p className="text-3xl md:text-4xl lg:text-5xl font-display text-white leading-tight mb-12">
+                "Finally, I can see my whole career journey in one place. 
+                <span className="text-blue-400"> ApplyLab changed everything</span> about how I approach my job search."
+              </p>
+              
+              <div className="flex items-center justify-center gap-6">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-xl shadow-blue-500/30">
+                  JD
+                </div>
+                <div className="text-left">
+                  <div className="flex items-center gap-2 mb-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <p className="text-white font-medium text-lg">Jessica Davis</p>
+                  <p className="text-white/50">Computer Science, Class of 2025 • Stanford University</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Stats row */}
+          <motion.div 
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 pt-16 border-t border-white/10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            {[
+              { value: "50,000+", label: "Students empowered" },
+              { value: "200+", label: "University partners" },
+              { value: "92%", label: "Placement rate" },
+              { value: "4.9/5", label: "Student satisfaction" },
+            ].map((stat, i) => (
+              <div key={stat.label} className="text-center">
+                <motion.p 
+                  className="text-4xl md:text-5xl font-display font-bold text-white mb-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                >
+                  {stat.value}
+                </motion.p>
+                <p className="text-white/50">{stat.label}</p>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
