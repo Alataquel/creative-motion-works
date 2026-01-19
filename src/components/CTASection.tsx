@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, GraduationCap, Building2, Star } from "lucide-react";
+import { ArrowRight, GraduationCap, Building2, Star, CheckCircle, Quote } from "lucide-react";
 
 const testimonials = [
   {
@@ -17,15 +17,6 @@ const testimonials = [
   },
 ];
 
-const universities = [
-  "ETH Zürich",
-  "TU Munich", 
-  "IE Business School",
-  "University of St. Gallen",
-  "ESADE",
-  "LMU Munich"
-];
-
 const stats = [
   { value: "10+", label: "Universities" },
   { value: "5/5", label: "Satisfaction" },
@@ -39,51 +30,66 @@ const CTASection = () => {
   return (
     <section ref={sectionRef} className="relative overflow-hidden">
       {/* Social Proof Section */}
-      <div className="py-20 bg-[#0a1628] relative overflow-hidden">
-        {/* Background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-blue-500/5 blur-3xl" />
-        
-        <div className="max-w-6xl mx-auto px-6 relative z-10">
-          <motion.div
+      <div className="bg-white py-32 relative overflow-hidden">
+        <div className="relative z-10 max-w-6xl mx-auto px-6">
+          <motion.div 
             className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-blue-400 text-sm font-medium tracking-wider uppercase mb-4">
-              Trusted by Top Universities Worldwide
-            </p>
-            
-            {/* University logos */}
-            <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-12">
-              {universities.map((uni, i) => (
-                <motion.div
-                  key={uni}
-                  className="px-5 py-3 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 text-white/80 text-sm font-medium"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.1 + i * 0.05 }}
-                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
-                >
-                  {uni}
-                </motion.div>
-              ))}
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-100 border border-slate-200 mb-8">
+              <CheckCircle className="w-5 h-5 text-emerald-500" />
+              <span className="text-slate-700 font-medium">Partnered with universities in Germany, Spain and Switzerland</span>
             </div>
 
             {/* Stats */}
-            <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+            <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-16">
               {stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}
                   className="text-center"
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ delay: 0.4 + i * 0.1 }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
                 >
-                  <div className="text-4xl md:text-5xl font-bold text-white mb-1">{stat.value}</div>
-                  <div className="text-blue-300 text-sm">{stat.label}</div>
+                  <div className="text-4xl font-display font-bold text-blue-600 mb-1">{stat.value}</div>
+                  <div className="text-slate-500 text-sm">{stat.label}</div>
                 </motion.div>
               ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="absolute -top-8 left-1/2 -translate-x-1/2">
+              <Quote className="w-16 h-16 text-blue-200" />
+            </div>
+            
+            <div className="text-center max-w-4xl mx-auto">
+              <p className="text-3xl md:text-4xl lg:text-5xl font-display text-slate-800 leading-tight mb-12">
+                "ApplyLab gave us visibility we never had before.
+                <span className="text-blue-600"> Now we can actually help students before they fall behind.</span>"
+              </p>
+              
+              <div className="flex items-center justify-center gap-6">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-xl shadow-blue-500/30">
+                  MK
+                </div>
+                <div className="text-left">
+                  <div className="flex items-center gap-2 mb-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <p className="text-slate-800 font-medium text-lg">Dr. Maria Keller</p>
+                  <p className="text-slate-500">Director of Career Services • LMU Munich</p>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
