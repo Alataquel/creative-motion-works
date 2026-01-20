@@ -227,15 +227,15 @@ const Universities = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB]">
+    <div className="min-h-screen bg-background">
       <Navbar />
 
       {/* Hero Section with Dashboard Mockup */}
-      <section className="relative min-h-screen pt-32 pb-20 overflow-hidden">
+      <section className="relative min-h-screen pt-32 pb-20 overflow-hidden bg-primary">
         {/* Background Effects */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
         </div>
 
         <div className="relative max-w-[1400px] mx-auto px-6">
@@ -246,19 +246,19 @@ const Universities = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
-              <Building2 className="w-4 h-4 text-blue-400" />
-              <span className="text-blue-400 text-sm font-medium">For Universities & Career Services</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-6">
+              <Building2 className="w-4 h-4 text-white" />
+              <span className="text-white text-sm font-medium">For Universities & Career Services</span>
             </div>
             
             <h1 className="text-4xl md:text-6xl font-display font-bold text-white mb-6 leading-tight">
               See what your students are{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#93c5fd] via-[#60a5fa] to-[#3b82f6]">
+              <span className="text-secondary">
                 actually doing
               </span>
             </h1>
             
-            <p className="text-xl text-white/60 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
               Track engagement, activity, and outcomes across your entire cohort. Transform raw data into strategic insights.
             </p>
           </motion.div>
@@ -398,14 +398,14 @@ const Universities = () => {
 
 
       {/* Scroll-Triggered Features */}
-      <section className="bg-gradient-to-br from-[#0c1929] via-[#1e3a5f] to-[#2563EB] relative">
+      <section className="bg-primary relative">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div 
-            className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-full blur-3xl"
+            className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-full blur-3xl"
             style={{ y: useTransform(scrollYProgress, [0, 1], [0, -100]) }}
           />
           <motion.div 
-            className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-gradient-to-br from-blue-400/10 to-blue-500/5 rounded-full blur-3xl"
+            className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-full blur-3xl"
             style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]) }}
           />
         </div>
@@ -420,11 +420,11 @@ const Universities = () => {
           >
             <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
               See what your students are{" "}
-              <span className="bg-gradient-to-r from-[#93c5fd] via-[#60a5fa] to-[#3b82f6] bg-clip-text text-transparent">
+              <span className="text-secondary">
                 actually doing
               </span>
             </h3>
-            <p className="text-xl text-white/60 max-w-2xl mx-auto">
+            <p className="text-xl text-white/70 max-w-2xl mx-auto">
               Track engagement, activity, and outcomes across your entire cohort.
             </p>
           </motion.div>
@@ -445,7 +445,7 @@ const Universities = () => {
                   {/* Content - alternating sides */}
                   <div className={`${i % 2 === 1 ? "lg:order-2" : ""}`}>
                     <motion.div
-                      className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center mb-8 shadow-2xl shadow-blue-500/30"
+                      className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-8 shadow-2xl shadow-secondary/30"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                     >
                       <feature.icon className="w-10 h-10 text-white" />
