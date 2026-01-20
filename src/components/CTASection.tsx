@@ -10,7 +10,7 @@ const CTASection = () => {
   return (
     <section ref={sectionRef} className="relative overflow-hidden">
       {/* CTA Section */}
-      <div className="py-24 md:py-32 relative overflow-hidden bg-white">
+      <div className="py-24 md:py-32 relative overflow-hidden bg-card">
         {/* Subtle animated background */}
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full"

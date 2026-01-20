@@ -87,7 +87,7 @@ const HeroSection = () => {
   return (
     <section 
       ref={sectionRef} 
-      className="relative min-h-screen bg-gradient-to-b from-[#0c1929] via-[#1e3a5f] to-[#2563EB] overflow-hidden"
+      className="relative min-h-screen bg-gradient-to-b from-primary via-[#1e3a5f] to-secondary overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       {/* Floating Particles Background */}
@@ -369,7 +369,7 @@ const HeroSection = () => {
 
                   <button className={`mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm group transition-all duration-500 ${
                     hoveredSide === "left"
-                      ? "bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-500/20"
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20"
                       : "bg-white/10 text-white border border-white/20 hover:bg-white/20"
                   }`}>
                     <GraduationCap className="w-4 h-4" />
@@ -528,7 +528,7 @@ const HeroSection = () => {
 
                   <button className={`mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm group transition-all duration-500 ${
                     hoveredSide === "right"
-                      ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 shadow-lg shadow-blue-500/20"
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20"
                       : "bg-white/10 text-white border border-white/20 hover:bg-white/20"
                   }`}>
                     <Building2 className="w-4 h-4" />
