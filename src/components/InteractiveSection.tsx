@@ -108,13 +108,13 @@ const InteractiveSection = () => {
             viewport={{ once: true }}
           >
             <motion.span
-              className="inline-block px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary rounded-full border border-primary/20 mb-6"
+              className="inline-block px-4 py-1.5 text-sm font-medium bg-accent text-accent-foreground rounded-full border border-accent-foreground/20 mb-6"
             >
               One Platform, Two Experiences
             </motion.span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6">
               Built for everyone in the{" "}
-              <span className="bg-gradient-to-r from-[#2563EB] to-[#3B82F6] bg-clip-text text-transparent">
+              <span className="text-secondary">
                 career journey
               </span>
             </h2>
@@ -128,8 +128,8 @@ const InteractiveSection = () => {
             <motion.button
               className={`relative group px-8 py-4 rounded-2xl border transition-all duration-300 ${
                 activeTab === "students"
-                  ? "bg-[#2563EB] text-white border-transparent shadow-xl shadow-blue-500/25"
-                  : "bg-white border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 shadow-sm"
+                  ? "bg-primary text-primary-foreground border-transparent shadow-xl shadow-primary/25"
+                  : "bg-card border-border hover:border-secondary/50 hover:bg-secondary/5 shadow-sm"
               }`}
               onClick={() => setActiveTab("students")}
               whileHover={{ scale: 1.02 }}
@@ -137,9 +137,9 @@ const InteractiveSection = () => {
             >
               <div className="flex items-center gap-3">
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                  activeTab === "students" ? "bg-white/20" : "bg-blue-100"
+                  activeTab === "students" ? "bg-white/20" : "bg-accent"
                 }`}>
-                  <GraduationCap className={`w-6 h-6 ${activeTab === "students" ? "text-white" : "text-blue-600"}`} />
+                  <GraduationCap className={`w-6 h-6 ${activeTab === "students" ? "text-white" : "text-secondary"}`} />
                 </div>
                 <div className="text-left">
                   <h3 className={`font-display font-bold text-lg ${activeTab === "students" ? "text-white" : "text-foreground"}`}>
@@ -155,8 +155,8 @@ const InteractiveSection = () => {
             <motion.button
               className={`relative group px-8 py-4 rounded-2xl border transition-all duration-300 ${
                 activeTab === "staff"
-                  ? "bg-[#2563EB] text-white border-transparent shadow-xl shadow-blue-500/25"
-                  : "bg-white border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 shadow-sm"
+                  ? "bg-primary text-primary-foreground border-transparent shadow-xl shadow-primary/25"
+                  : "bg-card border-border hover:border-secondary/50 hover:bg-secondary/5 shadow-sm"
               }`}
               onClick={() => setActiveTab("staff")}
               whileHover={{ scale: 1.02 }}
@@ -164,9 +164,9 @@ const InteractiveSection = () => {
             >
               <div className="flex items-center gap-3">
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                  activeTab === "staff" ? "bg-white/20" : "bg-blue-100"
+                  activeTab === "staff" ? "bg-white/20" : "bg-accent"
                 }`}>
-                  <Building2 className={`w-6 h-6 ${activeTab === "staff" ? "text-white" : "text-blue-600"}`} />
+                  <Building2 className={`w-6 h-6 ${activeTab === "staff" ? "text-white" : "text-secondary"}`} />
                 </div>
                 <div className="text-left">
                   <h3 className={`font-display font-bold text-lg ${activeTab === "staff" ? "text-white" : "text-foreground"}`}>
@@ -183,7 +183,7 @@ const InteractiveSection = () => {
       </div>
 
       {/* Full-Width Scroll-Triggered Feature Journey */}
-      <div className="bg-gradient-to-br from-[#0c1929] via-[#1e3a5f] to-[#2563EB] relative">
+      <div className="bg-gradient-to-br from-primary via-[#1e3a5f] to-secondary relative">
         {/* Parallax background decorations */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div 
@@ -231,7 +231,7 @@ const InteractiveSection = () => {
                 {/* Content - alternating sides */}
                 <div className={`${i % 2 === 1 ? "lg:order-2" : ""}`}>
                   <motion.div
-                    className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#3B82F6] flex items-center justify-center mb-8 shadow-2xl shadow-blue-500/30"
+                    className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-8 shadow-2xl shadow-secondary/30"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                   >
                     <feature.icon className="w-10 h-10 text-white" />
@@ -290,7 +290,7 @@ const InteractiveSection = () => {
       </div>
 
       {/* Full-Width Social Proof Section */}
-      <div className="bg-white py-32 relative overflow-hidden">
+      <div className="bg-card py-32 relative overflow-hidden">
         <div className="relative z-10 max-w-6xl mx-auto px-6">
           <motion.div 
             className="text-center mb-12"
@@ -298,9 +298,9 @@ const InteractiveSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-100 border border-slate-200 mb-8">
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-accent border border-accent-foreground/10 mb-8">
               <CheckCircle className="w-5 h-5 text-emerald-500" />
-              <span className="text-slate-700 font-medium">Partnered with universities in Germany, Spain and Switzerland</span>
+              <span className="text-foreground font-medium">Partnered with universities in Germany, Spain and Switzerland</span>
             </div>
 
             {/* Stats */}
@@ -318,8 +318,8 @@ const InteractiveSection = () => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 + i * 0.1 }}
                 >
-                  <div className="text-4xl font-display font-bold text-blue-600 mb-1">{stat.value}</div>
-                  <div className="text-slate-500 text-sm">{stat.label}</div>
+                  <div className="text-4xl font-display font-bold text-secondary mb-1">{stat.value}</div>
+                  <div className="text-muted-foreground text-sm">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -333,17 +333,17 @@ const InteractiveSection = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="absolute -top-8 left-1/2 -translate-x-1/2">
-              <Quote className="w-16 h-16 text-blue-200" />
+              <Quote className="w-16 h-16 text-secondary/30" />
             </div>
             
             <div className="text-center max-w-4xl mx-auto">
-              <p className="text-3xl md:text-4xl lg:text-5xl font-display text-slate-800 leading-tight mb-12">
+              <p className="text-3xl md:text-4xl lg:text-5xl font-display text-foreground leading-tight mb-12">
                 "ApplyLab gave us visibility we never had before.
-                <span className="text-blue-600"> Now we can actually help students before they fall behind.</span>"
+                <span className="text-secondary"> Now we can actually help students before they fall behind.</span>"
               </p>
               
               <div className="flex items-center justify-center gap-6">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-xl shadow-blue-500/30">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xl shadow-xl shadow-secondary/30">
                   MK
                 </div>
                 <div className="text-left">
@@ -352,8 +352,8 @@ const InteractiveSection = () => {
                       <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <p className="text-slate-800 font-medium text-lg">Dr. Maria Keller</p>
-                  <p className="text-slate-500">Director of Career Services • LMU Munich</p>
+                  <p className="text-foreground font-medium text-lg">Dr. Maria Keller</p>
+                  <p className="text-muted-foreground">Director of Career Services • LMU Munich</p>
                 </div>
               </div>
             </div>

@@ -23,13 +23,13 @@ const Navbar = () => {
     <>
       <motion.header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "bg-[#0c1929]/90 backdrop-blur-xl border-b border-white/5" : "bg-transparent"
+          isScrolled ? "bg-primary/95 backdrop-blur-xl border-b border-white/5" : "bg-transparent"
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <nav className="max-w-7xl mx-auto px-6 py-4">
+        <nav className="max-w-[1400px] mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <motion.div whileHover={{ scale: 1.02 }}>
               <Link to="/" className="flex items-center">
@@ -72,7 +72,7 @@ const Navbar = () => {
               </Link>
               <Link to="/request-pilot">
                 <motion.button
-                  className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#2563EB] rounded-full font-semibold text-sm group"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-white text-primary rounded-full font-semibold text-sm group"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
