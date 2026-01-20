@@ -27,13 +27,13 @@ const CTASection = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.7 }}
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-slate-900 mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground mb-4">
               Make your career activity{" "}
-              <span className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 bg-clip-text text-transparent">
+              <span className="text-secondary">
                 visible
               </span>
             </h2>
-            <p className="text-slate-500 text-lg mb-10 max-w-xl mx-auto">
+            <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
               Join the universities and students already benefiting from real visibility.
             </p>
 
@@ -41,7 +41,7 @@ const CTASection = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link to="/students">
                 <motion.button
-                  className="flex items-center gap-2 px-8 py-4 bg-[#2563EB] text-white rounded-full font-semibold text-lg group shadow-lg shadow-blue-500/25"
+                  className="flex items-center gap-2 px-8 py-4 bg-secondary text-secondary-foreground rounded-full font-semibold text-lg group shadow-lg shadow-secondary/25"
                   whileHover={{ scale: 1.03, boxShadow: "0 20px 40px rgba(37,99,235,0.3)" }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -52,7 +52,7 @@ const CTASection = () => {
 
               <Link to="/request-pilot">
                 <motion.button
-                  className="flex items-center gap-2 px-8 py-4 bg-slate-900 text-white rounded-full font-semibold text-lg group shadow-lg"
+                  className="flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold text-lg group shadow-lg"
                   whileHover={{ scale: 1.03, boxShadow: "0 20px 40px rgba(0,0,0,0.15)" }}
                   whileTap={{ scale: 0.98 }}
                 >
