@@ -28,7 +28,7 @@ const Login = () => {
       {/* Back button - fixed */}
       <Link
         to="/"
-        className="fixed top-6 left-6 z-50 inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors bg-slate-900/50 backdrop-blur-sm px-4 py-2 rounded-full"
+        className="fixed top-6 left-6 z-50 inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors bg-primary/50 backdrop-blur-sm px-4 py-2 rounded-full"
       >
         <ArrowLeft className="w-4 h-4" />
         Back
@@ -44,12 +44,12 @@ const Login = () => {
         </Link>
       </div>
 
-      {/* Left side - University Staff (Dark Blue matching landing) */}
+      {/* Left side - University Staff (Deep Navy) */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-1/2 bg-gradient-to-br from-[#0c1929] via-[#1e3a5f] to-[#2563EB] flex items-center justify-center p-8"
+        className="w-1/2 bg-primary flex items-center justify-center p-8"
       >
         <div className="w-full max-w-sm">
           <h1 className="text-3xl font-display font-bold text-white text-center mb-10">
@@ -86,7 +86,7 @@ const Login = () => {
 
             <motion.button
               type="submit"
-              className="w-full py-3.5 rounded-full bg-white text-blue-600 font-semibold hover:bg-white/90 transition-colors shadow-lg shadow-blue-500/20"
+              className="w-full py-3.5 rounded-full bg-white text-primary font-semibold hover:bg-white/90 transition-colors shadow-lg shadow-primary/20"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -114,10 +114,10 @@ const Login = () => {
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-1/2 bg-white flex items-center justify-center p-8"
+        className="w-1/2 bg-card flex items-center justify-center p-8"
       >
         <div className="w-full max-w-sm">
-          <h1 className="text-3xl font-display font-bold text-blue-600 text-center mb-10">
+          <h1 className="text-3xl font-display font-bold text-secondary text-center mb-10">
             Students
           </h1>
 
@@ -128,7 +128,7 @@ const Login = () => {
                 placeholder="Email"
                 value={studentEmail}
                 onChange={(e) => setStudentEmail(e.target.value)}
-                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-slate-200 text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors"
+                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-border text-foreground placeholder-muted-foreground focus:border-secondary focus:outline-none transition-colors"
               />
             </div>
 
@@ -138,12 +138,12 @@ const Login = () => {
                 placeholder="Password"
                 value={studentPassword}
                 onChange={(e) => setStudentPassword(e.target.value)}
-                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-slate-200 text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors pr-12"
+                className="w-full px-5 py-3.5 rounded-full bg-transparent border-2 border-border text-foreground placeholder-muted-foreground focus:border-secondary focus:outline-none transition-colors pr-12"
               />
               <button
                 type="button"
                 onClick={() => setStudentShowPassword(!studentShowPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
               >
                 {studentShowPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
@@ -151,7 +151,7 @@ const Login = () => {
 
             <motion.button
               type="submit"
-              className="w-full py-3.5 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/25"
+              className="w-full py-3.5 rounded-full bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -159,9 +159,9 @@ const Login = () => {
             </motion.button>
           </form>
 
-          <p className="text-center text-slate-500 mt-6">
+          <p className="text-center text-muted-foreground mt-6">
             Don't have an account yet?{" "}
-            <a href="#" className="text-blue-600 font-semibold hover:underline">
+            <a href="#" className="text-secondary font-semibold hover:underline">
               Sign Up
             </a>
           </p>
