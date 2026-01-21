@@ -10,11 +10,11 @@ const CTASection = () => {
   return (
     <section ref={sectionRef} className="relative overflow-hidden">
       {/* CTA Section */}
-      <div className="py-24 md:py-32 relative overflow-hidden bg-card">
+      <div className="py-24 md:py-32 relative overflow-hidden bg-muted/30">
         {/* Subtle animated background */}
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(37,99,235,0.05) 0%, transparent 60%)" }}
+          style={{ background: "radial-gradient(circle, hsl(221 83% 53% / 0.05) 0%, transparent 60%)" }}
           animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
           transition={{ duration: 10, repeat: Infinity }}
         />
@@ -41,8 +41,8 @@ const CTASection = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link to="/students">
                 <motion.button
-                  className="flex items-center gap-2 px-8 py-4 bg-secondary text-secondary-foreground rounded-full font-semibold text-lg group shadow-lg shadow-secondary/25"
-                  whileHover={{ scale: 1.03, boxShadow: "0 20px 40px rgba(37,99,235,0.3)" }}
+                  className="flex items-center gap-2 px-8 py-4 bg-secondary text-secondary-foreground rounded-full font-semibold text-lg group shadow-lg shadow-secondary/20"
+                  whileHover={{ scale: 1.03, boxShadow: "0 20px 40px hsl(221 83% 53% / 0.25)" }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <GraduationCap className="w-5 h-5" />
@@ -52,8 +52,8 @@ const CTASection = () => {
 
               <Link to="/request-pilot">
                 <motion.button
-                  className="flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold text-lg group shadow-lg"
-                  whileHover={{ scale: 1.03, boxShadow: "0 20px 40px rgba(0,0,0,0.15)" }}
+                  className="flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold text-lg group shadow-lg shadow-primary/20"
+                  whileHover={{ scale: 1.03, boxShadow: "0 20px 40px hsl(220 56% 23% / 0.2)" }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <Building2 className="w-5 h-5" />

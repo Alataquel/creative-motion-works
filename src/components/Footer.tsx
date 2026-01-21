@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Linkedin, Twitter, Mail } from "lucide-react";
 
 const Footer = () => {
@@ -24,7 +23,11 @@ const Footer = () => {
             </p>
             <div className="flex gap-4">
               {[Linkedin, Twitter, Mail].map((Icon, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-lg bg-muted border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-accent transition-colors">
+                <a 
+                  key={i} 
+                  href="#" 
+                  className="w-10 h-10 rounded-lg bg-muted border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                >
                   <Icon className="w-4 h-4" />
                 </a>
               ))}

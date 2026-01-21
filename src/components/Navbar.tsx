@@ -23,7 +23,9 @@ const Navbar = () => {
     <>
       <motion.header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "bg-primary/95 backdrop-blur-xl border-b border-white/5" : "bg-transparent"
+          isScrolled 
+            ? "bg-card/95 backdrop-blur-xl border-b border-border shadow-sm" 
+            : "bg-transparent"
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -47,7 +49,7 @@ const Navbar = () => {
                   <Link
                     key={item.label}
                     to={item.href}
-                    className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -55,7 +57,7 @@ const Navbar = () => {
                   <a
                     key={item.label}
                     href={item.href}
-                    className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {item.label}
                   </a>
@@ -66,13 +68,13 @@ const Navbar = () => {
             <div className="hidden md:flex items-center gap-4">
               <Link
                 to="/login"
-                className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 Login
               </Link>
               <Link to="/request-pilot">
                 <motion.button
-                  className="flex items-center gap-2 px-5 py-2.5 bg-white text-primary rounded-full font-semibold text-sm group"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-full font-semibold text-sm group shadow-lg shadow-primary/20"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -82,11 +84,62 @@ const Navbar = () => {
               </Link>
             </div>
 
-            <button className="md:hidden p-2 text-white" onClick={() => setIsMobileOpen(!isMobileOpen)}>
+            <button 
+              className="md:hidden p-2 text-foreground" 
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+            >
               {isMobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </nav>
+
+        {/* Mobile Menu */}
+        {isMobileOpen && (
+          <motion.div 
+            className="md:hidden bg-card border-b border-border"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+          >
+            <div className="px-6 py-4 space-y-4">
+              {navItems.map((item) => (
+                item.href.startsWith("/") ? (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className="block text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() => setIsMobileOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="block text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() => setIsMobileOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                )
+              ))}
+              <div className="pt-4 border-t border-border space-y-3">
+                <Link
+                  to="/login"
+                  className="block text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  onClick={() => setIsMobileOpen(false)}
+                >
+                  Login
+                </Link>
+                <Link to="/request-pilot" onClick={() => setIsMobileOpen(false)}>
+                  <button className="w-full flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-full font-semibold text-sm">
+                    Request Pilot
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
       </motion.header>
     </>
   );
