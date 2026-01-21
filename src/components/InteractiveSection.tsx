@@ -7,10 +7,8 @@ import {
   FileText, 
   Send, 
   TrendingUp, 
-  BarChart3, 
   Users, 
-  CheckCircle, 
-  Activity,
+  CheckCircle,
   Target,
   BookOpen,
   Globe,
@@ -99,7 +97,7 @@ const InteractiveSection = () => {
   return (
     <section ref={sectionRef} className="relative overflow-hidden">
       {/* Full-width Header Section */}
-      <div className="bg-gradient-to-b from-background via-muted/20 to-background py-24">
+      <div className="bg-background py-24">
         <div className="max-w-[1400px] mx-auto px-6">
           <motion.div
             className="text-center mb-16"
@@ -108,7 +106,7 @@ const InteractiveSection = () => {
             viewport={{ once: true }}
           >
             <motion.span
-              className="inline-block px-4 py-1.5 text-sm font-medium bg-accent text-accent-foreground rounded-full border border-accent-foreground/20 mb-6"
+              className="inline-block px-4 py-1.5 text-sm font-medium bg-accent text-accent-foreground rounded-full border border-accent-foreground/10 mb-6"
             >
               One Platform, Two Experiences
             </motion.span>
@@ -128,8 +126,8 @@ const InteractiveSection = () => {
             <motion.button
               className={`relative group px-8 py-4 rounded-2xl border transition-all duration-300 ${
                 activeTab === "students"
-                  ? "bg-primary text-primary-foreground border-transparent shadow-xl shadow-primary/25"
-                  : "bg-card border-border hover:border-secondary/50 hover:bg-secondary/5 shadow-sm"
+                  ? "bg-primary text-primary-foreground border-transparent shadow-xl shadow-primary/20"
+                  : "bg-card border-border hover:border-secondary/50 hover:bg-accent/50 shadow-sm"
               }`}
               onClick={() => setActiveTab("students")}
               whileHover={{ scale: 1.02 }}
@@ -139,7 +137,7 @@ const InteractiveSection = () => {
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                   activeTab === "students" ? "bg-white/20" : "bg-accent"
                 }`}>
-                  <GraduationCap className={`w-6 h-6 ${activeTab === "students" ? "text-white" : "text-secondary"}`} />
+                  <GraduationCap className={`w-6 h-6 ${activeTab === "students" ? "text-white" : "text-primary"}`} />
                 </div>
                 <div className="text-left">
                   <h3 className={`font-display font-bold text-lg ${activeTab === "students" ? "text-white" : "text-foreground"}`}>
@@ -155,8 +153,8 @@ const InteractiveSection = () => {
             <motion.button
               className={`relative group px-8 py-4 rounded-2xl border transition-all duration-300 ${
                 activeTab === "staff"
-                  ? "bg-primary text-primary-foreground border-transparent shadow-xl shadow-primary/25"
-                  : "bg-card border-border hover:border-secondary/50 hover:bg-secondary/5 shadow-sm"
+                  ? "bg-primary text-primary-foreground border-transparent shadow-xl shadow-primary/20"
+                  : "bg-card border-border hover:border-secondary/50 hover:bg-accent/50 shadow-sm"
               }`}
               onClick={() => setActiveTab("staff")}
               whileHover={{ scale: 1.02 }}
@@ -166,7 +164,7 @@ const InteractiveSection = () => {
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                   activeTab === "staff" ? "bg-white/20" : "bg-accent"
                 }`}>
-                  <Building2 className={`w-6 h-6 ${activeTab === "staff" ? "text-white" : "text-secondary"}`} />
+                  <Building2 className={`w-6 h-6 ${activeTab === "staff" ? "text-white" : "text-primary"}`} />
                 </div>
                 <div className="text-left">
                   <h3 className={`font-display font-bold text-lg ${activeTab === "staff" ? "text-white" : "text-foreground"}`}>
@@ -183,15 +181,15 @@ const InteractiveSection = () => {
       </div>
 
       {/* Full-Width Scroll-Triggered Feature Journey */}
-      <div className="bg-gradient-to-br from-primary via-[#1e3a5f] to-secondary relative">
+      <div className="bg-primary relative">
         {/* Parallax background decorations */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div 
-            className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-full blur-3xl"
+            className="absolute top-20 left-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"
             style={{ y: useTransform(scrollYProgress, [0, 1], [0, -100]) }}
           />
           <motion.div 
-            className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-gradient-to-br from-blue-400/10 to-blue-500/5 rounded-full blur-3xl"
+            className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-3xl"
             style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]) }}
           />
         </div>
@@ -206,7 +204,7 @@ const InteractiveSection = () => {
           >
             <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
               {activeTab === "students" ? "Your journey in " : "See what your students are "}
-              <span className="bg-gradient-to-r from-[#93c5fd] via-[#60a5fa] to-[#3b82f6] bg-clip-text text-transparent">
+              <span className="text-secondary/80">
                 {activeTab === "students" ? "one view" : "actually doing"}
               </span>
             </h3>
@@ -231,7 +229,7 @@ const InteractiveSection = () => {
                 {/* Content - alternating sides */}
                 <div className={`${i % 2 === 1 ? "lg:order-2" : ""}`}>
                   <motion.div
-                    className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-8 shadow-2xl shadow-secondary/30"
+                    className="w-20 h-20 rounded-2xl bg-white/10 flex items-center justify-center mb-8 shadow-2xl"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                   >
                     <feature.icon className="w-10 h-10 text-white" />
@@ -254,9 +252,9 @@ const InteractiveSection = () => {
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="relative p-6 bg-white/[0.05] backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden">
+                  <div className="relative p-6 bg-white/[0.08] backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden">
                     {/* Glow effect */}
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-2xl" />
+                    <div className="absolute top-0 right-0 w-40 h-40 bg-secondary/20 rounded-full blur-2xl" />
                     
                     {/* Authentic Feature UI */}
                     <div className="relative z-10">
@@ -275,7 +273,7 @@ const InteractiveSection = () => {
                           {[...Array(features.length)].map((_, j) => (
                             <div 
                               key={j} 
-                              className={`w-2 h-2 rounded-full transition-colors ${j === i ? "bg-blue-400" : "bg-white/20"}`}
+                              className={`w-2 h-2 rounded-full transition-colors ${j === i ? "bg-secondary" : "bg-white/20"}`}
                             />
                           ))}
                         </div>
@@ -290,7 +288,7 @@ const InteractiveSection = () => {
       </div>
 
       {/* Full-Width Social Proof Section */}
-      <div className="bg-card py-32 relative overflow-hidden">
+      <div className="bg-background py-32 relative overflow-hidden">
         <div className="relative z-10 max-w-6xl mx-auto px-6">
           <motion.div 
             className="text-center mb-12"
@@ -318,7 +316,7 @@ const InteractiveSection = () => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 + i * 0.1 }}
                 >
-                  <div className="text-4xl font-display font-bold text-secondary mb-1">{stat.value}</div>
+                  <div className="text-4xl font-display font-bold text-primary mb-1">{stat.value}</div>
                   <div className="text-muted-foreground text-sm">{stat.label}</div>
                 </motion.div>
               ))}
@@ -343,7 +341,7 @@ const InteractiveSection = () => {
               </p>
               
               <div className="flex items-center justify-center gap-6">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xl shadow-xl shadow-secondary/30">
+                <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl shadow-xl shadow-primary/20">
                   MK
                 </div>
                 <div className="text-left">
