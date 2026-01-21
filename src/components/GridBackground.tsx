@@ -11,10 +11,10 @@ const GridBackground = () => {
       
       {/* Subtle dot pattern for texture */}
       <div 
-        className="absolute inset-0 opacity-[0.4]"
+        className="absolute inset-0 opacity-[0.6]"
         style={{
-          backgroundImage: `radial-gradient(circle at center, hsl(221 83% 70% / 0.3) 1px, transparent 1px)`,
-          backgroundSize: '24px 24px'
+          backgroundImage: `radial-gradient(circle at center, hsl(221 83% 65% / 0.4) 1.5px, transparent 1.5px)`,
+          backgroundSize: '20px 20px'
         }}
       />
       
