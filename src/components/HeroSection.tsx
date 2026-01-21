@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { ArrowRight, GraduationCap, Building2, TrendingUp, Briefcase, FileText, ClipboardList, Award, BarChart3 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import FloatingParticles from "./FloatingParticles";
 
 type HoveredSide = "left" | "right" | null;
 
@@ -21,6 +22,9 @@ const HeroSection = () => {
           background: "radial-gradient(ellipse 80% 50% at 50% -20%, hsl(221 83% 53% / 0.08), transparent)"
         }}
       />
+      
+      {/* Floating particles */}
+      <FloatingParticles count={25} />
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center max-w-[1400px] mx-auto px-6 pt-32 pb-16">
