@@ -12,10 +12,10 @@ const FloatingParticles = ({ count = 30, className = "" }: FloatingParticlesProp
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() * 4 + 2,
+      size: Math.random() * 6 + 4,
       duration: Math.random() * 20 + 15,
       delay: Math.random() * 5,
-      opacity: Math.random() * 0.3 + 0.1,
+      opacity: Math.random() * 0.4 + 0.25,
     }));
   }, [count]);
 
@@ -24,7 +24,7 @@ const FloatingParticles = ({ count = 30, className = "" }: FloatingParticlesProp
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-secondary/20"
+          className="absolute rounded-full bg-secondary/40"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
@@ -46,19 +46,19 @@ const FloatingParticles = ({ count = 30, className = "" }: FloatingParticlesProp
       ))}
       
       {/* Larger subtle accent dots */}
-      {Array.from({ length: 8 }, (_, i) => (
+      {Array.from({ length: 10 }, (_, i) => (
         <motion.div
           key={`large-${i}`}
-          className="absolute rounded-full bg-accent"
+          className="absolute rounded-full bg-secondary/15"
           style={{
-            left: `${10 + i * 12}%`,
-            top: `${20 + (i % 3) * 30}%`,
-            width: 80 + i * 10,
-            height: 80 + i * 10,
+            left: `${5 + i * 10}%`,
+            top: `${15 + (i % 4) * 25}%`,
+            width: 100 + i * 15,
+            height: 100 + i * 15,
           }}
           animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.3, 0.5, 0.3],
+            scale: [1, 1.2, 1],
+            opacity: [0.4, 0.6, 0.4],
           }}
           transition={{
             duration: 8 + i * 2,
