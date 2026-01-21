@@ -232,10 +232,26 @@ const Universities = () => {
 
       {/* Hero Section - Clean White Theme */}
       <section className="relative min-h-screen pt-32 pb-20 overflow-hidden bg-background">
-        {/* Subtle Background Effects */}
-        <div className="absolute inset-0 pointer-events-none">
+        {/* Grid Background */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div 
+            className="absolute inset-0 opacity-[0.4]"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
+                linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px)
+              `,
+              backgroundSize: '60px 60px'
+            }}
+          />
+          <div 
+            className="absolute inset-0"
+            style={{
+              background: `radial-gradient(ellipse 80% 60% at 50% 0%, transparent 0%, hsl(var(--background)) 70%)`
+            }}
+          />
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/50 rounded-full blur-3xl" />
         </div>
 
         <div className="relative max-w-[1400px] mx-auto px-6">
@@ -270,7 +286,7 @@ const Universities = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="max-w-5xl mx-auto"
           >
-            <div className="relative p-6 bg-card backdrop-blur-xl rounded-3xl border border-border shadow-xl">
+            <div className="relative p-6 bg-card backdrop-blur-xl rounded-3xl border-2 border-border shadow-xl">
               {/* Window Controls */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-2">
@@ -286,7 +302,7 @@ const Universities = () => {
               </div>
 
               {/* Student Engagement Section */}
-              <div className="bg-muted/30 rounded-xl p-4 border border-border mb-4">
+              <div className="bg-muted rounded-xl p-4 border border-border/80 mb-4 shadow-sm">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <BarChart3 className="w-4 h-4 text-muted-foreground" />
@@ -321,7 +337,7 @@ const Universities = () => {
                 ].map((metric, i) => (
                   <motion.div
                     key={metric.label}
-                    className="bg-muted/30 rounded-xl p-3 border border-border text-center"
+                    className="bg-muted rounded-xl p-3 border border-border/80 text-center shadow-sm"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.7 + i * 0.1 }}
@@ -334,20 +350,20 @@ const Universities = () => {
               </div>
 
               {/* Actionable Insights */}
-              <div className="bg-muted/30 rounded-xl p-4 border border-border mb-4">
+              <div className="bg-muted rounded-xl p-4 border border-border/80 mb-4 shadow-sm">
                 <div className="flex items-center gap-2 mb-3">
                   <TrendingUp className="w-4 h-4 text-muted-foreground" />
                   <span className="text-foreground font-medium text-sm">Actionable Insights</span>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between p-2 bg-background rounded-lg border border-border">
+                    <div className="flex items-center justify-between p-2 bg-card rounded-lg border border-border/80 shadow-sm">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-amber-500" />
                       <span className="text-muted-foreground text-sm">CS majors need more interview prep</span>
                     </div>
                     <span className="px-2 py-0.5 rounded bg-amber-100 text-amber-700 text-xs">Action</span>
                   </div>
-                  <div className="flex items-center justify-between p-2 bg-background rounded-lg border border-border">
+                  <div className="flex items-center justify-between p-2 bg-card rounded-lg border border-border/80 shadow-sm">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-secondary" />
                       <span className="text-muted-foreground text-sm">Finance internship demand up 40%</span>
@@ -358,7 +374,7 @@ const Universities = () => {
               </div>
 
               {/* Placement Rate */}
-              <div className="bg-muted/30 rounded-xl p-4 border border-border mb-6">
+              <div className="bg-muted rounded-xl p-4 border border-border/80 mb-6 shadow-sm">
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-muted-foreground text-sm mb-1">Placement Rate</div>

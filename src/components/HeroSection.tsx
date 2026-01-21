@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { ArrowRight, GraduationCap, Building2, TrendingUp, Briefcase, FileText, ClipboardList, Award, BarChart3 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import FloatingParticles from "./FloatingParticles";
+import GridBackground from "./GridBackground";
 
 type HoveredSide = "left" | "right" | null;
 
@@ -15,16 +15,8 @@ const HeroSection = () => {
       ref={sectionRef} 
       className="relative min-h-screen bg-background overflow-hidden"
     >
-      {/* Subtle gradient background */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{ 
-          background: "radial-gradient(ellipse 80% 50% at 50% -20%, hsl(221 83% 53% / 0.08), transparent)"
-        }}
-      />
-      
-      {/* Floating particles */}
-      <FloatingParticles count={25} />
+      {/* Grid background pattern */}
+      <GridBackground />
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center max-w-[1400px] mx-auto px-6 pt-32 pb-16">
