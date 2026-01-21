@@ -85,11 +85,12 @@ const HeroSection = () => {
               style={{ originX: 0 }}
             >
               <div 
-                className={`h-full flex flex-col rounded-2xl overflow-hidden transition-all duration-500 bg-card border ${
+                className={`h-full flex flex-col rounded-2xl overflow-hidden transition-all duration-500 border ${
                   hoveredSide === "left" 
                     ? "border-secondary/30 shadow-xl shadow-secondary/10" 
                     : "border-border shadow-soft"
                 }`}
+                style={{ background: 'linear-gradient(180deg, hsl(221 83% 98%) 0%, hsl(221 83% 99%) 100%)' }}
               >
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 py-4 border-b border-border bg-muted/30">
@@ -210,11 +211,12 @@ const HeroSection = () => {
               style={{ originX: 1 }}
             >
               <div 
-                className={`h-full flex flex-col rounded-2xl overflow-hidden transition-all duration-500 bg-card border ${
+                className={`h-full flex flex-col rounded-2xl overflow-hidden transition-all duration-500 border ${
                   hoveredSide === "right" 
                     ? "border-secondary/30 shadow-xl shadow-secondary/10" 
                     : "border-border shadow-soft"
                 }`}
+                style={{ background: 'linear-gradient(180deg, hsl(221 83% 98%) 0%, hsl(221 83% 99%) 100%)' }}
               >
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 py-4 border-b border-border bg-muted/30">
