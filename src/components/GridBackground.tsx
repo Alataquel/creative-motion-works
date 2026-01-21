@@ -1,39 +1,52 @@
 const GridBackground = () => {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {/* Soft blue tinted background */}
+      {/* Soft blue tinted base */}
       <div 
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(180deg, hsl(221 83% 97%) 0%, hsl(0 0% 100%) 50%, hsl(221 83% 98%) 100%)`
+          background: `linear-gradient(180deg, hsl(221 83% 96%) 0%, hsl(221 50% 98%) 40%, hsl(221 83% 97%) 100%)`
         }}
       />
       
-      {/* Subtle grid pattern with blue tint */}
+      {/* Subtle dot pattern for texture */}
       <div 
-        className="absolute inset-0 opacity-[0.35]"
+        className="absolute inset-0 opacity-[0.4]"
         style={{
-          backgroundImage: `
-            linear-gradient(to right, hsl(221 83% 85% / 0.6) 1px, transparent 1px),
-            linear-gradient(to bottom, hsl(221 83% 85% / 0.6) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px'
+          backgroundImage: `radial-gradient(circle at center, hsl(221 83% 70% / 0.3) 1px, transparent 1px)`,
+          backgroundSize: '24px 24px'
         }}
       />
       
-      {/* Blue gradient orbs for depth */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-secondary/8 rounded-full blur-3xl" />
-      <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-1/4 w-[600px] h-[400px] bg-accent rounded-full blur-3xl opacity-60" />
-      
-      {/* Gradient fade at edges */}
+      {/* Large soft gradient blobs */}
       <div 
-        className="absolute inset-0"
+        className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] rounded-full blur-3xl"
+        style={{ background: 'radial-gradient(ellipse, hsl(221 83% 90% / 0.6) 0%, transparent 70%)' }}
+      />
+      <div 
+        className="absolute top-1/4 -left-40 w-[600px] h-[600px] rounded-full blur-3xl"
+        style={{ background: 'radial-gradient(ellipse, hsl(221 83% 88% / 0.5) 0%, transparent 70%)' }}
+      />
+      <div 
+        className="absolute top-1/3 -right-40 w-[500px] h-[500px] rounded-full blur-3xl"
+        style={{ background: 'radial-gradient(ellipse, hsl(230 60% 92% / 0.6) 0%, transparent 70%)' }}
+      />
+      <div 
+        className="absolute bottom-0 left-1/3 w-[800px] h-[400px] rounded-full blur-3xl"
+        style={{ background: 'radial-gradient(ellipse, hsl(221 83% 92% / 0.5) 0%, transparent 70%)' }}
+      />
+      
+      {/* Subtle diagonal lines for depth */}
+      <div 
+        className="absolute inset-0 opacity-[0.08]"
         style={{
-          background: `
-            radial-gradient(ellipse 80% 60% at 50% 0%, transparent 0%, hsl(221 83% 99% / 0.5) 70%)
-          `
+          backgroundImage: `repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 100px,
+            hsl(221 83% 60%) 100px,
+            hsl(221 83% 60%) 101px
+          )`
         }}
       />
     </div>
