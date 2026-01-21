@@ -90,7 +90,7 @@ const HeroSection = () => {
                     ? "border-secondary/30 shadow-xl shadow-secondary/10" 
                     : "border-border shadow-soft"
                 }`}
-                style={{ background: 'linear-gradient(180deg, hsl(221 83% 98%) 0%, hsl(221 83% 99%) 100%)' }}
+                style={{ background: 'linear-gradient(180deg, hsl(221 83% 95%) 0%, hsl(221 83% 97%) 100%)' }}
               >
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 py-4 border-b border-border bg-muted/30">
@@ -216,7 +216,7 @@ const HeroSection = () => {
                     ? "border-secondary/30 shadow-xl shadow-secondary/10" 
                     : "border-border shadow-soft"
                 }`}
-                style={{ background: 'linear-gradient(180deg, hsl(221 83% 98%) 0%, hsl(221 83% 99%) 100%)' }}
+                style={{ background: 'linear-gradient(180deg, hsl(221 83% 95%) 0%, hsl(221 83% 97%) 100%)' }}
               >
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 py-4 border-b border-border bg-muted/30">
