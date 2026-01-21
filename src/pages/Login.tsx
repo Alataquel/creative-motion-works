@@ -34,11 +34,10 @@ const Login = () => {
         Back
       </Link>
 
-      {/* Logo - centered at top */}
-      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-        <Link to="/" className="flex items-center gap-3">
+      {/* Logo - top right corner */}
+      <div className="fixed top-6 right-6 z-50">
+        <Link to="/">
           <img src={logo} alt="ApplyLab" className="h-10 w-auto" />
-          <span className="text-xl font-display font-bold text-white drop-shadow-lg">ApplyLab</span>
         </Link>
       </div>
 
